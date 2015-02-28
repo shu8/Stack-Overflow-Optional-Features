@@ -50,3 +50,7 @@ These link to their corresponding MSE feature-request, if applicable:
     - No annoying alert when you don't choose any options / save the options
     - Renamed save button to something more fitting
     - Compatibility with new (currently MSE-only) profiles
+
+---
+
+Note: I've 'migrated' this from my Gist over [here](https://gist.github.com/shu8/daae9127fa0fe06d5e4d) because I think a proper repo is better - so I've 'edited' the script a few times in a few minutes at the start - those are the first 6 versions (0.1 up to and including 0.6).
