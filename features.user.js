@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%B9%A7%D0%BD%CA%8A%C3%9F
-// @version      0.2
+// @version      0.3
 // @description  Adds a bunch of optional 'features' to the StackExchange sites.
 // @author       ṧнʊß (http://stackexchange.com/users/4337810/%E1%B9%A7%D0%BD%CA%8A%C3%9F)
 // @match        *://*.stackexchange.com/*
@@ -106,10 +106,53 @@ var functionsToCall = { //ALL the functions must go in here
             'position': 'fixed',
             'z-index': '1'
         });
+    },
+    
+    highlightQuestions: function() {
+        setTimeout(function() { //Need delay to make sure the CSS is applied
+            //alert('highlight alternative');
+            if (window.location.href.indexOf('superuser') > -1) { //superuser
+                var betterCSS = {
+                    backgroundColor: '#a1eaff',
+                    color: 'black'                
+                };
+            }
+            else if (window.location.href.indexOf('stackoverflow') > -1) { //stackoverflow
+                var betterCSS = {
+                    backgroundColor: '#ffefc6',
+                    borderWidth: '0'                
+                };
+            }
+            else if (window.location.href.indexOf('.stackexchange.com') > -1) {
+                if (window.location.href.indexOf('meta') === -1) { //beta sites
+                    var betterCSS = {
+                    backgroundColor: '#c3dafa',
+                    borderWidth: '0'                
+                    }; 
+                }
+            }
+            var interestingTagsDiv = $("#interestingTags").text();
+            var interesting = interestingTagsDiv.split(' ');
+            interesting.pop(); //Because there's one extra value at the end        
+    
+            $(".tagged-interesting > .summary > .tags > .post-tag").filter(function(index) {
+                return interesting.indexOf($(this).text()) > -1;
+            }).css(betterCSS);
+    
+            $(".tagged-interesting").removeClass("tagged-interesting");   
+        }, 100);
+    },
+    
+    displayName: function() {
+        //alert('display name');
+        var uname = $('.gravatar-wrapper-24').attr('title');
+        var insertme = "<span class='reputation links-container' style='color:white;'>"+uname+"</span>"
+        $(insertme).insertBefore('.gravatar-wrapper-24');
     }
 };
  
-var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; margin:auto; top:50%; margin:-100px 0 0 -150px; z-index:2; background-color:gray; color:white; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'><span id='closeFeature' style='float:right;'>Close</span><span id='featureTitle'><h2>Extra Feature Options</h2></span> <label for='grayOutVotes'>Gray out deleted votes:</label> <input type='checkbox' id='grayOutVotes' checked/> <br /> <label for='moveBounty'>Move 'start bounty' to top:</label> <input type='checkbox' id='moveBounty' checked /> <br /> <label for='dragBounty'>Make bounty box draggable:</label> <input type='checkbox' id='dragBounty' checked /> <br /> <label for='renameChat'>Prepend 'Chat - ' to chat tabs' titles:</label> <input type='checkbox' id='renameChat' checked /> <br /> <label for='exclaim'>Remove exclamation mark on message:</label> <input type='checkbox' id='exclaim' checked /> <br /> <label for='employeeStar'>Add star after employee names:</label> <input type='checkbox' id='employeeStar' checked /> <br /> <label for='bulletReplace'>Replace triangluar bullets with normal ones:</label> <input type='checkbox' id='bulletReplace' checked /> <br /> <label for='addEllipsis'>Add ellipsis to long names:</label> <input type='checkbox' id='addEllipsis' checked /> <br /> <label for='moveCommentsLink'>Move 'show x more comments' to the top:</label> <input type='checkbox' id='moveCommentsLink' checked /> <br /> <label for='unHideAnswer'>Un-gray-out downvoted answers:</label> <input type='checkbox' id='unHideAnswer' checked /> <br /> <label for='fixedTopbar'>Fix topbar position:</label> <input type='checkbox' id='fixedTopbar' checked /> <br /> <input type='submit' id='submitOptions' value='Submit' /> <br /> </div>";
+// Format for options below: <label for='id'>Text:</label><input type='checkbox' id='id' checked><br />
+var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; margin:auto; top:50%; margin:-100px 0 0 -150px; z-index:2; background-color:gray; color:white; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'><span id='closeFeature' style='float:right;'>Close</span><span id='featureTitle'><h2>Extra Feature Options</h2></span> <label for='grayOutVotes'>Gray out deleted votes:</label> <input type='checkbox' id='grayOutVotes' checked/> <br /> <label for='moveBounty'>Move 'start bounty' to top:</label> <input type='checkbox' id='moveBounty' checked /> <br /> <label for='dragBounty'>Make bounty box draggable:</label> <input type='checkbox' id='dragBounty' checked /> <br /> <label for='renameChat'>Prepend 'Chat - ' to chat tabs' titles:</label> <input type='checkbox' id='renameChat' checked /> <br /> <label for='exclaim'>Remove exclamation mark on message:</label> <input type='checkbox' id='exclaim' checked /> <br /> <label for='employeeStar'>Add star after employee names:</label> <input type='checkbox' id='employeeStar' checked /> <br /> <label for='bulletReplace'>Replace triangluar bullets with normal ones:</label> <input type='checkbox' id='bulletReplace' checked /> <br /> <label for='addEllipsis'>Add ellipsis to long names:</label> <input type='checkbox' id='addEllipsis' checked /> <br /> <label for='moveCommentsLink'>Move 'show x more comments' to the top:</label> <input type='checkbox' id='moveCommentsLink' checked /> <br /> <label for='unHideAnswer'>Un-gray-out downvoted answers:</label> <input type='checkbox' id='unHideAnswer' checked /> <br /> <label for='fixedTopbar'>Fix topbar position:</label> <input type='checkbox' id='fixedTopbar' checked /> <br /> <label for='highlightQuestions'>Alternate favourite questions highlighing::</label> <input type='checkbox' id='highlightQuestions' checked /> <br /> <label for='displayName'>Display name before gravatar:</label> <input type='checkbox' id='displayName' checked /> <br /><input type='submit' id='submitOptions' value='Submit' /> <br /> </div>";
 $('body').append(div);
 $('#featureGMOptions').draggable().hide(); //Hide it at first
 $('#featureTitle').css('cursor', 'move');
@@ -126,29 +169,30 @@ $('#featureGMOptions > #closeFeature').css('cursor', 'pointer').click(function (
     $('#featureGMOptions').hide(500);
 });
  
- 
-if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
-    var featureOptions = JSON.parse(GM_getValue("featureOptions"));
-    for (i = 0; i < featureOptions.length; ++i) {
-        functionsToCall[featureOptions[i]](); //Call the functions that were chosen
+$(window).bind("load", function() {
+    if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
+        var featureOptions = JSON.parse(GM_getValue("featureOptions"));
+        for (i = 0; i < featureOptions.length; ++i) {
+            functionsToCall[featureOptions[i]](); //Call the functions that were chosen
+        }
+    } else { //If not, set it:
+        $('#featureGMOptions').show(); //Show the dialog
+        var featureOptions = [];
     }
-} else { //If not, set it:
-    $('#featureGMOptions').show(); //Show the dialog
-    var featureOptions = [];
-}
- 
-$('#submitOptions').click(function () {
-    var featureOptions = [];
-    if ($('input[type=checkbox]:checked').length == 0) { //If nothing's checked
-        alert('Please check at least one box!');
-    } else { //If something is
-        $('input[type=checkbox]:checked').each(function () {
-            var x = $(this).attr('id');
-            featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
-        });
-        GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
-        console.log('Options saved: ' + featureOptions);
-        alert('Options were saved!');
-        $('#featureGMOptions').hide(500);
-    }
+    
+    $('#submitOptions').click(function () {
+        var featureOptions = [];
+        if ($('input[type=checkbox]:checked').length == 0) { //If nothing's checked
+            alert('Please check at least one box!');
+        } else { //If something is
+            $('input[type=checkbox]:checked').each(function () {
+                var x = $(this).attr('id');
+                featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
+            });
+            GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
+            console.log('Options saved: ' + featureOptions);
+            alert('Options were saved!');
+            $('#featureGMOptions').hide(500);
+        }
+    });
 });
