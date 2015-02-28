@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%B9%A7%D0%BD%CA%8A%C3%9F
-// @version      0.4
+// @version      0.5
 // @description  Adds a bunch of optional 'features' to the StackExchange sites.
 // @author       ṧнʊß (http://stackexchange.com/users/4337810/%E1%B9%A7%D0%BD%CA%8A%C3%9F)
 // @match        *://*.stackexchange.com/*
@@ -17,6 +17,7 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
+// @updateURL    https://gist.github.com/shu8/daae9127fa0fe06d5e4d/raw/67668665eeda766f03e70b02fa6ac3901ccf620a/features.user.js
 // ==/UserScript==
 var functionsToCall = { //ALL the functions must go in here
  
@@ -73,11 +74,12 @@ var functionsToCall = { //ALL the functions must go in here
                          "Peter Tarr", "Shane Madden", "Nextraztus", "G-Wiz", "Dan O'Boyle", "yolovolo", "Griffin Sandberg", "ODB", "Mark Villarreal", "Lowell Gruman Jr.", "bweber", "Natalie How",
                          "Haney", "jmac", "Emmanuel Andem-Ewa", "Jess Pardue", "Dean Ward", "Steve Trout", "Nicholas Chabanovsky", "Kelli Ward", "Noah Neuman", "Lauren Roemer", "Heidi Hays", 
                          "Joe Wilkie", "Mackenzie Ralston"];
-        $('.comment a, .deleted-answer-info a, .employee-name, .started a, .user-details a').each(function () { //normal comments, deleted answers (deleted by), SE.com/about, question feed users, question/answer/edit owners
+        
+        $('.comment, .deleted-answer-info, .employee-name, .started, .user-details').each(function () { //normal comments, deleted answers (deleted by), SE.com/about, question feed users, question/answer/edit owners
             var $divtext = $(this);
-            $.each(employees, function (index, value) {
-                if ($divtext.is(':contains(' + value + ')')) {
-                    $divtext.append('<span class="mod-flair" title="possible employee">&Star;</span>');
+            $.each(employees, function (index, value) {             
+                if ($divtext.find('a[href*="/users"]').html() == value) {
+                    $divtext.find('a[href*="/users"]').append('<span class="mod-flair" title="possible employee">&Star;</span>');
                 }
             });
         });
@@ -365,7 +367,47 @@ var functionsToCall = { //ALL the functions must go in here
                 functionsToCall.addCheckboxes();
             }, 500);
         });
-    }    
+    },
+    
+    shareLinksMarkdown: function() { 
+        //alert('change share value')
+        $('.short-link').click(function() {
+            setTimeout(function() {
+                $('.share-tip input').val('[' + $('#question-header a').html() + '](' + document.URL + ')');
+        	}, 500);
+        });
+    },
+    
+    commentShortcuts: function() {
+        $('.js-add-link.comments-link').click(function() {
+            setTimeout(function() {
+                $('.comments textarea').bind('keydown', 'ctrl+k', function(e) {
+                    e.preventDefault();
+                    $(this).surroundSelectedText('`', '`');
+                });
+                $('.comments textarea').bind('keydown', 'ctrl+i', function(e) {
+                    e.preventDefault();
+                    $(this).surroundSelectedText('*', '*');
+                });
+                $('.comments textarea').bind('keydown', 'ctrl+b', function(e) {
+                    e.preventDefault();
+                    $(this).surroundSelectedText('**', '**');
+                });
+            }, 200);
+        });
+    },
+    
+    unspoil: function() {
+        $('#answers div[id*="answer"], div[id*="question"]').each(function() {
+            $(this).find('.post-menu').append('<span class="lsep">|</span><a id="showSpoiler-' + $(this).attr("id") + '" href="javascript:void(0)">unspoil</span>');
+        });
+        $('a[id*="showSpoiler"]').click(function() {
+            var x = $(this).attr('id').split(/-(.+)?/)[1];
+            $('#'+x+' .spoiler').css('color', 'inherit'); //for normal text
+            $('#'+x+' .spoiler a').css('color', '#0000FF').css('text-decoration', 'underline'); //for links
+            $('#'+x+' .spoiler code').css('color', '#222').css('background', '#eee'); //for links
+        });          
+    }
 };
  
 // Format for options below: <label for='id'>Text:</label><input type='checkbox' id='id' checked><br />
@@ -387,6 +429,9 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label for='colorAnswerer'>Color answerer's comments:</label> <input type='checkbox' id='colorAnswerer' checked /> <br />\
                 <label for='kbdAndBullets'>Add KBD and list buttons to editor toolbar:</label> <input type='checkbox' id='kbdAndBullets' checked /> <br />\
                 <label for='editComment'>Pre-defined edit comment options:</label> <input type='checkbox' id='editComment' checked /> <br />\
+				<label for='shareLinksMarkdown'>Edit 'share' link to format of [post-name](url):</label> <input type='checkbox' id='shareLinksMarkdown' checked /> <br />\
+				<label for='commentShortcuts'>Use Ctrl+I,B,K (to italicise, bolden and add code backticks) in comments:</label> <input type='checkbox' id='commentShortcuts' checked /> <br />\
+				<label for='unspoil'>Add a link to show all spoilers in a post:</label> <input type='checkbox' id='unspoil' checked /> <br />\
                 <input type='submit' id='submitOptions' value='Submit' /><br /> \
            </div>";
 $('body').append(div);
