@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%B9%A7%D0%BD%CA%8A%C3%9F
-// @version      0.5
+// @version      0.6
 // @description  Adds a bunch of optional 'features' to the StackExchange sites.
 // @author       ṧнʊß (http://stackexchange.com/users/4337810/%E1%B9%A7%D0%BD%CA%8A%C3%9F)
 // @match        *://*.stackexchange.com/*
@@ -11,7 +11,8 @@
 // @match        *://*.askubuntu.com/*
 // @match        *://*.stackapps.com/*
 // @match        *://*.mathoverflow.net/*
-// @require      http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js
+// @require      https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js
+// @require      https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js
 // @require      https://cdn.rawgit.com/timdown/rangyinputs/master/rangyinputs-jquery-src.js
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
 // @grant        GM_setValue
@@ -282,10 +283,11 @@ var functionsToCall = { //ALL the functions must go in here
         var cssForDiv = {
             'display': 'inline-block',
             'position': 'fixed',
-            'width': '50%',
-            'top': '50%',
+            'width': '500px',
+            'top': '10px',
+            'left': '50%',
             'z-index': '2',
-            'margin': '-100px 00 -150px',
+            'margin-left': '-250px',
             'background-color': 'gray',
             'color': 'white',
             '-webkit-border-radius': '15px',
@@ -403,45 +405,44 @@ var functionsToCall = { //ALL the functions must go in here
         });
         $('a[id*="showSpoiler"]').click(function() {
             var x = $(this).attr('id').split(/-(.+)?/)[1];
-            $('#'+x+' .spoiler').css('color', 'inherit'); //for normal text
-            $('#'+x+' .spoiler a').css('color', '#0000FF').css('text-decoration', 'underline'); //for links
-            $('#'+x+' .spoiler code').css('color', '#222').css('background', '#eee'); //for links
+            $('#'+x+' .spoiler').removeClass('spoiler');
         });          
     }
 };
  
-// Format for options below: <label for='id'>Text:</label><input type='checkbox' id='id' checked><br />
-var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; margin:auto; top:50%; margin:-100px 0 0 -150px; z-index:2; background-color:gray; color:white; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>\
-                <span id='closeFeature' style='float:right;'>Close</span>    <span id='featureTitle'><h2>Extra Feature Options</h2></span> \
-                <label for='grayOutVotes'>Gray out deleted votes:</label> <input type='checkbox' id='grayOutVotes' checked/> <br /> \
-                <label for='moveBounty'>Move 'start bounty' to top:</label> <input type='checkbox' id='moveBounty' checked /> <br /> \
-                <label for='dragBounty'>Make bounty box draggable:</label> <input type='checkbox' id='dragBounty' checked /> <br /> \
-                <label for='renameChat'>Prepend 'Chat - ' to chat tabs' titles:</label> <input type='checkbox' id='renameChat' checked /> <br /> \
-                <label for='exclaim'>Remove exclamation mark on message:</label> <input type='checkbox' id='exclaim' checked /> <br /> \
-                <label for='employeeStar'>Add star after employee names:</label> <input type='checkbox' id='employeeStar' checked /> <br /> \
-                <label for='bulletReplace'>Replace triangluar bullets with normal ones:</label> <input type='checkbox' id='bulletReplace' checked /> <br /> \
-                <label for='addEllipsis'>Add ellipsis to long names:</label> <input type='checkbox' id='addEllipsis' checked /> <br /> \
-                <label for='moveCommentsLink'>Move 'show x more comments' to the top:</label> <input type='checkbox' id='moveCommentsLink' checked /> <br /> \
-                <label for='unHideAnswer'>Un-gray-out downvoted answers:</label> <input type='checkbox' id='unHideAnswer' checked /> <br /> \
-                <label for='fixedTopbar'>Fix topbar position:</label> <input type='checkbox' id='fixedTopbar' checked /> <br /> \
-                <label for='highlightQuestions'>Alternate favourite questions highlighing::</label> <input type='checkbox' id='highlightQuestions' checked /> <br /> \
-                <label for='displayName'>Display name before gravatar:</label> <input type='checkbox' id='displayName' checked /> <br />\
-                <label for='colorAnswerer'>Color answerer's comments:</label> <input type='checkbox' id='colorAnswerer' checked /> <br />\
-                <label for='kbdAndBullets'>Add KBD and list buttons to editor toolbar:</label> <input type='checkbox' id='kbdAndBullets' checked /> <br />\
-                <label for='editComment'>Pre-defined edit comment options:</label> <input type='checkbox' id='editComment' checked /> <br />\
-				<label for='shareLinksMarkdown'>Edit 'share' link to format of [post-name](url):</label> <input type='checkbox' id='shareLinksMarkdown' checked /> <br />\
-				<label for='commentShortcuts'>Use Ctrl+I,B,K (to italicise, bolden and add code backticks) in comments:</label> <input type='checkbox' id='commentShortcuts' checked /> <br />\
-				<label for='unspoil'>Add a link to show all spoilers in a post:</label> <input type='checkbox' id='unspoil' checked /> <br />\
-                <input type='submit' id='submitOptions' value='Submit' /><br /> \
+// Format for options below: <label><input type='checkbox' id='id'>Text</label><br />
+var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; top:10px; left:50%; width:500px; margin-left:-250px; z-index:2; background-color:gray; color:white; padding: 10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>\
+                <span id='closeFeature' style='float:right;'>Close</span> <span id='resetFeature' style='float:right;'>Reset&nbsp;</span>    <span id='featureTitle'><h2>Extra Feature Options</h2></span> \
+                <label><input type='checkbox' id='grayOutVotes'/> Gray out deleted votes</label> <br /> \
+                <label><input type='checkbox' id='moveBounty'/> Move 'start bounty' to top</label> <br /> \
+                <label><input type='checkbox' id='dragBounty'/> Make bounty box draggable</label> <br /> \
+                <label><input type='checkbox' id='renameChat'/> Prepend 'Chat - ' to chat tabs' titles</label> <br /> \
+                <label><input type='checkbox' id='exclaim'/> Remove exclamation mark on message</label> <br /> \
+                <label><input type='checkbox' id='employeeStar'/> Add star after employee names</label> <br /> \
+                <label><input type='checkbox' id='bulletReplace'/> Replace triangluar bullets with normal ones</label> <br /> \
+                <label><input type='checkbox' id='addEllipsis'/> Add ellipsis to long names</label> <br /> \
+                <label><input type='checkbox' id='moveCommentsLink'/> Move 'show x more comments' to the top</label> <br /> \
+                <label><input type='checkbox' id='unHideAnswer'/> Un-gray-out downvoted answers</label> <br /> \
+                <label><input type='checkbox' id='fixedTopbar'/> Fix topbar position</label> <br /> \
+                <label><input type='checkbox' id='highlightQuestions'/> Alternate favourite questions highlighing</label> <br /> \
+                <label><input type='checkbox' id='displayName'/> Display name before gravatar</label> <br />\
+                <label><input type='checkbox' id='colorAnswerer'/> Color answerer's comments</label> <br />\
+                <label><input type='checkbox' id='kbdAndBullets'/> Add KBD and list buttons to editor toolbar</label> <br />\
+                <label><input type='checkbox' id='editComment'/> Pre-defined edit comment options</label> <br />\
+				<label><input type='checkbox' id='shareLinksMarkdown'/> Edit 'share' link to format of [post-name](url)</label> <br />\
+				<label><input type='checkbox' id='commentShortcuts'/> Use Ctrl+I,B,K (to italicise, bolden and add code backticks) in comments</label> <br />\
+				<label><input type='checkbox' id='unspoil'/> Add a link to show all spoilers in a post</label> <br />\
+                <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 $('body').append(div);
 $('#featureGMOptions').draggable().hide(); //Hide it at first
 $('#featureTitle').css('cursor', 'move');
  
 if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
-    $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>');
+    $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
+    $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015) Currently on MSE only
+ 
     $('#addFeaturesLink').click(function () {
-        GM_deleteValue('featureOptions'); //Delete the setting when clicked
         $('#featureGMOptions').show(500);
     });
 }
@@ -450,30 +451,32 @@ $('#featureGMOptions > #closeFeature').css('cursor', 'pointer').click(function (
     $('#featureGMOptions').hide(500);
 });
  
+$('#featureGMOptions > #resetFeature').css('cursor', 'pointer').click(function () {
+	GM_deleteValue('featureOptions'); //Delete the setting when clicked
+    location.reload();
+});
+ 
 $(window).bind("load", function() {
     if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
         var featureOptions = JSON.parse(GM_getValue("featureOptions"));
         for (i = 0; i < featureOptions.length; ++i) {
+            $('#featureGMOptions #'+featureOptions[i]).prop('checked', true);
             functionsToCall[featureOptions[i]](); //Call the functions that were chosen
         }
     } else { //If not, set it:
+        $('#featureGMOptions input').prop('checked', true);
         $('#featureGMOptions').show(); //Show the dialog
         var featureOptions = [];
     }
     
     $('#submitOptions').click(function () {
         var featureOptions = [];
-        if ($('input[type=checkbox]:checked').length === 0) { //If nothing's checked
-            alert('Please check at least one box!');
-        } else { //If something is
-            $('input[type=checkbox]:checked').each(function () {
-                var x = $(this).attr('id');
-                featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
-            });
-            GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
-            console.log('Options saved: ' + featureOptions);
-            alert('Options were saved!');
-            $('#featureGMOptions').hide(500);
-        }
+        $('input[type=checkbox]:checked').each(function () {
+            var x = $(this).attr('id');
+            featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
+        });
+        GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
+        console.log('Options saved: ' + featureOptions);
+        $('#featureGMOptions').hide(500);
     });
 });
