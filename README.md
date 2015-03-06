@@ -2,7 +2,7 @@
 A userscript for the StackExchange websites to add a bunch of (optional) features.
 
 #How to use, requirements, how it works
-1. Install the script
+1. Install [the script](https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js)
 2. Go to any SE site (eg. www.superuser.com or www.stackoverflow.com)
 3. A dialog box should popup asking you to select the features you want
 
@@ -34,6 +34,9 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Change the 'share' link to show link as markdown format](http://meta.stackexchange.com/questions/126544/add-a-second-share-button-to-posts-with-comment-ready-links) (v0.5)
 - [Add <kbd>Ctrl</kbd>+<kbd>i</kbd>,<kbd>b</kbd>,<kbd>k</kbd> support to comment fields](http://meta.stackexchange.com/questions/14756/formatting-keyboard-shortcuts-for-comments) (v0.5)
 - [Add a button to reveal spoilers in a post](http://meta.stackexchange.com/questions/249808/add-a-way-to-reveal-all-spoiler-blocks-in-a-post-at-once) (v0.5)
+- [Highlight on hold/closed questions](http://meta.stackexchange.com/questions/250428/should-the-questions-put-on-hold-be-marked-on-questions-list-with-a-color) (v0.7)
+- Add shortcuts for adding pre-defined comments (v0.7)
+- [Differentiate between empty blockquotes and spoilers](http://meta.stackexchange.com/questions/104085/differentiate-spoilers-from-empty-block-quotes) (v0.7)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -50,6 +53,7 @@ These link to their corresponding MSE feature-request, if applicable:
     - No annoying alert when you don't choose any options / save the options
     - Renamed save button to something more fitting
     - Compatibility with new (currently MSE-only) profiles
+- 06/03/15 - v0.7: Added more features (mentioned above)
 
 ---
 
