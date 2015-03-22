@@ -37,6 +37,8 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Highlight on hold/closed questions](http://meta.stackexchange.com/questions/250428/should-the-questions-put-on-hold-be-marked-on-questions-list-with-a-color) (v0.7)
 - Add shortcuts for adding pre-defined comments (v0.7)
 - [Differentiate between empty blockquotes and spoilers](http://meta.stackexchange.com/questions/104085/differentiate-spoilers-from-empty-block-quotes) (v0.7)
+- [Add reply links for quick replying](http://meta.stackexchange.com/questions/74778/add-reply-link-to-comment-that-pre-populates-comment-box-with-username) (v0.8)
+- [Parse cross-site links to questions](http://meta.stackexchange.com/questions/251183/parse-question-links-from-other-se-sites) (v0.8)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -54,6 +56,7 @@ These link to their corresponding MSE feature-request, if applicable:
     - Renamed save button to something more fitting
     - Compatibility with new (currently MSE-only) profiles
 - 06/03/15 - v0.7: Added more features (mentioned above)
+- 22/03/15 - v0.8: Added more features (mentioned above)
 
 ---
 
