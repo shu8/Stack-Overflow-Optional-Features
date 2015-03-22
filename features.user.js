@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
-// @version      0.7
+// @version      0.8
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
@@ -23,14 +23,12 @@
 var functionsToCall = { //ALL the functions must go in here
 
     grayOutVotes: function () { // For graying out votes AND vote count:
-        //alert('gray out votes');
         if ($('.deleted-answer').length) {
             $('.deleted-answer .vote-down-off, .deleted-answer .vote-up-off, .deleted-answer .vote-count-post').css('opacity', '0.5');
         }
     },
 
     moveBounty: function () { // For moving bounty to the top:
-        //alert('move bounty');
         if ($('.bounty-notification').length) {
             $('.bounty-notification').insertAfter('.question .fw');
             $('.question .bounty-notification .votecell').remove();
@@ -38,7 +36,6 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     dragBounty: function () { // For draggable bounty window:
-        //alert('draggable');
         $('.bounty-notification').click(function () {
             setTimeout(function () {
                 $('#start-bounty-popup').draggable().css('cursor', 'move');
@@ -47,21 +44,18 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     renameChat: function () { // For renaming Chat tabs:
-        //alert('rename chat');
         if (window.location.href.indexOf('chat') > -1) {
             document.title = 'Chat - ' + document.title;
         }
     },
 
     exclaim: function () { // For remvoving exclamation mark:
-        //alert('exclaim');
         var old = $("td.comment-actions > div > div > div.message-text");
         var newText = old.text().replace("!", ".");
         old.html(newText);
     },
 
     employeeStar: function () { // For looking for employees:
-        //alert('employee');
         var employees = ["Jeff Atwood", "Joel Spolsky", "Jarrod Dixon", "Geoff Dalgas", "David Fullerton", "Korneel Bouman", "Robert Cartaino", "Kevin Montrose",
             "MandyK", "Marc Gravell", "balpha", "Matt Sherman", "Danny Miller", "Jason Punyon", "NickC", "Kyle Brandt", "Jin", "Tall Jeff", "Zypher",
             "Nick Craver", "Nick Larsen", "Shog9", "Greg", "Alex Miller", "GuyZee", "abby hairboat", "samthebrand", "Laura", "Grace Note", "Dimitar Stanimiroff",
@@ -88,19 +82,16 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     bulletReplace: function () { // For replacing disclosure bullets with normal ones:
-        //alert('bullets');
         $('.dingus').each(function () {
             $(this).html('&#x25cf;');
         });
     },
 
     addEllipsis: function () { // For adding ellipsis to long names:
-        //alert('ellipsis');
         $('.user-info .user-details').css('text-overflow', 'ellipsis');
     },
 
     moveCommentsLink: function () { // For adding the 'show x more comments' link before the commnents:
-        //alert('comments link');
         $('.js-show-link.comments-link').each(function () {
             var $this2 = $(this);
             $("<tr><td></td><td>" + $this2.clone().wrap('<div>').parent().html() + "</td></tr>").insertBefore($(this).parent().closest('tr')).click(function () {
@@ -111,7 +102,6 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     unHideAnswer: function () { // For unfading a downvoted answer on hover
-        //alert('downvoted answer');
         $(".downvoted-answer").hover(function () {
             $(this).removeClass("downvoted-answer");
         }, function () {
@@ -120,7 +110,6 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     fixedTopbar: function () { // For making the topbar fixed (always stay at top of screen)
-        //alert('topbar');
         $('.topbar').css({
             'position': 'fixed',
             'z-index': '1'
@@ -129,7 +118,6 @@ var functionsToCall = { //ALL the functions must go in here
 
     highlightQuestions: function () { // For highlighting only the tags of favorite questions
         setTimeout(function () { //Need delay to make sure the CSS is applied
-            //alert('highlight alternative');
             if (window.location.href.indexOf('superuser') > -1) { //superuser
                 var betterCSS = {
                     backgroundColor: '#a1eaff',
@@ -161,14 +149,12 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     displayName: function () { // For displaying username next to avatar on topbar
-        //alert('display name');
         var uname = $('.gravatar-wrapper-24').attr('title');
         var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
         $(insertme).insertBefore('.gravatar-wrapper-24');
     },
 
     colorAnswerer: function () { // For highlighting the names of answerers on comments
-        //alert('color answerer comments');
         $('.answercell').each(function (i, obj) {
             var x = $(this).find('.user-details a').text();
             $('.answer .comment-user').each(function () {
@@ -194,7 +180,6 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     kbdAndBullets: function () { // For adding buttons to the markdown toolbar to surround selected test with KBD or convert selection into a markdown list
-        //alert('add kbd and list options');
         var kbdBtn = $('<button/>', {
             text: '<>',
             class: 'wmd-button',
@@ -280,7 +265,6 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     editComment: function () { // For adding checkboxes when editing to add pre-defined edit reasons
-        //alert('edit comment');
         var cssForDiv = {
             'display': 'inline-block',
             'position': 'fixed',
@@ -373,7 +357,6 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     shareLinksMarkdown: function () { // For changing the 'share' button link to the format [name](link)
-        //alert('change share value')
         $('.short-link').click(function () {
             setTimeout(function () {
                 $('.share-tip input').val('[' + $('#question-header a').html() + '](' + document.URL + ')');
@@ -647,6 +630,42 @@ var functionsToCall = { //ALL the functions must go in here
         }, function () {
             $(this).find('#isSpoiler').show(500);
         });
+    },
+    
+    commentReplies: function() { //For adding reply links to comments
+        $('.comment').each(function () {
+            if ($('.topbar-links a span:eq(0)').text() != $(this).find('.comment-text a.comment-user').text()) { //make sure the link is not added to your own comments
+                $(this).append("<span id='replyLink' title='reply to this user'>&crarr;</span>");
+            }
+        });
+
+        $('span[id="replyLink"]').css('cursor', 'pointer').on('click', function () {
+            var parentDiv = $(this).parent().parent().parent().parent();
+            var textToAdd = '@' + $(this).parent().find('.comment-text a.comment-user').text().replace(/\s/g, "").replace(/♦/, '') + ' '; //eg. @USERNAME [space]
+
+            if (parentDiv.find('textarea').length) {
+                parentDiv.find('textarea').append(textToAdd); //add the name
+            } else {
+                parentDiv.next('div').find('a').trigger('click'); //show the textarea
+                parentDiv.find('textarea').append(textToAdd); //add the name
+            }
+        });        
+    },
+    
+    parseCrossSiteLinks: function() { //For converting cross-site links to their titles
+        var sites = ['stackexchange', 'stackoverflow', 'superuser', 'serverfault', 'askubuntu', 'stackapps', 'mathoverflow', 'programmers', 'bitcoin'];
+
+        $('.post-text a').each(function () {
+            var anchor = $(this);
+            if (sites.indexOf($(this).attr('href').split('/')[2].split('.')[0]) > -1) { //if the link is to an SE site (not, for example, to google), do the necessary stuff
+                var sitename = $(this).attr('href').split('/')[2].split('.')[0],
+                    id = $(this).attr('href').split('/')[4];
+
+                $.getJSON("https://api.stackexchange.com/2.2/questions/" + id + "?order=desc&sort=activity&site=" + sitename, function (json) {
+                    anchor.html(json.items[0].title); //Get the title and add it in
+                });
+            }
+        });        
     }
 };
 
@@ -675,8 +694,11 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='highlightClosedQuestions'/> Highlight (and slighly fade) on hold/closed questions when viewing question lists</label> <br />\
                 <label><input type='checkbox' id='quickCommentShortcutsMain'/> Add shortcuts to add pre-defined comments to comment fields</label> <br />\
                 <label><input type='checkbox' id='spoilerTip'/> Differentiate spoilers from empty blockquotes</label> <br />\
+                <label><input type='checkbox' id='commentReplies'/> Add reply links to comments for quick replying (without having to type someone's username)</label> <br />\
+                <label><input type='checkbox' id='parseCrossSiteLinks'/> Parse titles to links cross-SE-sites</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
+
 $('body').append(div);
 $('#featureGMOptions').draggable().hide(); //Hide it at first
 $('#featureTitle').css('cursor', 'move');
