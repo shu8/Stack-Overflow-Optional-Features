@@ -63,4 +63,85 @@ These link to their corresponding MSE feature-request, if applicable:
 
 ---
 
+Descriptions of features
+-
+
+- Make the topbar fixed:
+Make the topbar stay at the top of the screen as you scroll down
+
+- Unfade low score answers:
+When you rollover posts with a score of -3 or less, ungray them out so you can read them properly
+
+- Move `show more comments` link to top:
+The `show x more comments` link is by default shown at the bottom of the comments section. But that can be annoying if you're trying to read through a 'conversation' - this will clone the link and put it before the actual comments as well
+
+- Ellipsis after long names:
+If you have a long username that gets cut off, this will add elipses instead. eg: `very long username blah blah blah` would normally be shown like `very long username bl` but this will make it `very long username...`
+
+- Rename chat tabs:
+Prefix all tabs on the chat section of the site with `Chat - `
+
+- Move `start a bounty` to after the question (instead of after comments):
+Pretty self explanatory
+
+- Make the bounty box draggable:
+The bounty box cannot be moved around, unlike other dialogs, this makes it draggable
+
+- Fade out vote signs on deleted answers:
+Deleted answers (which have a red background) cannot be voted on - so this slighly grays out the vote signs and vote count - it makes more sense!
+
+- Replace `>` bullet points with more normal ones:
+When suggesting edits, the box on the right has some 'tips', but those tips have `>` as their bullet symbol - this makes you think you can expand it - but you can't, so this replaces it with normal symbols
+
+- Differentiate between employees<sup>1</sup>:
+Add a star after names of employees (may be wrong, which is why the toolip says `possible employee`!
+
+- Remove exclamation mark on error:
+Pretty self explanatory
+
+- Highlight only the tags for your 'favourite questions':
+The default highlighing system for favourite questions can be pretty overwhelming - this removes the colouring and replaces it with only highlighting the tags of favourite questions, to make it more easy on the eye, and simpler
+
+- Show your username in the topbar:
+Pretty self explanatory
+
+- Colour the answerer's names in comments:
+Just like the OP's name in comments are highlighted, this highlights answerer's names in comments
+
+- Add KBD and Bullet options in editor toolbar:
+Adds buttons and shortcuts to surround selected text with `kbd` tags (<kbd>alt </kbd> + <kbd>k</kbd>) and add dashes (`-`) to a list to make it a list (<kbd>alt </kbd> + <kbd>l</kbd>)
+
+- Add pre-defined edit reason checkboxes on edit pages:
+Adds checkboxes under suggested edit Edit Reason textbox for adding user-defined reasons automatically. ***To set these reasons***, go to `help` (in the topbar) > `Edit Reasons`
+
+- Change the 'share' link to show link as markdown format:
+Changes the link given in the 'share' link to one in markdown format. ie. url --> [title](url)
+
+- Add <kbd>Ctrl</kbd>+<kbd>i</kbd>,<kbd>b</kbd>,<kbd>k</kbd> support to comment fields:
+Allows you to *italicise*, **bolden**, and add `code backticks` to comments via keyboard shortcuts
+
+- Add a button to reveal spoilers in a post:
+Adds a button under a post to 'unspoil' all spoilers in that post - useful if there are loads of spoilers in a post
+
+- Highlight on hold/closed questions:
+Highlights on hold/closed questions when viewing question lists
+
+- Add shortcuts for adding pre-defined comments:
+Allows you to use keyboard shortcuts to insert user-defined shortcuts in comments. ***To change these comments***, go to any post, click `add a comments`, press <kbd>alt</kbd>+<kbd>o</kbd> to **o**pen the dialog - from here you can edit/delete/add comments
+
+- Differentiate between empty blockquotes and spoilers:
+Adds `hover to show spoiler` to spoilers
+
+- Add reply links for quick replying:
+Adds reply links to comments to auto-insert the username of the commenter
+
+- Parse cross-site links to questions:
+Parses cross-site links when viewing them. eg. meta.stackexchange.com/questions/2312231/blah-blah --> Blah Blah
+
+- Show answer counts on sidebar:
+Shows the answer counts to questions shown on the Linked/Related section on the sidebar in their tooltip
+
+- Button to add author's name to hyperlinks:
+Adds a button on the editor toolbar to show a dialog to insert a hyperlink with the post's author automatically fetched an inserted
+
 Note: I've 'migrated' this from my Gist over [here](https://gist.github.com/shu8/daae9127fa0fe06d5e4d) because I think a proper repo is better - so I've 'edited' the script a few times in a few minutes at the start - those are the first 6 versions (0.1 up to and including 0.6).
