@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
-// @version      0.9
+// @version      1.0
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
@@ -750,7 +750,52 @@ var functionsToCall = { //ALL the functions must go in here
                 $('#addLinkAuthorName').show();
             });
         }, 1000);
+    },
+    
+    confirmNavigateAway: function() {
+       if (window.location.href.indexOf('questions/') >= 0) {
+           window.onbeforeunload = function () {   
+               if($('.comment-form textarea').length) {
+                   return "Do you really want to navigate away? Anything you have written will be lost!";
+               } else {
+                   return;
+               }
+           };
+       }
+    },
+    
+    sortByBountyAmount: function() {
+        if($('.bounty-indicator').length) { //if there is at least one bounty on the page
+            $('.question-summary').each(function() {
+                bountyAmount = $(this).find('.bounty-indicator').text().replace('+', '');
+                $(this).attr('data-bountyamount', bountyAmount); //add a 'bountyamount' attribute to all the questions
+            });
 
+            if ($('#question-mini-list').length) { //if on homepage featured tab
+                var $wrapper = $('#question-mini-list');
+            } else {
+                var $wrapper = $('#questions'); //if on questions featured tab
+            }
+
+            setTimeout(function() {
+                //filter buttons:
+                $('.subheader').after('<span>sort by bounty amount:&nbsp;&nbsp;&nbsp;</span><span id="largestFirst">largest first&nbsp;&nbsp;</span><span id="smallestFirst">smallest first</span>');
+
+                //Thanks: http://stackoverflow.com/a/14160529/3541881
+                $('#largestFirst').css('cursor', 'pointer').on('click', function() { //largest first
+                    $wrapper.find('.question-summary').sort(function(a, b) {
+                        return +b.getAttribute('data-bountyamount') - +a.getAttribute('data-bountyamount');
+                    }).prependTo($wrapper);
+                });
+
+                //Thanks: http://stackoverflow.com/a/14160529/3541881
+                $('#smallestFirst').css('cursor', 'pointer').on('click', function() { //smallest first
+                    $wrapper.find('.question-summary').sort(function(a, b) {
+                        return +a.getAttribute('data-bountyamount') - +b.getAttribute('data-bountyamount');
+                    }).prependTo($wrapper);
+                });
+            }, 500);
+        }
     }
 
 
@@ -785,6 +830,8 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='parseCrossSiteLinks'/> Parse titles to links cross-SE-sites</label> <br />\
                 <label><input type='checkbox' id='answerCountSidebar'/> Show answer count as a tooltip for questions in the sidebar</label> <br />\
                 <label><input type='checkbox' id='linkQuestionAuthorName'/> Add a button in the editor toolbar to insert a hyperlink to a post and add the author automatically</label> <br />\
+                <label><input type='checkbox' id='confirmNavigateAway'/> Add a confirmation dialog before navigating away on pages whilst you are still typing a comment</label> <br />\
+                <label><input type='checkbox' id='sortByBountyAmount'/> Add an option to filter bounties by their amount</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
