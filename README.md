@@ -41,6 +41,8 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Parse cross-site links to questions](http://meta.stackexchange.com/questions/251183/parse-question-links-from-other-se-sites) (v0.8)
 - [Show answer counts on sidebar](http://meta.stackexchange.com/questions/251771/show-number-of-answers-as-tooltip-in-the-sidebar-questions) (v0.9)
 - [Button to add author's name to hyperlinks](http://meta.stackexchange.com/questions/251722/is-there-a-way-to-automatically-mention-the-author-of-an-answer) (v0.9)
+- [Confirm when navigating away if you have started writing a comment](http://meta.stackexchange.com/questions/252205/add-are-you-sure-you-want-to-navigate-away-from-this-page-when-writing-a-comm) (v1.0)
+- [Allow you to sort bounties by their amout](http://meta.stackexchange.com/questions/7753/please-give-us-the-ability-to-sort-featured-tab-by-bounty-amount) (v1.0)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -59,7 +61,8 @@ These link to their corresponding MSE feature-request, if applicable:
     - Compatibility with new (currently MSE-only) profiles
 - 06/03/15 - v0.7: Added more features (mentioned above)
 - 22/03/15 - v0.8: Added more features (mentioned above)
-- 26/03/14 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
+- 26/03/15 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
+- 29/03/15 - v1.0: Added more features (mentioned above)
 
 ---
 
@@ -144,4 +147,12 @@ Shows the answer counts to questions shown on the Linked/Related section on the 
 - Button to add author's name to hyperlinks:
 Adds a button on the editor toolbar to show a dialog to insert a hyperlink with the post's author automatically fetched an inserted
 
-Note: I've 'migrated' this from my Gist over [here](https://gist.github.com/shu8/daae9127fa0fe06d5e4d) because I think a proper repo is better - so I've 'edited' the script a few times in a few minutes at the start - those are the first 6 versions (0.1 up to and including 0.6).
+- Confirm when navigating away if you have started writing a comment:
+Adds a confirmation dialog before you navigate away on pages where you have started to write a comment
+
+- Allow you to sort bounties by their amout:
+Adds a filter on pages with bounties listed to sort by bounty amount (largest first or smallest first). Note: Only sorts bounties on the current page
+
+---
+
+I've 'migrated' this from my Gist over [here](https://gist.github.com/shu8/daae9127fa0fe06d5e4d) because I think a proper repo is better - so I've 'edited' the script a few times in a few minutes at the start - those are the first 6 versions (0.1 up to and including 0.6).
