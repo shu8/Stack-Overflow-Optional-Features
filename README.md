@@ -43,6 +43,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Button to add author's name to hyperlinks](http://meta.stackexchange.com/questions/251722/is-there-a-way-to-automatically-mention-the-author-of-an-answer) (v0.9)
 - [Confirm when navigating away if you have started writing a comment](http://meta.stackexchange.com/questions/252205/add-are-you-sure-you-want-to-navigate-away-from-this-page-when-writing-a-comm) (v1.0)
 - [Allow you to sort bounties by their amout](http://meta.stackexchange.com/questions/7753/please-give-us-the-ability-to-sort-featured-tab-by-bounty-amount) (v1.0)
+- [Add a label when the question you are viewing is a 'hot-network question'](http://meta.stackexchange.com/questions/245390/let-mods-and-10k-know-when-questions-go-hot) (v1.1)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -63,6 +64,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 22/03/15 - v0.8: Added more features (mentioned above)
 - 26/03/15 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
 - 29/03/15 - v1.0: Added more features (mentioned above)
+- 30/03/15 - v1.1: Added more features (mentioned above)
 
 ---
 
@@ -152,6 +154,9 @@ Adds a confirmation dialog before you navigate away on pages where you have star
 
 - Allow you to sort bounties by their amout:
 Adds a filter on pages with bounties listed to sort by bounty amount (largest first or smallest first). Note: Only sorts bounties on the current page
+
+- Add a label when the question you are viewing is a 'hot-network question':
+Adds a label next to the title ad under view count if the current question is hot (over the network)
 
 ---
 
