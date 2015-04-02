@@ -44,6 +44,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Confirm when navigating away if you have started writing a comment](http://meta.stackexchange.com/questions/252205/add-are-you-sure-you-want-to-navigate-away-from-this-page-when-writing-a-comm) (v1.0)
 - [Allow you to sort bounties by their amout](http://meta.stackexchange.com/questions/7753/please-give-us-the-ability-to-sort-featured-tab-by-bounty-amount) (v1.0)
 - [Add a label when the question you are viewing is a 'hot-network question'](http://meta.stackexchange.com/questions/245390/let-mods-and-10k-know-when-questions-go-hot) (v1.1)
+- View links to imgur in comments inline (v1.2)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -65,6 +66,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 26/03/15 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
+- DEVELOP - v1.2: Added more features (mentioned above)
 
 ---
 
@@ -157,6 +159,9 @@ Adds a filter on pages with bounties listed to sort by bounty amount (largest fi
 
 - Add a label when the question you are viewing is a 'hot-network question':
 Adds a label next to the title ad under view count if the current question is hot (over the network)
+
+- View links to imgur in comments inline
+Converts links to imgur in comments to actual images to avoid clicks!
 
 ---
 
