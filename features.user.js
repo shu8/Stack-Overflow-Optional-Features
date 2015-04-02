@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
-// @version      1.1
+// @version      1.2
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
@@ -821,6 +821,15 @@ var functionsToCall = { //ALL the functions must go in here
                 }
             });
         }, 500);
+    },
+    
+    autoShowCommentImages: function() {
+        $('.comment .comment-text .comment-copy a').each(function() {
+            if($(this).attr('href').indexOf('imgur') != -1) {
+                var image = $(this).attr('href');
+                $(this).replaceWith("<img src='"+image+"' width='100%'>");
+            }
+        });     
     }
 };
 
@@ -856,6 +865,7 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='confirmNavigateAway'/> Add a confirmation dialog before navigating away on pages whilst you are still typing a comment</label> <br />\
                 <label><input type='checkbox' id='sortByBountyAmount'/> Add an option to filter bounties by their amount</label> <br />\
                 <label><input type='checkbox' id='isQuestionHot'/> Add a label on questions which are hot-network questions</label> <br />\
+                <label><input type='checkbox' id='autoShowCommentImages'/> View linked images (to imgur) in comments inline</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
