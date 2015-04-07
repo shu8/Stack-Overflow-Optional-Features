@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
-// @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
+// @namespace    http://stackexchange.com/users/4337810/
 // @version      1.2
 // @description  Adds a bunch of optional features to the StackExchange sites.
-// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
+// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
 // @match        *://*.stackoverflow.com/*
 // @match        *://*.superuser.com/*
@@ -830,6 +830,20 @@ var functionsToCall = { //ALL the functions must go in here
                 $(this).replaceWith("<img src='"+image+"' width='100%'>");
             }
         });     
+    },
+    
+    showCommentScores: function () {
+        var sitename = $(location).attr('hostname').split('.')[0];
+        $('.history-table td b a').each(function() {
+            id = $(this).attr('href').split('#')[1].split('_')[0].replace('comment', '');
+            $(this).after("<span class='showCommentScore' id='"+id+"'>&nbsp;&nbsp;&nbsp;show comment score</span>");
+        });    
+        $('.showCommentScore').css('cursor', 'pointer').on('click', function() {
+            that = $(this);
+            $.getJSON("https://api.stackexchange.com/2.2/comments/" + that.attr('id') + "?order=desc&sort=creation&site=" + sitename, function(json) {
+                that.html("&nbsp;&nbsp;&nbsp;" + json.items[0].score);
+            }); 
+        });        
     }
 };
 
@@ -860,12 +874,12 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='spoilerTip'/> Differentiate spoilers from empty blockquotes</label> <br />\
                 <label><input type='checkbox' id='commentReplies'/> Add reply links to comments for quick replying (without having to type someone's username)</label> <br />\
                 <label><input type='checkbox' id='parseCrossSiteLinks'/> Parse titles to links cross-SE-sites</label> <br />\
-                <label><input type='checkbox' id='answerCountSidebar'/> Show answer count as a tooltip for questions in the sidebar</label> <br />\
                 <label><input type='checkbox' id='linkQuestionAuthorName'/> Add a button in the editor toolbar to insert a hyperlink to a post and add the author automatically</label> <br />\
                 <label><input type='checkbox' id='confirmNavigateAway'/> Add a confirmation dialog before navigating away on pages whilst you are still typing a comment</label> <br />\
                 <label><input type='checkbox' id='sortByBountyAmount'/> Add an option to filter bounties by their amount</label> <br />\
                 <label><input type='checkbox' id='isQuestionHot'/> Add a label on questions which are hot-network questions</label> <br />\
                 <label><input type='checkbox' id='autoShowCommentImages'/> View linked images (to imgur) in comments inline</label> <br />\
+                <label><input type='checkbox' id='showCommentScores'/> Show your comment and comment replies scores in your profile tabs</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
@@ -902,6 +916,13 @@ $(function() {
         $('#featureGMOptions input').prop('checked', true);
         $('#featureGMOptions').show(); //Show the dialog
         var featureOptions = [];
+    }
+    
+    if (JSON.parse(GM_getValue("featureOptions")).indexOf('answerCountSidebar') != -1) { //if a deprecated feature is chosen, make them choose the options again!
+        $('#featureGMOptions input').prop('checked', true);
+        $('#featureGMOptions').show(); //Show the dialog
+        var featureOptions = [];
+        
     }
 
     $('#submitOptions').click(function() {
