@@ -661,21 +661,6 @@ var functionsToCall = { //ALL the functions must go in here
         });
     },
 
-    answerCountSidebar: function() { //For adding the answer count as a tooltip to questions in the sidebar
-        $('.sidebar-linked .linked .spacer a, .sidebar-related .related .spacer a').each(function(i) {
-            if (!i % 2 == 0) { //odd only (ie. question title)
-                var id = $(this).attr('href').split('/')[2],
-                    sitename = $(location).attr('hostname').split('.')[0],
-                    that = $(this);
-
-                $.getJSON("https://api.stackexchange.com/2.2/questions/" + id + "?order=desc&sort=activity&site=" + sitename, function(json) {
-                    answers = json.items[0].answer_count;
-                    that.attr('title', answers + (answers == 1 ? ' answer' : ' answers'));
-                });
-            }
-        });
-    },
-
     linkQuestionAuthorName: function() { //For adding a button to the editor toolbar to insert a link to a post and automatically add the author's name
         var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog'> \
             <h5>Insert hyperlink with author's name</h5> \
