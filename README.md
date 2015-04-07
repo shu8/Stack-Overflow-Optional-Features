@@ -39,12 +39,13 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Differentiate between empty blockquotes and spoilers](http://meta.stackexchange.com/questions/104085/differentiate-spoilers-from-empty-block-quotes) (v0.7)
 - [Add reply links for quick replying](http://meta.stackexchange.com/questions/74778/add-reply-link-to-comment-that-pre-populates-comment-box-with-username) (v0.8)
 - [Parse cross-site links to questions](http://meta.stackexchange.com/questions/251183/parse-question-links-from-other-se-sites) (v0.8)
-- [Show answer counts on sidebar](http://meta.stackexchange.com/questions/251771/show-number-of-answers-as-tooltip-in-the-sidebar-questions) (v0.9)
+- <s>[Show answer counts on sidebar](http://meta.stackexchange.com/questions/251771/show-number-of-answers-as-tooltip-in-the-sidebar-questions) (v0.9)</s>
 - [Button to add author's name to hyperlinks](http://meta.stackexchange.com/questions/251722/is-there-a-way-to-automatically-mention-the-author-of-an-answer) (v0.9)
 - [Confirm when navigating away if you have started writing a comment](http://meta.stackexchange.com/questions/252205/add-are-you-sure-you-want-to-navigate-away-from-this-page-when-writing-a-comm) (v1.0)
 - [Allow you to sort bounties by their amout](http://meta.stackexchange.com/questions/7753/please-give-us-the-ability-to-sort-featured-tab-by-bounty-amount) (v1.0)
 - [Add a label when the question you are viewing is a 'hot-network question'](http://meta.stackexchange.com/questions/245390/let-mods-and-10k-know-when-questions-go-hot) (v1.1)
 - View links to imgur in comments inline (v1.2)
+- [Show your comment and comment replies scores in your profile tabs](http://meta.stackexchange.com/questions/38285/display-the-number-of-comment-upvotes-in-recent-activity-pages) (v1.2)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -146,7 +147,8 @@ Adds reply links to comments to auto-insert the username of the commenter
 Parses cross-site links when viewing them. eg. meta.stackexchange.com/questions/2312231/blah-blah --> Blah Blah
 
 - Show answer counts on sidebar:
-Shows the answer counts to questions shown on the Linked/Related section on the sidebar in their tooltip
+<s>Shows the answer counts to questions shown on the Linked/Related section on the sidebar in their tooltip</s>
+**Update:** I have removed this feature because I felt that it was sending to many API requests and I kept on getting throttle violations; I can only think other users would be facing this issue as well.
 
 - Button to add author's name to hyperlinks:
 Adds a button on the editor toolbar to show a dialog to insert a hyperlink with the post's author automatically fetched an inserted
@@ -162,6 +164,9 @@ Adds a label next to the title ad under view count if the current question is ho
 
 - View links to imgur in comments inline
 Converts links to imgur in comments to actual images to avoid clicks!
+
+- Show your comment and comment replies scores in your profile tabs
+Adds a button next to comments in your profile page activities tab to show the comment's vote count
 
 ---
 
