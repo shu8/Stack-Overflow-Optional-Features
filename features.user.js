@@ -68,7 +68,7 @@ var functionsToCall = { //ALL the functions must go in here
             "Rob Dandorph", "Jessica Genther", "Courtny Cotten", "Stephanie", "Sean Durkin", "rla4", "Alex Warren", "Jaime Kronick", "Alexa", "Samuel Rouayrenc", "Josh Helfgott",
             "Peter Tarr", "Shane Madden", "Nextraztus", "G-Wiz", "Dan O'Boyle", "yolovolo", "Griffin Sandberg", "ODB", "Mark Villarreal", "Lowell Gruman Jr.", "bweber", "Natalie How",
             "Haney", "jmac", "Emmanuel Andem-Ewa", "Jess Pardue", "Dean Ward", "Steve Trout", "Nicholas Chabanovsky", "Kelli Ward", "Noah Neuman", "Lauren Roemer", "Heidi Hays",
-            "Joe Wilkie", "Mackenzie Ralston"
+            "Joe Wilkie", "Mackenzie Ralston", "animuson"
         ];
 
         $('.comment, .deleted-answer-info, .employee-name, .started, .user-details').each(function() { //normal comments, deleted answers (deleted by), SE.com/about, question feed users, question/answer/edit owners
@@ -149,9 +149,15 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     displayName: function() { // For displaying username next to avatar on topbar
-        var uname = $('.gravatar-wrapper-24').attr('title');
-        var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
-        $(insertme).insertBefore('.gravatar-wrapper-24');
+        if ($('.gravatar-wrapper-24').length) { //Old? Not working anymore on sites I checked. Kept it here in case it still exists on certain sites (though I doubt it does; will remove 1st part of this if next versoin)
+            var uname = $('.gravatar-wrapper-24').attr('title');
+            var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
+            $(insertme).insertBefore('.gravatar-wrapper-24');
+        } else {
+            var uname = $('.gravatar-wrapper-48').attr('title');
+            var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
+            $(insertme).insertBefore('.gravatar-wrapper-48');
+        }
     },
 
     colorAnswerer: function() { // For highlighting the names of answerers on comments
@@ -829,6 +835,35 @@ var functionsToCall = { //ALL the functions must go in here
                 that.html("&nbsp;&nbsp;&nbsp;" + json.items[0].score);
             }); 
         });        
+    },
+    
+    answerTagsSearch: function() {        
+        if (window.location.href.indexOf('search?q=') > -1) { //ONLY ON SEARCH PAGES!        
+            var sitename = $(location).attr('hostname').split('.')[0]; //sitename for API call
+
+            $.each($('div[id*="answer"]'), function(i) { //loop through all *answers*
+                var $that = $(this);
+                if (i < 25){ //make sure the max is 24 - a reasonable amount (I think) to avoid throttle violations
+                    id = $that.find('.result-link a').attr('href').split('/')[2];
+
+                    $.getJSON("https://api.stackexchange.com/2.2/questions/" + id + "?order=desc&sort=activity&site=" + sitename, function(json) {
+                        tags = json.items[0].tags; //get tags
+                        for (x=0; x<tags.length; x++){
+                            $that.find('.summary .tags').append("<a href='/questions/tagged/'"+tags[x]+"' class='post-tag'>"+tags[x]+"</a>"); //add the tags and their link to the answers 
+                        }
+                        $that.find('.summary .tags a').each(function() {
+                            if ($(this).text().indexOf('status-') > -1) { //if it's a mod tag
+                                $(this).addClass('moderator-tag'); //add appropiate class
+                            } else if ($(this).text().match( /(discussion|feature-request|support|bug)/ )) { //if it's a required tag
+                                $(this).addClass('required-tag'); //add appropiate class
+                            }
+                        });
+                    });
+                } else { //if 25 or more, display 'error'
+                    alert('Too many answers on this page! Stopping adding tags to answers in case you get a throttle violation! Try using smaller page sizes and go to the next page in a minute or so :)');
+                }
+            });
+        }       
     }
 };
 
@@ -865,6 +900,7 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='isQuestionHot'/> Add a label on questions which are hot-network questions</label> <br />\
                 <label><input type='checkbox' id='autoShowCommentImages'/> View linked images (to imgur) in comments inline</label> <br />\
                 <label><input type='checkbox' id='showCommentScores'/> Show your comment and comment replies scores in your profile tabs</label> <br />\
+                <label><input type='checkbox' id='answerTagsSearch'/> Show tags for the question an answer belongs to on search pages (for better context)</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
