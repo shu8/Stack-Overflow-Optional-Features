@@ -46,6 +46,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Add a label when the question you are viewing is a 'hot-network question'](http://meta.stackexchange.com/questions/245390/let-mods-and-10k-know-when-questions-go-hot) (v1.1)
 - View links to imgur in comments inline (v1.2)
 - [Show your comment and comment replies scores in your profile tabs](http://meta.stackexchange.com/questions/38285/display-the-number-of-comment-upvotes-in-recent-activity-pages) (v1.2)
+- [Show tags for the question an answer belongs to on search pages](http://meta.stackexchange.com/questions/197874/include-tags-in-answers-entries-on-search-results) (v1.2)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -67,7 +68,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 26/03/15 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
-- DEVELOP - v1.2: Added more features (mentioned above)
+- 30/04/15 - v1.2: Added more features (mentioned above), updated `employeeStar` function for animuson(!)
 
 ---
 
@@ -167,6 +168,9 @@ Converts links to imgur in comments to actual images to avoid clicks!
 
 - Show your comment and comment replies scores in your profile tabs
 Adds a button next to comments in your profile page activities tab to show the comment's vote count
+
+- Show tags for the question an answer belongs to on search pages
+Adds the tags for the question that an answer belongs to underneath the post when searching (for better context whilst searching)
 
 ---
 
