@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.2
+// @version      1.2.1
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
@@ -838,30 +838,35 @@ var functionsToCall = { //ALL the functions must go in here
     },
     
     answerTagsSearch: function() {        
-        if (window.location.href.indexOf('search?q=') > -1) { //ONLY ON SEARCH PAGES!        
-            var sitename = $(location).attr('hostname').split('.')[0]; //sitename for API call
+        if (window.location.href.indexOf('search?q=') > -1) { //ONLY ON SEARCH PAGES!
+            var sitename = $(location).attr('hostname').split('.')[0], //sitename for API call
+                ids = [],
+                idsAndTags = {};
 
-            $.each($('div[id*="answer"]'), function(i) { //loop through all *answers*
-                var $that = $(this);
-                if (i < 25){ //make sure the max is 24 - a reasonable amount (I think) to avoid throttle violations
-                    id = $that.find('.result-link a').attr('href').split('/')[2];
-
-                    $.getJSON("https://api.stackexchange.com/2.2/questions/" + id + "?order=desc&sort=activity&site=" + sitename, function(json) {
-                        tags = json.items[0].tags; //get tags
-                        for (x=0; x<tags.length; x++){
-                            $that.find('.summary .tags').append("<a href='/questions/tagged/'"+tags[x]+"' class='post-tag'>"+tags[x]+"</a>"); //add the tags and their link to the answers 
-                        }
-                        $that.find('.summary .tags a').each(function() {
-                            if ($(this).text().indexOf('status-') > -1) { //if it's a mod tag
-                                $(this).addClass('moderator-tag'); //add appropiate class
-                            } else if ($(this).text().match( /(discussion|feature-request|support|bug)/ )) { //if it's a required tag
-                                $(this).addClass('required-tag'); //add appropiate class
-                            }
-                        });
-                    });
-                } else { //if 25 or more, display 'error'
-                    alert('Too many answers on this page! Stopping adding tags to answers in case you get a throttle violation! Try using smaller page sizes and go to the next page in a minute or so :)');
+            $.each($('div[id*="answer"]'), function() { //loop through all *answers*
+                ids.push($(this).find('.result-link a').attr('href').split('/')[2]); //Get the IDs for the questions for all the *answers*
+            });
+            $.getJSON("https://api.stackexchange.com/2.2/questions/" + ids.join(';') + "?site=" + sitename, function(json) {
+                itemsLength = json.items.length;
+                for (i = 0; i < itemsLength; i++) {
+                    idsAndTags[json.items[i].question_id] = json.items[i].tags;
                 }
+                console.log(idsAndTags);
+
+                $.each($('div[id*="answer"]'), function() { //loop through all *answers*
+                    id = $(this).find('.result-link a').attr('href').split('/')[2]; //get their ID
+                    $that = $(this);
+                    for (x = 0; x < idsAndTags[id].length; x++) { //Add the appropiate tags for the appropiate answer
+                        $that.find('.summary .tags').append("<a href='/questions/tagged/" + idsAndTags[id][x] + "' class='post-tag'>" + idsAndTags[id][x] + "</a>"); //add the tags and their link to the answers 
+                    }
+                    $that.find('.summary .tags a').each(function() {
+                        if ($(this).text().indexOf('status-') > -1) { //if it's a mod tag
+                            $(this).addClass('moderator-tag'); //add appropiate class
+                        } else if ($(this).text().match(/(discussion|feature-request|support|bug)/)) { //if it's a required tag
+                            $(this).addClass('required-tag'); //add appropiate class
+                        }
+                    });
+                });
             });
         }       
     }
