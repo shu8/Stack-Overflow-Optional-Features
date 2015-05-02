@@ -851,7 +851,6 @@ var functionsToCall = { //ALL the functions must go in here
                 for (i = 0; i < itemsLength; i++) {
                     idsAndTags[json.items[i].question_id] = json.items[i].tags;
                 }
-                console.log(idsAndTags);
 
                 $.each($('div[id*="answer"]'), function() { //loop through all *answers*
                     id = $(this).find('.result-link a').attr('href').split('/')[2]; //get their ID
