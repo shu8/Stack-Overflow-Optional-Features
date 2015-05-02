@@ -68,7 +68,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 26/03/15 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
-- 30/04/15 - v1.2: Added more features (mentioned above), updated `employeeStar` function for animuson(!)
+- 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 
 ---
 
