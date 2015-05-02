@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.2.1
+// @version      1.3
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
@@ -15,6 +15,7 @@
 // @require      https://cdn.rawgit.com/timdown/rangyinputs/master/rangyinputs-jquery-src.js
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
 // @require      https://cdn.rawgit.com/camagu/jquery-feeds/master/jquery.feeds.js
+// @require      https://cdn.rawgit.com/EnzoMartin/Sticky-Element/master/jquery.stickyelement.js
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
@@ -851,6 +852,7 @@ var functionsToCall = { //ALL the functions must go in here
                 for (i = 0; i < itemsLength; i++) {
                     idsAndTags[json.items[i].question_id] = json.items[i].tags;
                 }
+                console.log(idsAndTags);
 
                 $.each($('div[id*="answer"]'), function() { //loop through all *answers*
                     id = $(this).find('.result-link a').attr('href').split('/')[2]; //get their ID
@@ -868,6 +870,10 @@ var functionsToCall = { //ALL the functions must go in here
                 });
             });
         }       
+    },
+    
+    stickyVoteButtons: function() {       
+        $('.vote').sticky($('.vote').parent().parent().parent().parent().parent());
     }
 };
 
@@ -905,6 +911,7 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='autoShowCommentImages'/> View linked images (to imgur) in comments inline</label> <br />\
                 <label><input type='checkbox' id='showCommentScores'/> Show your comment and comment replies scores in your profile tabs</label> <br />\
                 <label><input type='checkbox' id='answerTagsSearch'/> Show tags for the question an answer belongs to on search pages (for better context)</label> <br />\
+                <label><input type='checkbox' id='stickyVoteButtons'/> Make vote buttons next to posts sticky whilst scrolling on that post</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
