@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
-// @namespace    http://stackexchange.com/users/4337810/
+// @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
 // @version      1.3
 // @description  Adds a bunch of optional features to the StackExchange sites.
-// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
+// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
 // @match        *://*.stackoverflow.com/*
 // @match        *://*.superuser.com/*
@@ -69,7 +69,7 @@ var functionsToCall = { //ALL the functions must go in here
             "Rob Dandorph", "Jessica Genther", "Courtny Cotten", "Stephanie", "Sean Durkin", "rla4", "Alex Warren", "Jaime Kronick", "Alexa", "Samuel Rouayrenc", "Josh Helfgott",
             "Peter Tarr", "Shane Madden", "Nextraztus", "G-Wiz", "Dan O'Boyle", "yolovolo", "Griffin Sandberg", "ODB", "Mark Villarreal", "Lowell Gruman Jr.", "bweber", "Natalie How",
             "Haney", "jmac", "Emmanuel Andem-Ewa", "Jess Pardue", "Dean Ward", "Steve Trout", "Nicholas Chabanovsky", "Kelli Ward", "Noah Neuman", "Lauren Roemer", "Heidi Hays",
-            "Joe Wilkie", "Mackenzie Ralston", "animuson"
+            "Joe Wilkie", "Mackenzie Ralston"
         ];
 
         $('.comment, .deleted-answer-info, .employee-name, .started, .user-details').each(function() { //normal comments, deleted answers (deleted by), SE.com/about, question feed users, question/answer/edit owners
@@ -150,15 +150,9 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     displayName: function() { // For displaying username next to avatar on topbar
-        if ($('.gravatar-wrapper-24').length) { //Old? Not working anymore on sites I checked. Kept it here in case it still exists on certain sites (though I doubt it does; will remove 1st part of this if next versoin)
-            var uname = $('.gravatar-wrapper-24').attr('title');
-            var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
-            $(insertme).insertBefore('.gravatar-wrapper-24');
-        } else {
-            var uname = $('.gravatar-wrapper-48').attr('title');
-            var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
-            $(insertme).insertBefore('.gravatar-wrapper-48');
-        }
+        var uname = $('.gravatar-wrapper-24').attr('title');
+        var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
+        $(insertme).insertBefore('.gravatar-wrapper-24');
     },
 
     colorAnswerer: function() { // For highlighting the names of answerers on comments
@@ -668,6 +662,21 @@ var functionsToCall = { //ALL the functions must go in here
         });
     },
 
+    answerCountSidebar: function() { //For adding the answer count as a tooltip to questions in the sidebar
+        $('.sidebar-linked .linked .spacer a, .sidebar-related .related .spacer a').each(function(i) {
+            if (!i % 2 == 0) { //odd only (ie. question title)
+                var id = $(this).attr('href').split('/')[2],
+                    sitename = $(location).attr('hostname').split('.')[0],
+                    that = $(this);
+
+                $.getJSON("https://api.stackexchange.com/2.2/questions/" + id + "?order=desc&sort=activity&site=" + sitename, function(json) {
+                    answers = json.items[0].answer_count;
+                    that.attr('title', answers + (answers == 1 ? ' answer' : ' answers'));
+                });
+            }
+        });
+    },
+
     linkQuestionAuthorName: function() { //For adding a button to the editor toolbar to insert a link to a post and automatically add the author's name
         var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog'> \
             <h5>Insert hyperlink with author's name</h5> \
@@ -904,6 +913,7 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='spoilerTip'/> Differentiate spoilers from empty blockquotes</label> <br />\
                 <label><input type='checkbox' id='commentReplies'/> Add reply links to comments for quick replying (without having to type someone's username)</label> <br />\
                 <label><input type='checkbox' id='parseCrossSiteLinks'/> Parse titles to links cross-SE-sites</label> <br />\
+                <label><input type='checkbox' id='answerCountSidebar'/> Show answer count as a tooltip for questions in the sidebar</label> <br />\
                 <label><input type='checkbox' id='linkQuestionAuthorName'/> Add a button in the editor toolbar to insert a hyperlink to a post and add the author automatically</label> <br />\
                 <label><input type='checkbox' id='confirmNavigateAway'/> Add a confirmation dialog before navigating away on pages whilst you are still typing a comment</label> <br />\
                 <label><input type='checkbox' id='sortByBountyAmount'/> Add an option to filter bounties by their amount</label> <br />\
@@ -948,13 +958,6 @@ $(function() {
         $('#featureGMOptions input').prop('checked', true);
         $('#featureGMOptions').show(); //Show the dialog
         var featureOptions = [];
-    }
-    
-    if (JSON.parse(GM_getValue("featureOptions")).indexOf('answerCountSidebar') != -1) { //if a deprecated feature is chosen, make them choose the options again!
-        $('#featureGMOptions input').prop('checked', true);
-        $('#featureGMOptions').show(); //Show the dialog
-        var featureOptions = [];
-        
     }
 
     $('#submitOptions').click(function() {
