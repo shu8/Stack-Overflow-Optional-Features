@@ -47,6 +47,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - View links to imgur in comments inline (v1.2)
 - [Show your comment and comment replies scores in your profile tabs](http://meta.stackexchange.com/questions/38285/display-the-number-of-comment-upvotes-in-recent-activity-pages) (v1.2)
 - [Show tags for the question an answer belongs to on search pages](http://meta.stackexchange.com/questions/197874/include-tags-in-answers-entries-on-search-results) (v1.2)
+- [Make the vote buttons sticky](http://meta.stackexchange.com/a/35047/260841) (v1.3)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -69,6 +70,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
 - 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
+- DEVELOP - v1.3: Added more features (mentioned above)
 
 ---
 
@@ -163,14 +165,17 @@ Adds a filter on pages with bounties listed to sort by bounty amount (largest fi
 - Add a label when the question you are viewing is a 'hot-network question':
 Adds a label next to the title ad under view count if the current question is hot (over the network)
 
-- View links to imgur in comments inline
+- View links to imgur in comments inline:
 Converts links to imgur in comments to actual images to avoid clicks!
 
-- Show your comment and comment replies scores in your profile tabs
+- Show your comment and comment replies scores in your profile tabs:
 Adds a button next to comments in your profile page activities tab to show the comment's vote count
 
-- Show tags for the question an answer belongs to on search pages
+- Show tags for the question an answer belongs to on search pages:
 Adds the tags for the question that an answer belongs to underneath the post when searching (for better context whilst searching)
+
+- Make the vote buttons sticky:
+Makes the vote buttons next to a post sticky whilst scrolling on that post
 
 ---
 
