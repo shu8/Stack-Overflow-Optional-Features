@@ -70,7 +70,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
 - 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
-- DEVELOP - v1.3: Added more features (mentioned above)
+- 04/05/15 - v1.3: Added more features (mentioned above)
 
 ---
 
