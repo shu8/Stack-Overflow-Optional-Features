@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
 // @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
-// @version      1.3
+// @version      1.4 DEV
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
 // @match        *://*.stackexchange.com/*
@@ -883,6 +883,19 @@ var functionsToCall = { //ALL the functions must go in here
     
     stickyVoteButtons: function() {       
         $('.vote').sticky($('.vote').parent().parent().parent().parent().parent());
+    },
+    
+    titleEditDiff: function() {
+        setTimeout(function() {
+            var $questionHyperlink = $('.summary h2 .question-hyperlink').clone(),
+                $questionHyperlinkTwo = $('.summary h2 .question-hyperlink').clone(),
+                link = $('.summary h2 .question-hyperlink').attr('href'),
+                added = ($questionHyperlinkTwo.find('.diff-delete').remove().end().text()),
+                removed = ($questionHyperlink.find('.diff-add').remove().end().text());
+
+            $('.summary h2 .question-hyperlink').hide();
+            $('.summary h2 .question-hyperlink').after("<a href='"+link+"' class='question-hyperlink'><span class='diff-delete'>"+removed+"</span><span class='diff-add'>"+added+"</span></a>");        
+        }, 1000);
     }
 };
 
@@ -922,6 +935,7 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='showCommentScores'/> Show your comment and comment replies scores in your profile tabs</label> <br />\
                 <label><input type='checkbox' id='answerTagsSearch'/> Show tags for the question an answer belongs to on search pages (for better context)</label> <br />\
                 <label><input type='checkbox' id='stickyVoteButtons'/> Make vote buttons next to posts sticky whilst scrolling on that post</label> <br />\
+                <label><input type='checkbox' id='titleEditDiff'/> Make title edits show seperately rather than merged</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
