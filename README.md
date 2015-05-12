@@ -49,6 +49,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Show tags for the question an answer belongs to on search pages](http://meta.stackexchange.com/questions/197874/include-tags-in-answers-entries-on-search-results) (v1.2)
 - [Make the vote buttons sticky](http://meta.stackexchange.com/a/35047/260841) (v1.3)
 - [Show title edit diffs separately](http://meta.stackexchange.com/questions/135710/please-show-changed-titles-separately-in-edit-diffs) (v1.4 - DEVELOP)
+- [Show meta, chat and blog buttons on hover of a site under the StackExchange button](http://meta.stackexchange.com/questions/256183/show-the-meta-chat-and-blog-in-the-top-bar-for-other-sites-on-hover) (v1.4 - DEVELOP)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -181,6 +182,8 @@ Makes the vote buttons next to a post sticky whilst scrolling on that post
 
 - Show title edit diffs separately:
 Shows any title edits as separate green and red parts - so you can actually read the edit! 
+
+- Show meta, chat and blog buttons on hover of a site under the StackExchange button: Self explanatory
 
 ---
 
