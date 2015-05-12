@@ -896,6 +896,30 @@ var functionsToCall = { //ALL the functions must go in here
             $('.summary h2 .question-hyperlink').hide();
             $('.summary h2 .question-hyperlink').after("<a href='"+link+"' class='question-hyperlink'><span class='diff-delete'>"+removed+"</span><span class='diff-add'>"+added+"</span></a>");        
         }, 1000);
+    },
+    
+    metaChatBlogStackExchangeButton: function() {
+        var blogSites = ["math", "serverfault", "english", "stats", "diy", "bicycles", "webapps", "mathematica", "christianity", "cooking", "fitness", "cstheory", "scifi", "tex", "security", "islam", "superuser", "gaming", "programmers", "gis", "apple", "photo", "dba"],
+            link,
+            blogLink = '//' + 'blog.stackexchange.com';
+        $('#your-communities-section > ul > li > a').hover(function () {
+            if($(this).attr('href').substr(0, 6).indexOf('meta') == -1) {
+                link = 'http://meta.'+ $(this).attr('href').substr(2, $(this).attr('href').length-1);
+                if(blogSites.indexOf($(this).attr('href').split('/')[2].split('.')[0]) != -1) {
+                    blogLink = '//' + $(this).attr('href').split('/')[2].split('.')[0] + '.blogoverflow.com';
+                }
+
+                $(this).find('.rep-score').hide(500);
+                $(this).append('<div class="related-links" style="float: right;">\
+                                 <a href="'+link+'">meta</a>\
+                                 <a href="http://chat.stackexchange.com">chat</a>\
+                                 <a href="'+blogLink+'">blog</a>\
+                                </div>');
+            }
+        }, function () {
+            $(this).find('.rep-score').show(500);
+            $(this).find('.related-links').remove();
+        });        
     }
 };
 
@@ -936,6 +960,7 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='answerTagsSearch'/> Show tags for the question an answer belongs to on search pages (for better context)</label> <br />\
                 <label><input type='checkbox' id='stickyVoteButtons'/> Make vote buttons next to posts sticky whilst scrolling on that post</label> <br />\
                 <label><input type='checkbox' id='titleEditDiff'/> Make title edits show seperately rather than merged</label> <br />\
+                <label><input type='checkbox' id='metaChatBlogStackExchangeButton'/> Show meta, chat and blog buttons on hover of a site under the StackExchange button</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
