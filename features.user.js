@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         SE Extra, Optional Features
-// @namespace    http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A
+// @namespace    http://stackexchange.com/users/4337810/
 // @version      1.4 DEV
 // @description  Adds a bunch of optional features to the StackExchange sites.
-// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/%E1%94%95%E1%96%BA%E1%98%8E%E1%95%8A)
+// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
 // @match        *://*.stackoverflow.com/*
 // @match        *://*.superuser.com/*
@@ -146,7 +146,7 @@ var functionsToCall = { //ALL the functions must go in here
             }).css(betterCSS);
 
             $(".tagged-interesting").removeClass("tagged-interesting");
-        }, 100);
+        }, 300);
     },
 
     displayName: function() { // For displaying username next to avatar on topbar
@@ -662,7 +662,7 @@ var functionsToCall = { //ALL the functions must go in here
         });
     },
 
-    answerCountSidebar: function() { //For adding the answer count as a tooltip to questions in the sidebar
+    /*answerCountSidebar: function() { //For adding the answer count as a tooltip to questions in the sidebar
         $('.sidebar-linked .linked .spacer a, .sidebar-related .related .spacer a').each(function(i) {
             if (!i % 2 == 0) { //odd only (ie. question title)
                 var id = $(this).attr('href').split('/')[2],
@@ -675,7 +675,7 @@ var functionsToCall = { //ALL the functions must go in here
                 });
             }
         });
-    },
+    },*/
 
     linkQuestionAuthorName: function() { //For adding a button to the editor toolbar to insert a link to a post and automatically add the author's name
         var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog'> \
@@ -920,6 +920,103 @@ var functionsToCall = { //ALL the functions must go in here
             $(this).find('.rep-score').show(500);
             $(this).find('.related-links').remove();
         });        
+    },
+    
+    metaNewQuestionAlert: function() {
+        var metaName = 'meta.' + $(location).attr('hostname').split('.')[0],
+            lastQuestions = {};
+        var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
+
+        $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container" style="font-size: 2em; vertical-align: top; padding-top: 3px; color: white;">♦</span>');
+        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog js-help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none;">\
+<div class="modal-content" id="newMetaQuestionsList"><span id="closeNewQuestionList" style="float:right">x</span>\
+<ul>\
+<li>\
+<a>No new questions!<span class="item-summary">\
+No new meta questions!</span>\
+</a>\
+</li>\
+</ul>\
+</div>\
+</div>')
+
+        $('#mod-extra-icon').css('cursor', 'pointer').click(function() {
+            $('#newMetaQuestionsDialog').show();
+        });
+        $('#closeNewQuestionList').css('cursor', 'pointer').click(function() {
+            $('#newMetaQuestionsDialog').hide();
+        });
+        $(document).mouseup(function (e) {
+            var container = $('#newMetaQuestionsDialog');
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
+        });
+
+        if (GM_getValue("metaNewQuestionAlert-lastQuestions", -1) == -1) {
+            GM_setValue("metaNewQuestionAlert-lastQuestions", JSON.stringify(lastQuestions));  
+        } else {
+            lastQuestions = JSON.parse(GM_getValue("metaNewQuestionAlert-lastQuestions"));    
+        }
+
+        $.getJSON(apiLink, function(json) {
+            var latestQuestion = json.items[0].title;
+            if(latestQuestion == lastQuestions[metaName]) {
+                //if you've already seen the stuff
+                $('#mod-extra-icon').css('color', 'white');
+            } else { 
+                $('#newMetaQuestionsList ul').text("");
+                $('#mod-extra-icon').css('color', 'red');
+
+                for(i=0;i<json.items.length;i++){
+                    var title = json.items[i].title,
+                        link = json.items[i].link,
+                        author = json.items[i].owner.display_name;
+                    $('#newMetaQuestionsList ul').append("<li><a href='"+link+"'>"+title+"<br>("+author+")</a>");
+                }
+                lastQuestions[metaName] = latestQuestion;
+                $('#mod-extra-icon').css('cursor', 'pointer').click(function() {
+                    GM_setValue("metaNewQuestionAlert-lastQuestions", JSON.stringify(lastQuestions));
+                });
+            }
+        });        
+    },
+    
+    betterCSS: function() {
+        $('head').append('<link rel="stylesheet" href="https://cdn.rawgit.com/shu8/SE-Answers_scripts/master/coolMaterialDesignCss.css" type="text/css" />');        
+    },
+    
+    standOutDupeCloseMigrated: function() {
+        $('head').append('<link rel="stylesheet" href="https://rawgit.com/shu8/SE-Answers_scripts/master/dupeClosedMigratedCSS.css" type="text/css" />'); //add the CSS
+        var questions = {};
+        $.each($('.question-summary'), function() { //Find the questions and add their id's and statuses to an object
+            if($(this).find('.summary a:eq(0)').text().trim().substr($(this).find('.summary a:eq(0)').text().trim().length-11) == '[duplicate]') {
+                questions[$(this).attr('id').split('-')[2]] = 'duplicate';
+                $(this).find('.summary a:eq(0)').text($(this).find('.summary a:eq(0)').text().trim().substr(0, $(this).find('.summary a:eq(0)').text().trim().length-11)); //remove [duplicate]
+
+            } else if($(this).find('.summary a:eq(0)').text().trim().substr($(this).find('.summary a:eq(0)').text().trim().length-8) == '[closed]') {
+                questions[$(this).attr('id').split('-')[2]] = 'closed';
+                $(this).find('.summary a:eq(0)').text($(this).find('.summary a:eq(0)').text().trim().substr(0, $(this).find('.summary a:eq(0)').text().trim().length-8)); //remove [closed]
+
+            } else if($(this).find('.summary a:eq(0)').text().trim().substr($(this).find('.summary a:eq(0)').text().trim().length-10) == '[migrated]') {
+                questions[$(this).attr('id').split('-')[2]] = 'migrated';
+                $(this).find('.summary a:eq(0)').text($(this).find('.summary a:eq(0)').text().trim().substr(0, $(this).find('.summary a:eq(0)').text().trim().length-10)); //remove [migrated]
+
+            } else if($(this).find('.summary a:eq(0)').text().trim().substr($(this).find('.summary a:eq(0)').text().trim().length-9) == '[on hold]') {
+                questions[$(this).attr('id').split('-')[2]] = 'onhold';
+                $(this).find('.summary a:eq(0)').text($(this).find('.summary a:eq(0)').text().trim().substr(0, $(this).find('.summary a:eq(0)').text().trim().length-9)); //remove [on hold]
+            }
+        });
+
+        $.each($('.question-summary'), function() { //loop through questions
+            $that = $(this);
+            $.each(questions, function(key, val) { //loop through object of questions closed/dupes/migrated
+                if($that.attr('id').split('-')[2] == key) {
+                    $that.find('.summary a:eq(0)').after("&nbsp;<span class='"+val+"'>&nbsp;"+val+"&nbsp;</span>"); //add appropiate message
+                }
+            });
+        });
+        
     }
 };
 
@@ -950,7 +1047,6 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='spoilerTip'/> Differentiate spoilers from empty blockquotes</label> <br />\
                 <label><input type='checkbox' id='commentReplies'/> Add reply links to comments for quick replying (without having to type someone's username)</label> <br />\
                 <label><input type='checkbox' id='parseCrossSiteLinks'/> Parse titles to links cross-SE-sites</label> <br />\
-                <label><input type='checkbox' id='answerCountSidebar'/> Show answer count as a tooltip for questions in the sidebar</label> <br />\
                 <label><input type='checkbox' id='linkQuestionAuthorName'/> Add a button in the editor toolbar to insert a hyperlink to a post and add the author automatically</label> <br />\
                 <label><input type='checkbox' id='confirmNavigateAway'/> Add a confirmation dialog before navigating away on pages whilst you are still typing a comment</label> <br />\
                 <label><input type='checkbox' id='sortByBountyAmount'/> Add an option to filter bounties by their amount</label> <br />\
@@ -961,6 +1057,9 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <label><input type='checkbox' id='stickyVoteButtons'/> Make vote buttons next to posts sticky whilst scrolling on that post</label> <br />\
                 <label><input type='checkbox' id='titleEditDiff'/> Make title edits show seperately rather than merged</label> <br />\
                 <label><input type='checkbox' id='metaChatBlogStackExchangeButton'/> Show meta, chat and blog buttons on hover of a site under the StackExchange button</label> <br />\
+                <label><input type='checkbox' id='metaNewQuestionAlert'/> Add an extra mod diamond to the topbar that alerts you if there is a new question posted on the child-meta of the current site</label> <br />\
+                <label><input type='checkbox' id='betterCSS'/> Add extra CSS for voting signs and favourite button (currently only on Android SE)</label> <br />\
+                <label><input type='checkbox' id='standOutDupeCloseMigrated'/> Add colourful, more apparent signs to questions that are on hold, duplicates, closed or migrated on question lists</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
@@ -970,7 +1069,7 @@ $('#featureTitle').css('cursor', 'move');
 
 if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
     $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
-    $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015) Currently on MSE only
+    $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015)
 
     $('#addFeaturesLink').click(function() {
         $('#featureGMOptions').show(500);
@@ -987,16 +1086,22 @@ $('#featureGMOptions > #resetFeature').css('cursor', 'pointer').click(function()
 });
 
 $(function() {
-    if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
-        var featureOptions = JSON.parse(GM_getValue("featureOptions"));
-        for (i = 0; i < featureOptions.length; ++i) {
-            $('#featureGMOptions #' + featureOptions[i]).prop('checked', true);
-            functionsToCall[featureOptions[i]](); //Call the functions that were chosen
-        }
-    } else { //If not, set it:
+    if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1) { //if a deprecated feature exists, make user set options again!
         $('#featureGMOptions input').prop('checked', true);
         $('#featureGMOptions').show(); //Show the dialog
         var featureOptions = [];
+    } else {    
+        if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
+            var featureOptions = JSON.parse(GM_getValue("featureOptions"));
+            for (i = 0; i < featureOptions.length; ++i) {
+                $('#featureGMOptions #' + featureOptions[i]).prop('checked', true);
+                functionsToCall[featureOptions[i]](); //Call the functions that were chosen
+            }
+        } else { //If not, set it:
+            $('#featureGMOptions input').prop('checked', true);
+            $('#featureGMOptions').show(); //Show the dialog
+            var featureOptions = [];
+        }
     }
 
     $('#submitOptions').click(function() {
