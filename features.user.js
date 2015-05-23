@@ -69,7 +69,7 @@ var functionsToCall = { //ALL the functions must go in here
             "Rob Dandorph", "Jessica Genther", "Courtny Cotten", "Stephanie", "Sean Durkin", "rla4", "Alex Warren", "Jaime Kronick", "Alexa", "Samuel Rouayrenc", "Josh Helfgott",
             "Peter Tarr", "Shane Madden", "Nextraztus", "G-Wiz", "Dan O'Boyle", "yolovolo", "Griffin Sandberg", "ODB", "Mark Villarreal", "Lowell Gruman Jr.", "bweber", "Natalie How",
             "Haney", "jmac", "Emmanuel Andem-Ewa", "Jess Pardue", "Dean Ward", "Steve Trout", "Nicholas Chabanovsky", "Kelli Ward", "Noah Neuman", "Lauren Roemer", "Heidi Hays",
-            "Joe Wilkie", "Mackenzie Ralston"
+            "Joe Wilkie", "Mackenzie Ralston", "animuson"
         ];
 
         $('.comment, .deleted-answer-info, .employee-name, .started, .user-details').each(function() { //normal comments, deleted answers (deleted by), SE.com/about, question feed users, question/answer/edit owners
@@ -387,7 +387,7 @@ var functionsToCall = { //ALL the functions must go in here
         });
     },
 
-    highlightClosedQuestions: function() { // For highlighting and slightly greying out closed questions when viewing question lists
+    /*highlightClosedQuestions: function() { // For highlighting and slightly greying out closed questions when viewing question lists
         $('.question-summary').each(function() {
             if ($(this).find('.summary h3 a').text().indexOf('[on hold]') > -1 || $(this).find('.summary h3 a').text().indexOf('[closed]') > -1) {
                 if ($('.cp').length) {
@@ -399,7 +399,7 @@ var functionsToCall = { //ALL the functions must go in here
                 }
             }
         });
-    },
+    },*/
 
     parseGM: function() { // part of quickCommentShortcutsMain
         return JSON.parse(GM_getValue("quickCommentShortcutsData"));
@@ -753,7 +753,7 @@ var functionsToCall = { //ALL the functions must go in here
         }, 1000);
     },
     
-    confirmNavigateAway: function() {
+    confirmNavigateAway: function() { //For adding a 'are you ure you want to go away' confirmation on pages where you have started writing something
        if (window.location.href.indexOf('questions/') >= 0) {
            window.onbeforeunload = function () {   
                if($('.comment-form textarea').length) {
@@ -765,7 +765,7 @@ var functionsToCall = { //ALL the functions must go in here
        }
     },
     
-    sortByBountyAmount: function() {
+    sortByBountyAmount: function() { //For adding some buttons to sort bounty's by size
         if($('.bounty-indicator').length) { //if there is at least one bounty on the page
             $('.question-summary').each(function() {
                 bountyAmount = $(this).find('.bounty-indicator').text().replace('+', '');
@@ -799,12 +799,12 @@ var functionsToCall = { //ALL the functions must go in here
         }
     },
     
-    addHotText: function() {
+    addHotText: function() { //Part of isQuestionHot
         $('#feed').html('<p>In the top 30 most recent hot network questions!</p>');
         $('#question-header').prepend("<div title='this question is in the top 30 most recent hot network questions!' style='float:right; -ms-transform: rotate(30deg); -webkit-transform: rotate(30deg); transform: rotate(30deg); font-size: xx-large; color: red;'>HOT<div>");        
     },
     
-    isQuestionHot: function() {
+    isQuestionHot: function() { //For adding some text to questions that are in the 30 most recent hot network questions
         $('#qinfo').after('<div id="feed"></div>');
 
         setTimeout(function() {
@@ -824,7 +824,7 @@ var functionsToCall = { //ALL the functions must go in here
         }, 500);
     },
     
-    autoShowCommentImages: function() {
+    autoShowCommentImages: function() { //For auto-inlining any links to imgur images in comments
         $('.comment .comment-text .comment-copy a').each(function() {
             if($(this).attr('href').indexOf('imgur') != -1) {
                 var image = $(this).attr('href');
@@ -833,7 +833,7 @@ var functionsToCall = { //ALL the functions must go in here
         });     
     },
     
-    showCommentScores: function () {
+    showCommentScores: function () { //For adding a button on your profile comment history pages to show your comment's scores
         var sitename = $(location).attr('hostname').split('.')[0];
         $('.history-table td b a').each(function() {
             id = $(this).attr('href').split('#')[1].split('_')[0].replace('comment', '');
@@ -847,7 +847,7 @@ var functionsToCall = { //ALL the functions must go in here
         });        
     },
     
-    answerTagsSearch: function() {        
+    answerTagsSearch: function() { //For adding tags to answers in search     
         if (window.location.href.indexOf('search?q=') > -1) { //ONLY ON SEARCH PAGES!
             var sitename = $(location).attr('hostname').split('.')[0], //sitename for API call
                 ids = [],
@@ -881,11 +881,11 @@ var functionsToCall = { //ALL the functions must go in here
         }       
     },
     
-    stickyVoteButtons: function() {       
+    stickyVoteButtons: function() { //For making the vote buttons stick to the screen as you scroll through a post   
         $('.vote').sticky($('.vote').parent().parent().parent().parent().parent());
     },
     
-    titleEditDiff: function() {
+    titleEditDiff: function() { //For showing the new version of a title in a diff separately rather than loads of crossing outs in red and additions in green
         setTimeout(function() {
             var $questionHyperlink = $('.summary h2 .question-hyperlink').clone(),
                 $questionHyperlinkTwo = $('.summary h2 .question-hyperlink').clone(),
@@ -898,7 +898,7 @@ var functionsToCall = { //ALL the functions must go in here
         }, 1000);
     },
     
-    metaChatBlogStackExchangeButton: function() {
+    metaChatBlogStackExchangeButton: function() { //For adding buttons next to sites under the StackExchange button that lead to that site's meta, chat and blog
         var blogSites = ["math", "serverfault", "english", "stats", "diy", "bicycles", "webapps", "mathematica", "christianity", "cooking", "fitness", "cstheory", "scifi", "tex", "security", "islam", "superuser", "gaming", "programmers", "gis", "apple", "photo", "dba"],
             link,
             blogLink = '//' + 'blog.stackexchange.com';
@@ -922,7 +922,7 @@ var functionsToCall = { //ALL the functions must go in here
         });        
     },
     
-    metaNewQuestionAlert: function() {
+    metaNewQuestionAlert: function() { //For adding a fake mod diamond that notifies you if there has been a new post posted on the current site's meta
         var metaName = 'meta.' + $(location).attr('hostname').split('.')[0],
             lastQuestions = {};
         var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
@@ -982,11 +982,11 @@ No new meta questions!</span>\
         });        
     },
     
-    betterCSS: function() {
+    betterCSS: function() { //For adding the better CSS for the voting buttons and favourite button
         $('head').append('<link rel="stylesheet" href="https://cdn.rawgit.com/shu8/SE-Answers_scripts/master/coolMaterialDesignCss.css" type="text/css" />');        
     },
     
-    standOutDupeCloseMigrated: function() {
+    standOutDupeCloseMigrated: function() { //For adding cooler signs that a questions has been closed/migrated/put on hod/is a dupe
         $('head').append('<link rel="stylesheet" href="https://rawgit.com/shu8/SE-Answers_scripts/master/dupeClosedMigratedCSS.css" type="text/css" />'); //add the CSS
         var questions = {};
         $.each($('.question-summary'), function() { //Find the questions and add their id's and statuses to an object
@@ -1016,7 +1016,6 @@ No new meta questions!</span>\
                 }
             });
         });
-        
     }
 };
 
@@ -1042,7 +1041,6 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
 				<label><input type='checkbox' id='shareLinksMarkdown'/> Edit 'share' link to format of [post-name](url)</label> <br />\
 				<label><input type='checkbox' id='commentShortcuts'/> Use Ctrl+I,B,K (to italicise, bolden and add code backticks) in comments</label> <br />\
 				<label><input type='checkbox' id='unspoil'/> Add a link to show all spoilers in a post</label> <br />\
-                <label><input type='checkbox' id='highlightClosedQuestions'/> Highlight (and slighly fade) on hold/closed questions when viewing question lists</label> <br />\
                 <label><input type='checkbox' id='quickCommentShortcutsMain'/> Add shortcuts to add pre-defined comments to comment fields</label> <br />\
                 <label><input type='checkbox' id='spoilerTip'/> Differentiate spoilers from empty blockquotes</label> <br />\
                 <label><input type='checkbox' id='commentReplies'/> Add reply links to comments for quick replying (without having to type someone's username)</label> <br />\
@@ -1086,7 +1084,7 @@ $('#featureGMOptions > #resetFeature').css('cursor', 'pointer').click(function()
 });
 
 $(function() {
-    if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1) { //if a deprecated feature exists, make user set options again!
+    if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1) { //if a deprecated feature exists, make user set options again!
         $('#featureGMOptions input').prop('checked', true);
         $('#featureGMOptions').show(); //Show the dialog
         var featureOptions = [];
