@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         SE Additional Optional Features CSS
+// @namespace    http://your.homepage/
+// @version      0.1
+// @description  enter something useful
+// @author       You
+// @match        http://meta.stackexchange.com/?sort=newest&layout=expanded
+// @grant        none
+// ==/UserScript==
+
 //standOutDupeCloseMigrated:
 .duplicate, .closed, .migrated, .onhold{
     color: #FFF;
@@ -15,7 +25,7 @@
 .diamondOn {
     font-size: 1.7em;
     vertical-align: top;
-    padding-top: 6px;
+    padding-top: 6px !important; //!important because the 'links-container' class has a different value which I need to overide
     color: rgb(30, 126, 203);
 
 }
@@ -23,6 +33,6 @@
 .diamondOff{
     font-size: 1.7em;
     vertical-align: top;
-    padding-top: 6px;
+    padding-top: 6px !important; //!important because the 'links-container' class has a different value which I need to overide
     color: rgb(136, 136, 136);
 }
