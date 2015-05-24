@@ -10,17 +10,19 @@
 .migrated {background: #19F;}
 .onhold {background: #808080;}
 
-//metaNewQuestionAlert:
-.diamondOn, .diamondOff {
+//metaNewQuestionAlert: 
+
+.diamondOn {
     font-size: 1.7em;
     vertical-align: top;
     padding-top: 6px;
-}
-
-.diamondOn {
     color: rgb(30, 126, 203);
+
 }
          
 .diamondOff{
+    font-size: 1.7em;
+    vertical-align: top;
+    padding-top: 6px;
     color: rgb(136, 136, 136);
 }
