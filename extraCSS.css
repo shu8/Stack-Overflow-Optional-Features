@@ -78,3 +78,20 @@
      font-size: xx-large; 
      color: red;
 }
+         
+/*editComment:*/
+.editCommentDiv {
+    display: inline-block;
+    position: fixed;
+    width: 500px;
+    top: 10px;
+    left: 50%;
+    z-index: 2;
+    margin-left: -250px;
+    background-color: gray;
+    color: white;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;           
+}
