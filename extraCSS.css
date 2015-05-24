@@ -69,3 +69,12 @@
     animation-duration: .5s
 }
 
+/*addHotText:*/
+SEAOF-hot {
+     float:right; 
+     -ms-transform: rotate(30deg); 
+     -webkit-transform: rotate(30deg); 
+     transform: rotate(30deg); 
+     font-size: xx-large; 
+     color: red;
+}
