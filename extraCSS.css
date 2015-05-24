@@ -95,3 +95,21 @@
     border-radius: 15px;
     text-align: center;           
 }
+         
+/*quickCommentShortcutsMain:*/:
+.quickCommentShortcutsDiv {
+    position: fixed;
+    width: 90%;
+    height: 80%;
+    top: 10px;
+    left: 50%;
+    z-index: 2;
+    margin-left: -250px;
+    background-color: gray;
+    color: white;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;
+    overflow: auto;
+}
