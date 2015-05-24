@@ -1,0 +1,26 @@
+//standOutDupeCloseMigrated:
+.duplicate, .closed, .migrated, .onhold{
+    color: #FFF;
+    padding: 2px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+.duplicate {background: #FA0;}
+.closed {background: #F00;}
+.migrated {background: #19F;}
+.onhold {background: #808080;}
+
+//metaNewQuestionAlert:
+.diamondOn, .diamondOff {
+    font-size: 1.7em;
+    vertical-align: top;
+    padding-top: 6px;
+}
+
+.diamondOn {
+    color: rgb(30, 126, 203);
+}
+         
+.diamondOff{
+    color: rgb(136, 136, 136);
+}
