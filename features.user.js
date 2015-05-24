@@ -924,10 +924,12 @@ var functionsToCall = { //ALL the functions must go in here
     
     metaNewQuestionAlert: function() { //For adding a fake mod diamond that notifies you if there has been a new post posted on the current site's meta
         var metaName = 'meta.' + $(location).attr('hostname').split('.')[0],
-            lastQuestions = {};
+            lastQuestions = {},
+            unread = "rgb(30, 126, 203)",
+            read = "rgb(136, 136, 136)";
         var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
 
-        $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container" style="font-size: 2em; vertical-align: top; padding-top: 3px; color: white;">♦</span>');
+        $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container" style="font-size: 2em; vertical-align: top; padding-top: 3px; color: '+read+';">♦</span>');
         $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog js-help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none;">\
 <div class="modal-content" id="newMetaQuestionsList"><span id="closeNewQuestionList" style="float:right">x</span>\
 <ul>\
@@ -963,10 +965,10 @@ No new meta questions!</span>\
             var latestQuestion = json.items[0].title;
             if(latestQuestion == lastQuestions[metaName]) {
                 //if you've already seen the stuff
-                $('#mod-extra-icon').css('color', 'white');
+                $('#mod-extra-icon').css('color', read);
             } else { 
                 $('#newMetaQuestionsList ul').text("");
-                $('#mod-extra-icon').css('color', 'red');
+                $('#mod-extra-icon').css('color', unread);
 
                 for(i=0;i<json.items.length;i++){
                     var title = json.items[i].title,
@@ -979,7 +981,7 @@ No new meta questions!</span>\
                     GM_setValue("metaNewQuestionAlert-lastQuestions", JSON.stringify(lastQuestions));
                 });
             }
-        });        
+        });             
     },
     
     betterCSS: function() { //For adding the better CSS for the voting buttons and favourite button
