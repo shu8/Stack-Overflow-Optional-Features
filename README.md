@@ -1,19 +1,22 @@
-# SE_OptionalFeatures
-A userscript for the StackExchange websites to add a bunch of (optional) features.
+# Stack Exchange Additional Optional Features 
+<sup>acronym coming soon, I hope :)</sup>
+
+A userscript for the StackExchange websites to add a bunch of optional, user-selectable features via an easy-to-use control panel.
 
 #How to use, requirements, how it works
-1. Install [the script](https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js)
-2. Go to any SE site (eg. www.superuser.com or www.stackoverflow.com)
-3. A dialog box should popup asking you to select the features you want
+1. Install [Tampermonkey](http://tampermonkey.net/) (for Chrome), or [Greasemonkey](http://www.greasespot.net/) (for Firefox) or similar. These are userscript managers that are required for this script to work, because they also provide support for `GM_*` functions, which this script relies on to save the options you set!
+2. Install [the script](https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js)
+3. Go to any SE site (eg. www.superuser.com or www.stackoverflow.com)
+4. A dialog box should popup asking you to select the features you want
 
 If you ever want to change your options, a link - `add features` - is added in your profile at the top right (*not* in the header)
 
-**You need to have a browser compatible with Greasemonkey, or Tampermokey (or similar), because this script relies on `GM_*` features**. For example, Chrome with Tampermonkey, or Firefox with Greasemonkey.
+**You need to have a browser compatible with Greasemonkey, or Tampermokey (or similar), because this script relies on `GM_*` features**, as mentioned above.
 
 In case you're wondering, it works by using `GM_setValue` to save your options and then calling the appropiate functions according to your options.
 
 #What features are included?
-These link to their corresponding MSE feature-request, if applicable:
+In the latest version: (these link to their corresponding feature-request (from any site on the network), *if applicable*):
 
 - [Make the topbar fixed (stay at the top as you scroll)](http://meta.stackexchange.com/questions/101385/should-the-top-navigation-be-frozen-optional) (v0.1)
 - [Unfade low score answers](http://meta.stackexchange.com/questions/129593/un-fade-low-score-answers-on-rollover-or-click) (v0.1)
@@ -76,7 +79,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 30/03/15 - v1.1: Added more features (mentioned above)
 - 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 - 04/05/15 - v1.3: Added more features (mentioned above)
-- 26/05/15 - v1.4: Added more features (mentioned above)
+- 26/05/15 - v1.4: Added more features (mentioned above), updated dialog styles to match SE style, fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
 
 ---
 
