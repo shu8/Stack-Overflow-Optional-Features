@@ -1,3 +1,17 @@
+/*Main centered divs:*/
+.SEAOP-centered {
+    position:fixed;
+    width:400px;
+    z-index:1001;
+    top:102px;
+    left:615.5px;
+    display:inline-block;
+    margin-top:-95.5px;
+    margin-left:-216px;
+    overflow:auto;
+    height:90%;   
+}
+
 /*standOutDupeCloseMigrated:*/
 .duplicate, .closed, .migrated, .onhold{
     color: #FFF;
