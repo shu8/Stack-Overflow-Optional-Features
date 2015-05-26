@@ -113,3 +113,14 @@
     text-align: center;
     overflow: auto;
 }
+
+.quickCommentShortcutsReminder {
+    height: 50%;
+    width: 13%;
+    left: 0;
+    top: 10%;
+    position: fixed;
+    background-color: gray;
+    color: white;
+    text-align: center;
+}
