@@ -2,7 +2,7 @@
 .SEAOP-centered {
     width:400px;
     z-index:1001;
-    top:102px;
+    top:10%;
     left:615.5px;
     display:inline-block;
     margin-top:-95.5px;
@@ -90,23 +90,6 @@
      transform: rotate(30deg); 
      font-size: xx-large; 
      color: red;
-}
-         
-/*editComment:*/
-.editCommentDiv {
-    display: inline-block;
-    position: fixed;
-    width: 500px;
-    top: 10px;
-    left: 50%;
-    z-index: 2;
-    margin-left: -250px;
-    background-color: gray;
-    color: white;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    text-align: center;           
 }
          
 /*quickCommentShortcutsMain:*/
