@@ -1,0 +1,20 @@
+// ==UserScript==
+// @name         Sticky vote buttons
+// @namespace    http://stackexchange.com/users/4337810/
+// @version      1.0
+// @description  Makes the vote buttons next to posts sticky whilst scrolling on that post
+// @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
+// @match        *://*.stackexchange.com/*
+// @match        *://*.stackoverflow.com/*
+// @match        *://*.superuser.com/*
+// @match        *://*.serverfault.com/*
+// @match        *://*.askubuntu.com/*
+// @match        *://*.stackapps.com/*
+// @match        *://*.mathoverflow.net/*
+// @require      https://cdn.rawgit.com/EnzoMartin/Sticky-Element/master/jquery.stickyelement.js
+// @grant        none
+// ==/UserScript==
+
+$(document).ready(function() {
+    $('.vote').sticky($('.vote').parent().parent().parent().parent().parent());
+});

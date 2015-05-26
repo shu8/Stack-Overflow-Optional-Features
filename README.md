@@ -1,19 +1,22 @@
-# SE_OptionalFeatures
-A userscript for the StackExchange websites to add a bunch of (optional) features.
+# Stack Exchange Additional Optional Features 
+<sup>acronym coming soon, I hope :)</sup>
+
+A userscript for the StackExchange websites to add a bunch of optional, user-selectable features via an easy-to-use control panel.
 
 #How to use, requirements, how it works
-1. Install [the script](https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js)
-2. Go to any SE site (eg. www.superuser.com or www.stackoverflow.com)
-3. A dialog box should popup asking you to select the features you want
+1. Install [Tampermonkey](http://tampermonkey.net/) (for Chrome), or [Greasemonkey](http://www.greasespot.net/) (for Firefox) or similar. These are userscript managers that are required for this script to work, because they also provide support for `GM_*` functions, which this script relies on to save the options you set!
+2. Install [the script](https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js)
+3. Go to any SE site (eg. www.superuser.com or www.stackoverflow.com)
+4. A dialog box should popup asking you to select the features you want
 
 If you ever want to change your options, a link - `add features` - is added in your profile at the top right (*not* in the header)
 
-**You need to have a browser compatible with Greasemonkey, or Tampermokey (or similar), because this script relies on `GM_*` features**. For example, Chrome with Tampermonkey, or Firefox with Greasemonkey.
+**You need to have a browser compatible with Greasemonkey, or Tampermokey (or similar), because this script relies on `GM_*` features**, as mentioned above.
 
 In case you're wondering, it works by using `GM_setValue` to save your options and then calling the appropiate functions according to your options.
 
 #What features are included?
-These link to their corresponding MSE feature-request, if applicable:
+In the latest version: (these link to their corresponding feature-request (from any site on the network), *if applicable*):
 
 - [Make the topbar fixed (stay at the top as you scroll)](http://meta.stackexchange.com/questions/101385/should-the-top-navigation-be-frozen-optional) (v0.1)
 - [Unfade low score answers](http://meta.stackexchange.com/questions/129593/un-fade-low-score-answers-on-rollover-or-click) (v0.1)
@@ -34,12 +37,12 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Change the 'share' link to show link as markdown format](http://meta.stackexchange.com/questions/126544/add-a-second-share-button-to-posts-with-comment-ready-links) (v0.5)
 - [Add <kbd>Ctrl</kbd>+<kbd>i</kbd>,<kbd>b</kbd>,<kbd>k</kbd> support to comment fields](http://meta.stackexchange.com/questions/14756/formatting-keyboard-shortcuts-for-comments) (v0.5)
 - [Add a button to reveal spoilers in a post](http://meta.stackexchange.com/questions/249808/add-a-way-to-reveal-all-spoiler-blocks-in-a-post-at-once) (v0.5)
-- [Highlight on hold/closed questions](http://meta.stackexchange.com/questions/250428/should-the-questions-put-on-hold-be-marked-on-questions-list-with-a-color) (v0.7)
+- <s>[Highlight on hold/closed questions](http://meta.stackexchange.com/questions/250428/should-the-questions-put-on-hold-be-marked-on-questions-list-with-a-color) (v0.7)</s> (replaced by new feature in v1.4)
 - Add shortcuts for adding pre-defined comments (v0.7)
 - [Differentiate between empty blockquotes and spoilers](http://meta.stackexchange.com/questions/104085/differentiate-spoilers-from-empty-block-quotes) (v0.7)
 - [Add reply links for quick replying](http://meta.stackexchange.com/questions/74778/add-reply-link-to-comment-that-pre-populates-comment-box-with-username) (v0.8)
 - [Parse cross-site links to questions](http://meta.stackexchange.com/questions/251183/parse-question-links-from-other-se-sites) (v0.8)
-- <s>[Show answer counts on sidebar](http://meta.stackexchange.com/questions/251771/show-number-of-answers-as-tooltip-in-the-sidebar-questions) (v0.9)</s>
+- <s>[Show answer counts on sidebar](http://meta.stackexchange.com/questions/251771/show-number-of-answers-as-tooltip-in-the-sidebar-questions) (v0.9)</s> (deprecated)
 - [Button to add author's name to hyperlinks](http://meta.stackexchange.com/questions/251722/is-there-a-way-to-automatically-mention-the-author-of-an-answer) (v0.9)
 - [Confirm when navigating away if you have started writing a comment](http://meta.stackexchange.com/questions/252205/add-are-you-sure-you-want-to-navigate-away-from-this-page-when-writing-a-comm) (v1.0)
 - [Allow you to sort bounties by their amout](http://meta.stackexchange.com/questions/7753/please-give-us-the-ability-to-sort-featured-tab-by-bounty-amount) (v1.0)
@@ -48,6 +51,11 @@ These link to their corresponding MSE feature-request, if applicable:
 - [Show your comment and comment replies scores in your profile tabs](http://meta.stackexchange.com/questions/38285/display-the-number-of-comment-upvotes-in-recent-activity-pages) (v1.2)
 - [Show tags for the question an answer belongs to on search pages](http://meta.stackexchange.com/questions/197874/include-tags-in-answers-entries-on-search-results) (v1.2)
 - [Make the vote buttons sticky](http://meta.stackexchange.com/a/35047/260841) (v1.3)
+- [Show title edit diffs separately](http://meta.stackexchange.com/questions/135710/please-show-changed-titles-separately-in-edit-diffs) (v1.4)
+- [Show meta, chat and blog buttons on hover of a site under the StackExchange button](http://meta.stackexchange.com/questions/256183/show-the-meta-chat-and-blog-in-the-top-bar-for-other-sites-on-hover) (v1.4)
+- [Notify you if a new question has been posted on the current site's meta](http://meta.stackexchange.com/questions/256318/can-high-rep-users-be-allowed-to-see-meta-notifications) (v1.4)
+- [Add better CSS for voting buttons (as is on Android SE currenly)](http://meta.stackexchange.com/questions/252685/i-want-to-have-those-voting-animations-like-on-android-se-pretty-please) (v1.4)
+- [Make it stand out that a question has been put on hold/closed/marked as a dupe/migrated](http://meta.stackexchange.com/questions/257021/proposal-to-make-duplicate-closed-and-migrated-in-the-title-more-obvious) (v1.4)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -71,6 +79,7 @@ These link to their corresponding MSE feature-request, if applicable:
 - 30/03/15 - v1.1: Added more features (mentioned above)
 - 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 - 04/05/15 - v1.3: Added more features (mentioned above)
+- 26/05/15 - v1.4: Added more features (mentioned above), updated dialog styles to match SE style, fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
 
 ---
 
@@ -135,7 +144,7 @@ Allows you to *italicise*, **bolden**, and add `code backticks` to comments via 
 Adds a button under a post to 'unspoil' all spoilers in that post - useful if there are loads of spoilers in a post
 
 - Highlight on hold/closed questions:
-Highlights on hold/closed questions when viewing question lists
+<s>Highlights on hold/closed questions when viewing question lists</s> **This has been replaces by the better feature `Make it stand out that a question has been put on hold/closed/marked as a dupe/migrated` in v1.4**
 
 - Add shortcuts for adding pre-defined comments:
 Allows you to use keyboard shortcuts to insert user-defined shortcuts in comments. ***To change these comments***, go to any post, click `add a comments`, press <kbd>alt</kbd>+<kbd>o</kbd> to **o**pen the dialog - from here you can edit/delete/add comments
@@ -151,7 +160,7 @@ Parses cross-site links when viewing them. eg. meta.stackexchange.com/questions/
 
 - Show answer counts on sidebar:
 <s>Shows the answer counts to questions shown on the Linked/Related section on the sidebar in their tooltip</s>
-**Update:** I have removed this feature because I felt that it was sending to many API requests and I kept on getting throttle violations; I can only think other users would be facing this issue as well.
+**I have removed this feature because I felt that it was sending to many API requests and I kept on getting throttle violations; I can only think other users would be facing this issue as well.**
 
 - Button to add author's name to hyperlinks:
 Adds a button on the editor toolbar to show a dialog to insert a hyperlink with the post's author automatically fetched an inserted
@@ -176,6 +185,21 @@ Adds the tags for the question that an answer belongs to underneath the post whe
 
 - Make the vote buttons sticky:
 Makes the vote buttons next to a post sticky whilst scrolling on that post
+
+- Show title edit diffs separately:
+Shows any title edits as separate green and red parts - so you can actually read the edit! 
+
+- Show meta, chat and blog buttons on hover of a site under the StackExchange button: 
+Self explanatory
+
+- Notify you if a new question has been posted on the current site's meta:
+Adds a diamond to the topbar that goes red if a new question has been posted on the current site's meta
+
+- Add better CSS for voting buttons (as is on Android SE currenly):
+Pulse on click and hover of voting button. Cool animation on click
+
+- Make it stand out that a question has been put on hold/closed/marked as a dupe/migrated:
+Adds a coloured box at the end of a title (that replaces the standard `[duplicate]`, etc...) so you know instanly the state of a question
 
 ---
 
