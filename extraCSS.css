@@ -1,6 +1,5 @@
 /*Main centered divs:*/
 .SEAOP-centered {
-    position:fixed;
     width:400px;
     z-index:1001;
     top:102px;
