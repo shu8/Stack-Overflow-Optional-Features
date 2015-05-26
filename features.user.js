@@ -21,6 +21,7 @@
 // @grant        GM_deleteValue
 // @updateURL    https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js
 // ==/UserScript==
+/*jshint multistr: true */
 var functionsToCall = { //ALL the functions must go in here
 
     grayOutVotes: function() { // For graying out votes AND vote count:
@@ -259,23 +260,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     editComment: function() { // For adding checkboxes when editing to add pre-defined edit reasons
-        var cssForDiv = {
-            'display': 'inline-block',
-            'position': 'fixed',
-            'width': '500px',
-            'top': '10px',
-            'left': '50%',
-            'z-index': '2',
-            'margin-left': '-250px',
-            'background-color': 'gray',
-            'color': 'white',
-            '-webkit-border-radius': '15px',
-            '-moz-border-radius': '15px',
-            'border-radius': '15px',
-            'text-align': 'center'
-        };
-
-        var div = "<div id='dialogEditReasons'><span id='closeDialogEditReasons' style='float:right;'>Close</span><span id='resetEditReasons' style='float:left;'>Reset</span>  \
+        var div = "<div id='dialogEditReasons' class='SEAOP-centered wmd-prompt-dialog'><span id='closeDialogEditReasons' style='float:right;'>Close</span><span id='resetEditReasons' style='float:left;'>Reset</span>  \
                         <h2>View/Remove Edit Reasons</h2>																														\
                         <div id='currentValues'></div>																															\
                         <br />																																					\
@@ -288,7 +273,7 @@ var functionsToCall = { //ALL the functions must go in here
                     </div>";
 
         $('body').append(div);
-        $('#dialogEditReasons').css(cssForDiv).draggable().hide();
+        $('#dialogEditReasons').draggable().css('position', 'absolute').css('text-align', 'center').css('height', '60%').hide();
 
         $('#closeDialogEditReasons').css('cursor', 'pointer').click(function() {
             $(this).parent().hide(500);
@@ -337,7 +322,7 @@ var functionsToCall = { //ALL the functions must go in here
             //Add the button to update and view the values in the help menu:
             $('.topbar-dialog.help-dialog.js-help-dialog > .modal-content ul').append("<li><a href='javascript:void(0)' id='editReasonsLink'>Edit Reasons     \
                                                                                       <span class='item-summary'>Edit your personal edit reasons for SE sites</span></a></li>");
-            $('#editReasonsLink').click(function() {
+            $('.topbar-dialog.help-dialog.js-help-dialog > .modal-content ul #editReasonsLink').on('click', function() {
                 functionsToCall.displayDeleteValues();
                 $('#dialogEditReasons').show(500); //Show the dialog to view and update values
             });
@@ -424,43 +409,15 @@ var functionsToCall = { //ALL the functions must go in here
             siteurl = 'http://' + $(location).attr('hostname'),
             op = $('.post-signature.owner .user-info .user-details a').text(),
             data = [],
-            cssMainDiv = {
-                //'display': 'inline-block',
-                'position': 'fixed',
-                'width': '90%',
-                'height': '80%',
-                'top': '10px',
-                'left': '50%',
-                'z-index': '2',
-                'margin-left': '-250px',
-                'background-color': 'gray',
-                'color': 'white',
-                '-webkit-border-radius': '15px',
-                '-moz-border-radius': '15px',
-                'border-radius': '15px',
-                'text-align': 'center',
-                'overflow': 'auto'
-            },
-            cssReminderDiv = {
-                'height': '50%',
-                'width': '13%',
-                'left': '0',
-                'top': '10%',
-                'position': 'fixed',
-                'background-color': 'gray',
-                'color': 'white',
-                'text-align': 'center'
-            },
             tableCSS = {
                 'border': '1px solid white',
                 'padding': '5px',
                 'vertical-align': 'middle'
             };
 
-        $('body').append("<div id='quickCommentShortcuts' style='display:none;'><table></table></div>");
-        $('#quickCommentShortcuts').css(cssMainDiv).draggable();
-        $('body').append("<div id='quickCommentShortcutsReminder' style='display:none;'></div>");
-        $('#quickCommentShortcutsReminder').css(cssReminderDiv).draggable();
+        $('body').append("<div id='quickCommentShortcuts' class='SEAOP-centered wmd-prompt-dialog' style='display:none;'><table></table></div>");
+        $('#quickCommentShortcuts').css('width', '100%').css('position', 'absolute').draggable();
+        $('body').append("<div id='quickCommentShortcutsReminder' class='quickCommentShortcutsReminder' style='display:none;'></div>");
 
         if (!GM_getValue("quickCommentShortcutsData") || functionsToCall.parseGM().length < 1) {
             data = [
@@ -678,24 +635,14 @@ var functionsToCall = { //ALL the functions must go in here
     },*/
 
     linkQuestionAuthorName: function() { //For adding a button to the editor toolbar to insert a link to a post and automatically add the author's name
-        var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog'> \
+        var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog SEAOP-centered' style='display:none'> \
             <h5>Insert hyperlink with author's name</h5> \
             <br /> \
             <input id='link' placeholder='http://example.com/ \"optional title\"' size='50'> \
             <input id='addLinkOk' value='OK' type='button' style='margin: 10px; display: inline; width: 7em;'><input id='addLinkCancel' value='Cancel' type='button' style='margin: 10px; display: inline; width: 7em;'> \
-           </div>",
-            css = {
-                "position": "fixed",
-                "width": "400px",
-                "z-index": "1001",
-                "top": "50%",
-                "left": "50%",
-                "display": "none",
-                "margin-top": "-95.5px",
-                "margin-left": "-216px"
-            };
+           </div>";
         $('body').append(div);
-        $('#addLinkAuthorName').css(css);
+        $('#addLinkAuthorName').css('top', '50%').css('position', 'fixed').css('height', '20%');
 
         $('#addLinkAuthorName #addLinkCancel').on('click', function() {
             $(this).parent().hide();
@@ -801,7 +748,7 @@ var functionsToCall = { //ALL the functions must go in here
     
     addHotText: function() { //Part of isQuestionHot
         $('#feed').html('<p>In the top 30 most recent hot network questions!</p>');
-        $('#question-header').prepend("<div title='this question is in the top 30 most recent hot network questions!' style='float:right; -ms-transform: rotate(30deg); -webkit-transform: rotate(30deg); transform: rotate(30deg); font-size: xx-large; color: red;'>HOT<div>");        
+        $('#question-header').prepend("<div title='this question is in the top 30 most recent hot network questions!' class='SEAOF-hot'>HOT<div>");        
     },
     
     isQuestionHot: function() { //For adding some text to questions that are in the 30 most recent hot network questions
@@ -924,12 +871,10 @@ var functionsToCall = { //ALL the functions must go in here
     
     metaNewQuestionAlert: function() { //For adding a fake mod diamond that notifies you if there has been a new post posted on the current site's meta
         var metaName = 'meta.' + $(location).attr('hostname').split('.')[0],
-            lastQuestions = {},
-            unread = "rgb(30, 126, 203)",
-            read = "rgb(136, 136, 136)";
+            lastQuestions = {};
         var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
 
-        $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container" style="font-size: 2em; vertical-align: top; padding-top: 3px; color: '+read+';">♦</span>');
+        $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container diamondOff">♦</span>');
         $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog js-help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none;">\
 <div class="modal-content" id="newMetaQuestionsList"><span id="closeNewQuestionList" style="float:right">x</span>\
 <ul>\
@@ -965,10 +910,10 @@ No new meta questions!</span>\
             var latestQuestion = json.items[0].title;
             if(latestQuestion == lastQuestions[metaName]) {
                 //if you've already seen the stuff
-                $('#mod-extra-icon').css('color', read);
+                $('#mod-extra-icon').removeClass('diamondOn').addClass('diamondOff');
             } else { 
                 $('#newMetaQuestionsList ul').text("");
-                $('#mod-extra-icon').css('color', unread);
+                $('#mod-extra-icon').removeClass('diamondOff').addClass('diamondOn');
 
                 for(i=0;i<json.items.length;i++){
                     var title = json.items[i].title,
@@ -989,7 +934,6 @@ No new meta questions!</span>\
     },
     
     standOutDupeCloseMigrated: function() { //For adding cooler signs that a questions has been closed/migrated/put on hod/is a dupe
-        $('head').append('<link rel="stylesheet" href="https://rawgit.com/shu8/SE-Answers_scripts/master/dupeClosedMigratedCSS.css" type="text/css" />'); //add the CSS
         var questions = {};
         $.each($('.question-summary'), function() { //Find the questions and add their id's and statuses to an object
             if($(this).find('.summary a:eq(0)').text().trim().substr($(this).find('.summary a:eq(0)').text().trim().length-11) == '[duplicate]') {
@@ -1022,8 +966,10 @@ No new meta questions!</span>\
 };
 
 // Format for options below: <label><input type='checkbox' id='id'>Text</label><br />
-var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; top:10px; left:50%; height: 90%; overflow: auto; width:500px; margin-left:-250px; z-index:2; background-color:gray; color:white; padding: 10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>\
-                <span id='closeFeature' style='float:right;'>Close</span> <span id='resetFeature' style='float:right;'>Reset&nbsp;</span>    <span id='featureTitle'><h2>Additional Optional Feature - settings</h2></span> \
+//var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; top:10px; left:50%; height: 90%; overflow: auto; width:500px; margin-left:-250px; z-index:2; background-color:gray; color:white; padding: 10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>\
+//var div = "<div id='featureGMOptions' class='wmd-prompt-dialog' style='position:fixed;width:400px;z-index:1001;top:102px;left:615.5px;display:inline-block;margin-top:-95.5px;margin-left:-216px;overflow:auto;height:90%;'>\
+var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
+                <span id='closeFeature' style='float:right;'>Close</span> <span id='resetFeature' style='float:right;'>Reset&nbsp;</span>    <span id='featureTitle'><h2>Additional Optional Features - settings</h2></span> \
                 <label><input type='checkbox' id='grayOutVotes'/> Gray out deleted votes</label> <br /> \
                 <label><input type='checkbox' id='moveBounty'/> Move 'start bounty' to top</label> <br /> \
                 <label><input type='checkbox' id='dragBounty'/> Make bounty box draggable</label> <br /> \
@@ -1063,45 +1009,46 @@ var div = "<div id='featureGMOptions' style='display:inline-block; position:fixe
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
-$('body').append(div);
-$('#featureGMOptions').draggable().hide(); //Hide it at first
-$('#featureTitle').css('cursor', 'move');
-
-if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
-    $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
-    $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015)
-
-    $('#addFeaturesLink').click(function() {
-        $('#featureGMOptions').show(500);
-    });
-}
-
-$('#featureGMOptions > #closeFeature').css('cursor', 'pointer').click(function() {
-    $('#featureGMOptions').hide(500);
-});
-
-$('#featureGMOptions > #resetFeature').css('cursor', 'pointer').click(function() {
-    GM_deleteValue('featureOptions'); //Delete the setting when clicked
-    location.reload();
-});
-
 $(function() {
-    if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1) { //if a deprecated feature exists, make user set options again!
-        $('#featureGMOptions input').prop('checked', true);
-        $('#featureGMOptions').show(); //Show the dialog
-        var featureOptions = [];
-    } else {    
-        if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
+    $('body').append(div);
+    $('#featureGMOptions').draggable().css('position', 'absolute').hide(); //Hide it at first
+    $('#featureTitle').css('cursor', 'move');
+    $('head').append("<link rel='stylesheet' type='text/css' href='https://rawgit.com/shu8/SE_OptionalFeatures/develop/extraCSS.css' />"); //Add SE Extra CSS for functions
+
+    if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
+        $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
+        $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015)
+
+        $('#addFeaturesLink').click(function() {
+            $('#featureGMOptions').show(500);
+        });
+    }
+
+    $('#featureGMOptions > #closeFeature').css('cursor', 'pointer').click(function() {
+        $('#featureGMOptions').hide(500);
+    });
+
+    $('#featureGMOptions > #resetFeature').css('cursor', 'pointer').click(function() {
+        GM_deleteValue('featureOptions'); //Delete the setting when clicked
+        location.reload();
+    });
+    
+    if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
+        if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1) { //if a deprecated feature exists, make user set options again!
+            $('#featureGMOptions input').prop('checked', true);
+            $('#featureGMOptions').show(); //Show the dialog
+            var featureOptions = [];
+        } else {
             var featureOptions = JSON.parse(GM_getValue("featureOptions"));
             for (i = 0; i < featureOptions.length; ++i) {
                 $('#featureGMOptions #' + featureOptions[i]).prop('checked', true);
                 functionsToCall[featureOptions[i]](); //Call the functions that were chosen
             }
-        } else { //If not, set it:
-            $('#featureGMOptions input').prop('checked', true);
-            $('#featureGMOptions').show(); //Show the dialog
-            var featureOptions = [];
         }
+    } else { //If not, set it:
+        $('#featureGMOptions input').prop('checked', true);
+        $('#featureGMOptions').show(); //Show the dialog
+        var featureOptions = [];
     }
 
     $('#submitOptions').click(function() {
