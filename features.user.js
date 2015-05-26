@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         SE Extra, Optional Features
+// @name         SE Additional Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
 // @version      1.4 DEV
 // @description  Adds a bunch of optional features to the StackExchange sites.
