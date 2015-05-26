@@ -98,7 +98,7 @@
          
 /*quickCommentShortcutsMain:*/
 .quickCommentShortcutsDiv {
-    position: fixed;
+    position: fixed !important;
     width: 90%;
     height: 80%;
     top: 10px;
@@ -115,7 +115,7 @@
 }
 
 .quickCommentShortcutsReminder {
-    height: 50%;
+    height: 40%;
     width: 13%;
     left: 0;
     top: 10%;
@@ -123,4 +123,5 @@
     background-color: gray;
     color: white;
     text-align: center;
+    overflow: auto;
 }
