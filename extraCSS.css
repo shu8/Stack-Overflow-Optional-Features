@@ -1,4 +1,4 @@
-/*Main centered divs:*/
+/*Main centered divs, SE-style:*/
 .SEAOP-centered {
     width:400px;
     z-index:1001;
@@ -24,7 +24,6 @@
 .onhold {background: #808080;}
 
 /*metaNewQuestionAlert: */
-
 .diamondOn {
     font-size: 1.7em;
     vertical-align: top;
@@ -93,23 +92,6 @@
 }
          
 /*quickCommentShortcutsMain:*/
-.quickCommentShortcutsDiv {
-    position: fixed !important;
-    width: 90%;
-    height: 80%;
-    top: 10px;
-    left: 50%;
-    z-index: 2;
-    margin-left: -250px;
-    background-color: gray;
-    color: white;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    text-align: center;
-    overflow: auto;
-}
-
 .quickCommentShortcutsReminder {
     height: 40%;
     width: 13%;
