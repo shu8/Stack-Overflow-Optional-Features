@@ -80,7 +80,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 - 04/05/15 - v1.3: Added more features (mentioned above)
 - 26/05/15 - v1.4: Added more features (mentioned above), updated dialog styles to match SE style, fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
-- DEVEOP - v1.5: Fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode)
+- DEVEOP - v1.5: Fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode) for clever CSS 'hack' :)
 
 ---
 
