@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Additional Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.4
+// @version      1.5 DEV
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
@@ -116,6 +116,9 @@ var functionsToCall = { //ALL the functions must go in here
             'position': 'fixed',
             'z-index': '1'
         });
+        //Thanks ArtOfCode (http://worldbuilding.stackexchange.com/users/2685/artofcode) for fixing the topbar covering the header :)
+        $("#header").css("margin-top", "34px");
+        $(".topbar").css("margin-top", "-34px");
     },
 
     highlightQuestions: function() { // For highlighting only the tags of favorite questions
