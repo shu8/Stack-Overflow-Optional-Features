@@ -878,7 +878,7 @@ var functionsToCall = { //ALL the functions must go in here
         var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
 
         $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container diamondOff">♦</span>');
-        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog js-help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none;">\
+        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog js-help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none; z-index:1001;">\
 <div class="modal-content" id="newMetaQuestionsList"><span id="closeNewQuestionList" style="float:right">x</span>\
 <ul>\
 <li>\
