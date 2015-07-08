@@ -341,7 +341,9 @@ var functionsToCall = { //ALL the functions must go in here
     shareLinksMarkdown: function() { // For changing the 'share' button link to the format [name](link)
         $('.short-link').click(function() {
             setTimeout(function() {
-                $('.share-tip input').val('[' + $('#question-header a').html() + '](' + document.URL + ')');
+                var link = $('.share-tip input').val();
+                $('.share-tip input').val('[' + $('#question-header a').html() + '](' + link + ')');
+                $('.share-tip input').select();
             }, 500);
         });
     },
