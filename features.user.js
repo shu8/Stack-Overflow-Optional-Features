@@ -967,6 +967,49 @@ No new meta questions!</span>\
                 }
             });
         });
+    },
+     
+    getComment: function(url, $that) { //part of editReasonTooltip
+        $.get(url, function(responseText, textStatus, XMLHttpRequest) {
+            $that.find('.shub-revision-comment').attr('title', $(XMLHttpRequest.responseText).find('.revision-comment:eq(0)')[0].innerHTML);  
+        });    
+    },
+ 
+    editReasonTooltip: function() { //For showing the latest revision's comment as a tooltip on 'edit [date] at [time]'
+        $('.question, .answer').each(function() {
+            if($(this).find('.post-signature').length > 1) {
+                var id = $(this).attr('data-questionid') || $(this).attr('data-answerid');
+                $(this).find('.post-signature:eq(0)').find('.user-action-time a').wrapInner("<span class='shub-revision-comment'></span>");
+                $that = $(this);
+                functionsToCall.getComment('http://' + $(location).attr('hostname') + '/posts/'+id+'/revisions', $that);        
+            }
+        });        
+    },
+    
+    startSBS: function() { //part of addSBSBtn
+        $('#sidebar').hide();    
+        $("#content").width(1360);
+        $("#post-editor").removeClass("post-editor");  
+        $("#post-editor").width(1360);  
+        $(".community-option").css("float","right");  
+        $(".wmd-container").css("float","right");  
+        $(".wmd-preview").css({"clear":"none","margin-left":"20px","float":"left"});  
+        $('.wmd-button-bar').css('float', 'none');
+
+        if($(location).attr('href').indexOf('/questions/ask') > -1 ) { //extra CSS for 'ask' page
+            $('.wmd-preview').css('margin-top', '20px');
+            $('#tag-suggestions').parent().prependTo('.form-submit.cbt');
+        }    
+    },
+    
+    addSBSBtn: function() { //For adding a button to the editor toolbar to start side-by-side editing
+        setTimeout(function() {
+            var sbsBtn = "<li class='wmd-button' title='side-by-side editing' style='left: 500px;'><span id='wmd-sbs-button' style='background-image: none;'>SBS</span></li>";
+            $('[id^="wmd-redo-button"]').after(sbsBtn);
+            $('#wmd-sbs-button').on('click', function() {
+                functionsToCall.startSBS();
+            });  
+        }, 1000);   
     }
 };
 
@@ -1011,6 +1054,8 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='metaNewQuestionAlert'/> Add an extra mod diamond to the topbar that alerts you if there is a new question posted on the child-meta of the current site</label> <br />\
                 <label><input type='checkbox' id='betterCSS'/> Add extra CSS for voting signs and favourite button (currently only on Android SE)</label> <br />\
                 <label><input type='checkbox' id='standOutDupeCloseMigrated'/> Add colourful, more apparent signs to questions that are on hold, duplicates, closed or migrated on question lists</label> <br />\
+                <label><input type='checkbox' id='editReasonTooltip'/> Add a tooltip to posts showing the latest revision's comment on 'edited [date] at [time]'</label> <br />\
+                <label><input type='checkbox' id='addSBSBtn'/> Add a button the the editor toolbar to start side-by-side editing</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
