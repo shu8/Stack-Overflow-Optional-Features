@@ -56,6 +56,8 @@ In the latest version: (these link to their corresponding feature-request (from 
 - [Notify you if a new question has been posted on the current site's meta](http://meta.stackexchange.com/questions/256318/can-high-rep-users-be-allowed-to-see-meta-notifications) (v1.4)
 - [Add better CSS for voting buttons (as is on Android SE currenly)](http://meta.stackexchange.com/questions/252685/i-want-to-have-those-voting-animations-like-on-android-se-pretty-please) (v1.4)
 - [Make it stand out that a question has been put on hold/closed/marked as a dupe/migrated](http://meta.stackexchange.com/questions/257021/proposal-to-make-duplicate-closed-and-migrated-in-the-title-more-obvious) (v1.4)
+- [Add a tooltip to posts showing the latest revision's comment on 'edited [date] at [time]'](http://meta.stackexchange.com/questions/2315/show-reason-for-edit-without-clicking-through-to-diff) (v1.5)
+- [Add a button the the editor toolbar to start side-by-side editing](http://meta.stackexchange.com/questions/253112/the-discourse-layout-for-side-by-side-markdown-preview) (v1.5)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -80,7 +82,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 - 04/05/15 - v1.3: Added more features (mentioned above)
 - 26/05/15 - v1.4: Added more features (mentioned above), updated dialog styles to match SE style, fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
-- DEVEOP - v1.5: Fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode) for clever CSS 'hack' :)
+- 13/07/15 - v1.5: Added more features (mentioned above), fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode) for clever CSS 'hack' :), made script [compatible with stackoverflow-code-expando](http://stackapps.com/a/6427/26088), added auto-selection for [Change the share link to show link as markdown format](http://stackapps.com/a/6451/26088)
 
 ---
 
@@ -201,6 +203,12 @@ Pulse on click and hover of voting button. Cool animation on click
 
 - Make it stand out that a question has been put on hold/closed/marked as a dupe/migrated:
 Adds a coloured box at the end of a title (that replaces the standard `[duplicate]`, etc...) so you know instanly the state of a question
+
+- Add a tooltip to posts showing the latest revision's comment on 'edited [date] at [time]':
+Hovering over the `edited [date] at [time]` will show that post's latest revision comment
+
+- Add a button the the editor toolbar to start side-by-side editing:
+A button `SBS` is added to the editor toolbar when answering/asking a question. Clicking it will change some CSS to cause the preview and the markdown to appear side-by-side
 
 ---
 
