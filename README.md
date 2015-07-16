@@ -19,7 +19,7 @@ In case you're wondering, it works by using `GM_setValue` to save your options a
 In the latest version: (these link to their corresponding feature-request (from any site on the network), *if applicable*):
 
 - [Make the topbar fixed (stay at the top as you scroll)](http://meta.stackexchange.com/questions/101385/should-the-top-navigation-be-frozen-optional) (v0.1)
-- [Unfade low score answers](http://meta.stackexchange.com/questions/129593/un-fade-low-score-answers-on-rollover-or-click) (v0.1)
+- <s>[Unfade low score answers](http://meta.stackexchange.com/questions/129593/un-fade-low-score-answers-on-rollover-or-click) (v0.1)</s> (deprecated; implemented by Stack Exchange by default now)
 - [Move `show more comments` link to top](http://meta.stackexchange.com/questions/55020/add-a-show-more-comments-button-to-the-top-of-a-list-of-comments) (v0.1)
 - [Ellipsis after long names](http://meta.stackexchange.com/questions/244729/provide-an-ellipsis-after-a-long-name-instead-of-truncating-it) (v0.1)
 - [Rename chat tabs](http://meta.stackexchange.com/questions/246289/change-the-browser-tab-title-on-chat-pages-to-chat-sitename-or-chat-room-name) (v0.1)
@@ -92,8 +92,8 @@ Descriptions of features
 - Make the topbar fixed:
 Make the topbar stay at the top of the screen as you scroll down
 
-- Unfade low score answers:
-When you rollover posts with a score of -3 or less, ungray them out so you can read them properly
+- <s> Unfade low score answers:
+When you rollover posts with a score of -3 or less, ungray them out so you can read them properly</s> **This feature is now implemented by default by Stack Exchange, no longer needed in this script!**
 
 - Move `show more comments` link to top:
 The `show x more comments` link is by default shown at the bottom of the comments section. But that can be annoying if you're trying to read through a 'conversation' - this will clone the link and put it before the actual comments as well
