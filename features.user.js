@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SE Additional Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.5 DEV
+// @version      1.6 DEV
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
@@ -11,6 +11,7 @@
 // @match        *://*.askubuntu.com/*
 // @match        *://*.stackapps.com/*
 // @match        *://*.mathoverflow.net/*
+// @require      http://code.jquery.com/jquery-2.1.4.min.js
 // @require      https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js
 // @require      https://cdn.rawgit.com/timdown/rangyinputs/master/rangyinputs-jquery-src.js
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
@@ -103,13 +104,13 @@ var functionsToCall = { //ALL the functions must go in here
 
     },
 
-    unHideAnswer: function() { // For unfading a downvoted answer on hover
+   /*unHideAnswer: function() { // For unfading a downvoted answer on hover
         $(".downvoted-answer").hover(function() {
             $(this).removeClass("downvoted-answer");
         }, function() {
             $(this).addClass("downvoted-answer");
         });
-    },
+    },*/
 
     fixedTopbar: function() { // For making the topbar fixed (always stay at top of screen)
         $('.topbar').css({
@@ -1027,7 +1028,6 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='bulletReplace'/> Replace triangluar bullets with normal ones</label> <br /> \
                 <label><input type='checkbox' id='addEllipsis'/> Add ellipsis to long names</label> <br /> \
                 <label><input type='checkbox' id='moveCommentsLink'/> Move 'show x more comments' to the top</label> <br /> \
-                <label><input type='checkbox' id='unHideAnswer'/> Un-gray-out downvoted answers</label> <br /> \
                 <label><input type='checkbox' id='fixedTopbar'/> Fix topbar position</label> <br /> \
                 <label><input type='checkbox' id='highlightQuestions'/> Alternate favourite questions highlighing</label> <br /> \
                 <label><input type='checkbox' id='displayName'/> Display name before gravatar</label> <br />\
@@ -1084,7 +1084,7 @@ $(function() {
     });
     
     if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
-        if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1) { //if a deprecated feature exists, make user set options again!
+        if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("unHideAnswer") != -1) { //if a deprecated feature exists, make user set options again!
             $('#featureGMOptions input').prop('checked', true);
             $('#featureGMOptions').show(); //Show the dialog
             var featureOptions = [];
