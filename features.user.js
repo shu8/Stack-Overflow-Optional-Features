@@ -17,6 +17,7 @@
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
 // @require      https://cdn.rawgit.com/camagu/jquery-feeds/master/jquery.feeds.js
 // @require      https://cdn.rawgit.com/EnzoMartin/Sticky-Element/master/jquery.stickyelement.js
+// @require      https://cdn.rawgit.com/shu8/SE_OptionalFeatures/develop/helperFunctions.js
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
@@ -47,7 +48,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     renameChat: function() { // For renaming Chat tabs:
-        if (window.location.href.indexOf('chat') > -1) {
+        if (window.location.href.indexOf('chat.') > -1) {
             document.title = 'Chat - ' + document.title;
         }
     },
@@ -155,7 +156,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     displayName: function() { // For displaying username next to avatar on topbar
-        var uname = $('.gravatar-wrapper-24').attr('title');
+        var uname = SEHelper.getUsername();
         var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
         $(insertme).insertBefore('.gravatar-wrapper-24');
     },
@@ -411,7 +412,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     quickCommentShortcutsMain: function() { // For adding shortcuts to insert pre-defined text into comment fields
-        var sitename = $('a.current-site-link div').attr('title'), //Get sitename from favicon's title
+        var sitename = SEHelper.getSiteName(),
             siteurl = 'http://' + $(location).attr('hostname'),
             op = $('.post-signature.owner .user-info .user-details a').text(),
             data = [],
@@ -441,7 +442,7 @@ var functionsToCall = { //ALL the functions must go in here
             $(document).on('click', 'a.js-add-link.comments-link', function() {
                 var answererName = $(this).parents('div').find('.post-signature:last').first().find('.user-details a').text(),
                     answererId = $(this).parents('div').find('.post-signature:last').first().find('.user-details a').attr('href').split('/')[2],
-                    apiUrl = "https://api.stackexchange.com/2.2/users/" + answererId + "?site=" + $(location).attr('hostname').split('.')[0];
+                    apiUrl = "https://api.stackexchange.com/2.2/users/" + answererId + "?site=" + SEHelper.getSiteName('api');
 
                 setTimeout(function() {
                     $('.comments textarea').attr('placeholder', "Use comments to ask for clarification or add more information. Avoid answering questions in comments. Press Alt+O to view/edit/delete Quick Comment Shortcuts data, or press Alt+R to open a box to remind you of the shortcuts.");
@@ -779,7 +780,7 @@ var functionsToCall = { //ALL the functions must go in here
     
     autoShowCommentImages: function() { //For auto-inlining any links to imgur images in comments
         $('.comment .comment-text .comment-copy a').each(function() {
-            if($(this).attr('href').indexOf('imgur') != -1) {
+            if($(this).attr('href').indexOf('imgur.com') != -1) {
                 var image = $(this).attr('href');
                 $(this).replaceWith("<img src='"+image+"' width='100%'>");
             }
@@ -787,7 +788,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
     
     showCommentScores: function () { //For adding a button on your profile comment history pages to show your comment's scores
-        var sitename = $(location).attr('hostname').split('.')[0];
+        var sitename = SEHelper.getSiteName('api');
         $('.history-table td b a').each(function() {
             id = $(this).attr('href').split('#')[1].split('_')[0].replace('comment', '');
             $(this).after("<span class='showCommentScore' id='"+id+"'>&nbsp;&nbsp;&nbsp;show comment score</span>");
@@ -802,7 +803,7 @@ var functionsToCall = { //ALL the functions must go in here
     
     answerTagsSearch: function() { //For adding tags to answers in search     
         if (window.location.href.indexOf('search?q=') > -1) { //ONLY ON SEARCH PAGES!
-            var sitename = $(location).attr('hostname').split('.')[0], //sitename for API call
+            var sitename = SEHelper.getSiteName('api'),
                 ids = [],
                 idsAndTags = {};
 
@@ -1065,7 +1066,7 @@ $(function() {
     $('#featureTitle').css('cursor', 'move');
     $('head').append("<link rel='stylesheet' type='text/css' href='https://rawgit.com/shu8/SE_OptionalFeatures/develop/extraCSS.css' />"); //Add SE Extra CSS for functions
 
-    if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
+    if (SE.isOnUserProfile()) { //Add the add features link
         $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
         $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015)
 
