@@ -83,7 +83,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - 04/05/15 - v1.3: Added more features (mentioned above)
 - 26/05/15 - v1.4: Added more features (mentioned above), updated dialog styles to match SE style, fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
 - 13/07/15 - v1.5: Added more features (mentioned above), fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode) for clever CSS 'hack' :), added auto-selection for [Change the share link to show link as markdown format](http://stackapps.com/a/6451/26088)
-- DEV - v1.6: Removed no longer neccessary feature (implemented by SE now), fixed bug where the mod diamond and help menu would merge together
+- DEV - v1.6: Removed no longer neccessary feature (implemented by SE now), fixed bug where the mod diamond and help menu would merge together, used my own [SE Helper functions](https://github.com/shu8/SE_OptionalFeatures/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc...
 
 ---
 
