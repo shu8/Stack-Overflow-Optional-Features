@@ -1066,7 +1066,7 @@ $(function() {
     $('#featureTitle').css('cursor', 'move');
     $('head').append("<link rel='stylesheet' type='text/css' href='https://rawgit.com/shu8/SE_OptionalFeatures/develop/extraCSS.css' />"); //Add SE Extra CSS for functions
 
-    if (SE.isOnUserProfile()) { //Add the add features link
+    if (SEHelper.isOnUserProfile()) { //Add the add features link
         $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
         $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015)
 
