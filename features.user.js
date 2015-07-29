@@ -193,11 +193,9 @@ var functionsToCall = { //ALL the functions must go in here
             $('[id^="wmd-redo-button"]').after(kbdBtn);
             $('[id^="wmd-redo-button"]').after(listBtn);
             $('#wmd-kbd-button').on('click', function() {
-                alert('click');
                 functionsToCall.addKbd();
             });
             $('#wmd-list-button').on('click', function() {
-                alert('click');
                 functionsToCall.addBullets();
             });
         }, 500);
