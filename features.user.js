@@ -113,14 +113,106 @@ var functionsToCall = { //ALL the functions must go in here
         });
     },*/
 
-    fixedTopbar: function() { // For making the topbar fixed (always stay at top of screen)
-        $('.topbar').css({
-            'position': 'fixed',
-            'z-index': '1'
-        });
-        //Thanks ArtOfCode (http://worldbuilding.stackexchange.com/users/2685/artofcode) for fixing the topbar covering the header :)
-        $("#header").css("margin-top", "34px");
-        $(".topbar").css("margin-top", "-34px");
+    fixedTopbar: function() { // For making the topbar fixed (always stay at top of screen)        
+        if($(location).attr('hostname') == 'askubuntu.com') { //AskUbuntu is annoying. UnicornsAreVeryVeryYummy made the below code for AskUbuntu: https://github.com/shu8/SE_OptionalFeatures/issues/11 Thanks!
+            var head = document.getElementsByTagName('head')[0],
+                ubuntuLinks = document.getElementsByClassName('nav-global')[0],
+                remove = document.getElementById('custom-header'),
+                newUbuntuLinks = document.createElement('div'),
+                linksWrapper = document.createElement('div'),
+                listOfSites = document.createElement('ul'),
+                ubuntuHome = document.createElement('li'),
+                ubuntuCommunity = document.createElement('li'),
+                askubuntu = document.createElement('li'),
+                developer = document.createElement('li'),
+                design = document.createElement('li'),
+                discourse = document.createElement('li'),
+                hardware = document.createElement('li'),
+                insights = document.createElement('li'),
+                juju = document.createElement('li'),
+                shop = document.createElement('li'),
+                more = document.createElement('li'),
+                apps = document.createElement('li'),
+                help = document.createElement('li'),
+                forum = document.createElement('li'),
+                launchpad = document.createElement('li'),
+                MAAS = document.createElement('li'),
+                canonical = document.createElement('li');
+            
+            ubuntuLinks.parentElement.removeChild(ubuntuLinks);
+            remove.parentElement.removeChild(remove);
+            newUbuntuLinks.className = "links";
+            linksWrapper.className = "linksList";
+            listOfSites.className = "siteLink";
+            ubuntuHome.innerHTML = "<a href=\"http://www.ubuntu.com\">Ubuntu</a>";
+            ubuntuHome.className = "siteLink";
+            ubuntuCommunity.innerHTML = "<a href=\"http://community.ubuntu.com/\">Community</a>";
+            ubuntuCommunity.className = "siteLink";
+            askubuntu.innerHTML = "<a href=\"http://askubuntu.com\">Ask!</a>";
+            askubuntu.className = "activeSite siteLink";
+            developer.innerHTML = "<a href=\"http://developer.ubuntu.com\">Developer</a>";
+            developer.className = "siteLink";
+            design.innerHTML = "<a href=\"http://design.ubuntu.com\">Design</a>";
+            design.className = "siteLink";
+            discourse.innerHTML = "<a href=\"http://discourse.ubuntu.com\">Discourse</a>";
+            discourse.className = "siteLink";
+            hardware.innerHTML = "<a href=\"http://www.ubuntu.com/certification\">Hardware</a>";
+            hardware.className = "siteLink";
+            insights.innerHTML = "<a href=\"http://insights.ubuntu.com/\">Insights</a>";
+            insights.className = "siteLink";
+            juju.innerHTML = "<a href=\"http://juju.ubuntu.com\">Juju</a>";
+            juju.className = "siteLink";
+            shop.innerHTML = "<a href=\"http://shop.ubuntu.com\">Shop</a>";
+            shop.className = "siteLink";
+            apps.innerHTML = "<a href=\"http://apps.ubuntu.com\">Apps</a>";
+            apps.className = "siteLink";
+            help.innerHTML = "<a href=\"https://help.ubuntu.com\">Help</a>";
+            help.className = "siteLink";
+            forum.innerHTML = "<a href=\"http://ubuntuforums.org\">Forum</a>";
+            forum.className = "siteLink";
+            launchpad.innerHTML = "<a href=\"http://launchpad.net\">Launchpad</a>";
+            launchpad.className = "siteLink";
+            MAAS.innerHTML = "<a href=\"http://maas.ubuntu.com\">MAAS</a>";
+            MAAS.className = "siteLink";
+            canonical.innerHTML = "<a href=\"http://canonical\">Canonical</a>";
+            canonical.className = "siteLink";
+            listOfSites.appendChild(ubuntuHome);
+            listOfSites.appendChild(ubuntuCommunity);
+            listOfSites.appendChild(askubuntu);
+            listOfSites.appendChild(developer);
+            listOfSites.appendChild(design);
+            listOfSites.appendChild(discourse);
+            listOfSites.appendChild(hardware);
+            listOfSites.appendChild(insights);
+            listOfSites.appendChild(juju);
+            listOfSites.appendChild(shop);
+            listOfSites.appendChild(apps);
+            listOfSites.appendChild(help);
+            listOfSites.appendChild(forum);
+            listOfSites.appendChild(launchpad);
+            listOfSites.appendChild(MAAS);
+            listOfSites.appendChild(canonical);
+            linksWrapper.appendChild(listOfSites);
+            newUbuntuLinks.appendChild(linksWrapper);
+            document.body.appendChild(newUbuntuLinks);
+            var toolbar = document.getElementsByClassName('topbar')[0];
+            toolbar.className += " stickyToolbar";
+            var line = document.createElement('div');
+            line.innerHTML = "<br><br>";
+            toolbar.parentElement.insertBefore(line, toolbar);            
+        } else { //for all the normal, unannoying sites ;)            
+            $('.topbar').css({
+                'position': 'fixed',
+                'z-index': '1'
+            });
+            
+            //Thanks ArtOfCode (http://worldbuilding.stackexchange.com/users/2685/artofcode) for fixing the topbar covering the header :)
+            $("#header").css("margin-top", "34px");
+            $(".topbar").css("margin-top", "-34px");
+        }
+        
+        //fix bug: https://github.com/shu8/SE_OptionalFeatures/issues/10
+        $('.label').css('z-index', 'auto');
     },
 
     highlightQuestions: function() { // For highlighting only the tags of favorite questions
@@ -194,9 +286,11 @@ var functionsToCall = { //ALL the functions must go in here
             $('[id^="wmd-redo-button"]').after(kbdBtn);
             $('[id^="wmd-redo-button"]').after(listBtn);
             $('#wmd-kbd-button').on('click', function() {
+                alert('click');
                 functionsToCall.addKbd();
             });
             $('#wmd-list-button').on('click', function() {
+                alert('click');
                 functionsToCall.addBullets();
             });
         }, 500);
