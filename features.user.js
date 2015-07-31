@@ -210,9 +210,6 @@ var functionsToCall = { //ALL the functions must go in here
             $("#header").css("margin-top", "34px");
             $(".topbar").css("margin-top", "-34px");
         }
-        
-        //fix bug: https://github.com/shu8/SE_OptionalFeatures/issues/10
-        $('.label').css('z-index', 'auto');
     },
 
     highlightQuestions: function() { // For highlighting only the tags of favorite questions
