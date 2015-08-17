@@ -16,7 +16,6 @@
 // @require      https://cdn.rawgit.com/timdown/rangyinputs/master/rangyinputs-jquery-src.js
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
 // @require      https://cdn.rawgit.com/camagu/jquery-feeds/master/jquery.feeds.js
-// @require      https://cdn.rawgit.com/EnzoMartin/Sticky-Element/master/jquery.stickyelement.js
 // @require      https://cdn.rawgit.com/shu8/SE_OptionalFeatures/develop/helperFunctions.js
 // @grant        GM_setValue
 // @grant        GM_getValue
@@ -925,26 +924,39 @@ var functionsToCall = { //ALL the functions must go in here
     },
     
     stickyVoteButtons: function() { //For making the vote buttons stick to the screen as you scroll through a post   
-        $(window).scroll(function(){
-		$(".votecell").each(function(){
-			var offset = 0;
-				if($(".topbar").css("position") == "fixed"){
-					offset = 34;
-				}
-			var vote = $(this).find(".vote");
-			if($(this).offset().top - $(window).scrollTop() + offset <= 0){
-				if($(this).offset().top + $(this).height() + offset - $(window).scrollTop() - vote.height() > 0){
-					vote.css({position:"fixed", left:$(this).offset().left, top:0 + offset});
-				}else{
-					vote.css({position:"relative", left:0, top:$(this).height()-vote.height()});
-				}
-			}else{
-				vote.css({position:"relative", left:0, top:0});
-			}
-		});
-	});
+        //https://github.com/shu8/SE_OptionalFeatures/pull/14:
+        $(window).scroll(function() {
+            $(".votecell").each(function() {
+                var offset = 0;
+                if ($(".topbar").css("position") == "fixed") {
+                    offset = 34;
+                }
+                var vote = $(this).find(".vote");
+                if ($(this).offset().top - $(window).scrollTop() + offset <= 0) {
+                    if ($(this).offset().top + $(this).height() + offset - $(window).scrollTop() - vote.height() > 0) {
+                        vote.css({
+                            position: "fixed",
+                            left: $(this).offset().left,
+                            top: 0 + offset
+                        });
+                    } else {
+                        vote.css({
+                            position: "relative",
+                            left: 0,
+                            top: $(this).height() - vote.height()
+                        });
+                    }
+                } else {
+                    vote.css({
+                        position: "relative",
+                        left: 0,
+                        top: 0
+                    });
+                }
+            });
+        });
     },
-    
+
     titleEditDiff: function() { //For showing the new version of a title in a diff separately rather than loads of crossing outs in red and additions in green
         setTimeout(function() {
             var $questionHyperlink = $('.summary h2 .question-hyperlink').clone(),
