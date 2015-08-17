@@ -209,6 +209,9 @@ var functionsToCall = { //ALL the functions must go in here
             $("#header").css("margin-top", "34px");
             $(".topbar").css("margin-top", "-34px");
         }
+        
+        $("#rep-card-next .percent").after($("#rep-card-next .label").css("z-index",0)).css("position","absolute");
+        $("#badge-card-next .percent").after($("#badge-card-next .label").css("z-index",0)).css("position","absolute")
     },
 
     highlightQuestions: function() { // For highlighting only the tags of favorite questions
