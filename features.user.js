@@ -209,6 +209,9 @@ var functionsToCall = { //ALL the functions must go in here
             $("#header").css("margin-top", "34px");
             $(".topbar").css("margin-top", "-34px");
         }
+        
+        $("#rep-card-next .percent").after($("#rep-card-next .label").css("z-index",0)).css("position","absolute");
+        $("#badge-card-next .percent").after($("#badge-card-next .label").css("z-index",0)).css("position","absolute")
     },
 
     highlightQuestions: function() { // For highlighting only the tags of favorite questions
@@ -1000,7 +1003,7 @@ var functionsToCall = { //ALL the functions must go in here
         var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
 
         $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container diamondOff">♦</span>');
-        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none;">\
+        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none; overflow: auto;">\
 <div class="modal-content" id="newMetaQuestionsList" style="max-height:none"><span id="closeNewQuestionList" style="float:right">x</span>\
 <ul>\
 <li>\
