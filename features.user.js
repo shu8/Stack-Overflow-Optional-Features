@@ -925,7 +925,24 @@ var functionsToCall = { //ALL the functions must go in here
     },
     
     stickyVoteButtons: function() { //For making the vote buttons stick to the screen as you scroll through a post   
-        $('.vote').sticky($('.vote').parent().parent().parent().parent().parent());
+        $(window).scroll(function(){
+		$(".votecell").each(function(){
+			var offset = 0;
+				if($(".topbar").css("position") == "fixed"){
+					offset = 34;
+				}
+			var vote = $(this).find(".vote");
+			if($(this).offset().top - $(window).scrollTop() + offset <= 0){
+				if($(this).offset().top + $(this).height() + offset - $(window).scrollTop() - vote.height() > 0){
+					vote.css({position:"fixed", left:$(this).offset().left, top:0 + offset});
+				}else{
+					vote.css({position:"relative", left:0, top:$(this).height()-vote.height()});
+				}
+			}else{
+				vote.css({position:"relative", left:0, top:0});
+			}
+		});
+	});
     },
     
     titleEditDiff: function() { //For showing the new version of a title in a diff separately rather than loads of crossing outs in red and additions in green
