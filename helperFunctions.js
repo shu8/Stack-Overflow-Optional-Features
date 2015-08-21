@@ -1,3 +1,7 @@
+// ==UserScript==
+// @name         SE Userscript Helper functions
+// ==/UserScript==
+
 SEHelper = {
     getUsername: function() {
         $uname = $('body > div.topbar > div > div.topbar-links > a > div.gravatar-wrapper-24');
@@ -16,6 +20,10 @@ SEHelper = {
 
     getSiteType: function() {
         return ($('.beta-title').length ? 'beta' : 'graduated'); 
+    },
+    
+    getQuestionId: function() {
+        return StackExchange.question.getQuestionId();
     },
 
     isLoggedIn: function() {
