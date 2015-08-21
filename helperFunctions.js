@@ -23,7 +23,7 @@ SEHelper = {
     },
     
     getQuestionId: function() {
-        return StackExchange.question.getQuestionId();
+        return window.location.href.split('/')[4];
     },
 
     isLoggedIn: function() {
