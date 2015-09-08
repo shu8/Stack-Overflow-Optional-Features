@@ -76,7 +76,8 @@ In the latest version: (these link to their corresponding feature-request (from 
     - Compatibility with new (currently MSE-only) profiles
 - 06/03/15 - v0.7: Added more features (mentioned above)
 - 22/03/15 - v0.8: Added more features (mentioned above)
-- 26/03/15 - v0.9: Added more features (mentioned above), 
+- 26/03/15 - v0.9: 
+    - Added more features (mentioned above), 
     - updated `kbdAndBullets` function to make icons fit better
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
@@ -84,7 +85,8 @@ In the latest version: (these link to their corresponding feature-request (from 
     - Added more features (mentioned above),
     - updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 - 04/05/15 - v1.3: Added more features (mentioned above)
-- 26/05/15 - v1.4: Added more features (mentioned above), 
+- 26/05/15 - v1.4: 
+    - Added more features (mentioned above), 
     - updated dialog styles to match SE style, 
     - fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
 - 13/07/15 - v1.5: 
