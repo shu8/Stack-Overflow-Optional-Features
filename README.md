@@ -1,7 +1,7 @@
 # Stack Exchange Additional Optional Features 
 <sup>acronym coming soon, I hope :)</sup>
 
-A userscript for the StackExchange websites to add a bunch of optional, user-selectable features via an easy-to-use control panel.
+A userscript for the Stack Exchange websites to add a bunch of optional, user-selectable features via an easy-to-use control panel.
 
 #How to use, requirements, how it works
 1. Install [Tampermonkey](http://tampermonkey.net/) (for Chrome), or [Greasemonkey](http://www.greasespot.net/) (for Firefox) or similar. These are userscript managers that are required for this script to work, because they also provide support for `GM_*` functions, which this script relies on to save the options you set!
@@ -76,14 +76,27 @@ In the latest version: (these link to their corresponding feature-request (from 
     - Compatibility with new (currently MSE-only) profiles
 - 06/03/15 - v0.7: Added more features (mentioned above)
 - 22/03/15 - v0.8: Added more features (mentioned above)
-- 26/03/15 - v0.9: Added more features (mentioned above), updated `kbdAndBullets` function to make icons fit better
+- 26/03/15 - v0.9: Added more features (mentioned above), 
+    - updated `kbdAndBullets` function to make icons fit better
 - 29/03/15 - v1.0: Added more features (mentioned above)
 - 30/03/15 - v1.1: Added more features (mentioned above)
-- 30/04/15 - v1.2 *(and 1.2.1)*: Added more features (mentioned above), updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
+- 30/04/15 - v1.2 *(and 1.2.1)*: 
+    - Added more features (mentioned above),
+    - updated `employeeStar` function for animuson(!) *(and edited `answerTagsSearch` function)*
 - 04/05/15 - v1.3: Added more features (mentioned above)
-- 26/05/15 - v1.4: Added more features (mentioned above), updated dialog styles to match SE style, fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
-- 13/07/15 - v1.5: Added more features (mentioned above), fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode) for clever CSS 'hack' :), added auto-selection for [Change the share link to show link as markdown format](http://stackapps.com/a/6451/26088)
-- DEV - v1.6: Removed no longer neccessary feature (implemented by SE now), fixed bug where the mod diamond and help menu would merge together, used my own [SE Helper functions](https://github.com/shu8/SE_OptionalFeatures/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc...
+- 26/05/15 - v1.4: Added more features (mentioned above), 
+    - updated dialog styles to match SE style, 
+    - fixed some stuff that disappeared in a previous version that I forgot to add back (so some of the change log might be wrong :()
+- 13/07/15 - v1.5: 
+    - Added more features (mentioned above), 
+    - fixed bug in `fixedTopbar` where topbar went over header originally (thanks [ArtOfCode](http://worldbuilding.stackexchange.com/users/2685/artofcode) for clever CSS 'hack' :), 
+    - added auto-selection for [Change the share link to show link as markdown format](http://stackapps.com/a/6451/26088)
+- 08/09/15 - v1.6: 
+    - Removed no longer neccessary feature (implemented by SE now), 
+    - fixed bug where the mod diamond and help menu would merge together, 
+    - used my own [SE Helper functions](https://github.com/shu8/SE_OptionalFeatures/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc..., 
+    - removed fade effect on the `metaChatBlogStackExchangeButton` feature, 
+    - [reimplemented the sticky vote buttons](https://github.com/shu8/SE_OptionalFeatures/pull/14), to fix a few bugs!
 
 ---
 
