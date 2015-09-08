@@ -984,7 +984,7 @@ var functionsToCall = { //ALL the functions must go in here
                     blogLink = '//' + $(this).attr('href').split('/')[2].split('.')[0] + '.blogoverflow.com';
                 }
 
-                $(this).find('.rep-score').hide(500);
+                $(this).find('.rep-score').hide();
                 $(this).append('<div class="related-links" style="float: right;">\
                                  <a href="'+link+'">meta</a>\
                                  <a href="http://chat.stackexchange.com">chat</a>\
@@ -992,7 +992,7 @@ var functionsToCall = { //ALL the functions must go in here
                                 </div>');
             }
         }, function () {
-            $(this).find('.rep-score').show(500);
+            $(this).find('.rep-score').show();
             $(this).find('.related-links').remove();
         });        
     },
