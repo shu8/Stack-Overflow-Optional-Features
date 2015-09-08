@@ -1,7 +1,7 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         SE Additional Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.5.1
+// @version      1.6
 // @description  Adds a bunch of optional features to the StackExchange sites.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
@@ -16,7 +16,7 @@
 // @require      https://cdn.rawgit.com/timdown/rangyinputs/master/rangyinputs-jquery-src.js
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
 // @require      https://cdn.rawgit.com/camagu/jquery-feeds/master/jquery.feeds.js
-// @require      https://cdn.rawgit.com/EnzoMartin/Sticky-Element/master/jquery.stickyelement.js
+// @require      https://cdn.rawgit.com/shu8/SE_OptionalFeatures/develop/helperFunctions.js
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
@@ -47,7 +47,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     renameChat: function() { // For renaming Chat tabs:
-        if (window.location.href.indexOf('chat') > -1) {
+        if (window.location.href.indexOf('chat.') > -1) {
             document.title = 'Chat - ' + document.title;
         }
     },
@@ -104,22 +104,114 @@ var functionsToCall = { //ALL the functions must go in here
 
     },
 
-    unHideAnswer: function() { // For unfading a downvoted answer on hover
+   /*unHideAnswer: function() { // For unfading a downvoted answer on hover
         $(".downvoted-answer").hover(function() {
             $(this).removeClass("downvoted-answer");
         }, function() {
             $(this).addClass("downvoted-answer");
         });
-    },
+    },*/
 
-    fixedTopbar: function() { // For making the topbar fixed (always stay at top of screen)
-        $('.topbar').css({
-            'position': 'fixed',
-            'z-index': '1'
-        });
-        //Thanks ArtOfCode (http://worldbuilding.stackexchange.com/users/2685/artofcode) for fixing the topbar covering the header :)
-        $("#header").css("margin-top", "34px");
-        $(".topbar").css("margin-top", "-34px");
+    fixedTopbar: function() { // For making the topbar fixed (always stay at top of screen)        
+        if($(location).attr('hostname') == 'askubuntu.com') { //AskUbuntu is annoying. UnicornsAreVeryVeryYummy made the below code for AskUbuntu: https://github.com/shu8/SE_OptionalFeatures/issues/11 Thanks!
+            var head = document.getElementsByTagName('head')[0],
+                ubuntuLinks = document.getElementsByClassName('nav-global')[0],
+                remove = document.getElementById('custom-header'),
+                newUbuntuLinks = document.createElement('div'),
+                linksWrapper = document.createElement('div'),
+                listOfSites = document.createElement('ul'),
+                ubuntuHome = document.createElement('li'),
+                ubuntuCommunity = document.createElement('li'),
+                askubuntu = document.createElement('li'),
+                developer = document.createElement('li'),
+                design = document.createElement('li'),
+                discourse = document.createElement('li'),
+                hardware = document.createElement('li'),
+                insights = document.createElement('li'),
+                juju = document.createElement('li'),
+                shop = document.createElement('li'),
+                more = document.createElement('li'),
+                apps = document.createElement('li'),
+                help = document.createElement('li'),
+                forum = document.createElement('li'),
+                launchpad = document.createElement('li'),
+                MAAS = document.createElement('li'),
+                canonical = document.createElement('li');
+            
+            ubuntuLinks.parentElement.removeChild(ubuntuLinks);
+            remove.parentElement.removeChild(remove);
+            newUbuntuLinks.className = "links";
+            linksWrapper.className = "linksList";
+            listOfSites.className = "siteLink";
+            ubuntuHome.innerHTML = "<a href=\"http://www.ubuntu.com\">Ubuntu</a>";
+            ubuntuHome.className = "siteLink";
+            ubuntuCommunity.innerHTML = "<a href=\"http://community.ubuntu.com/\">Community</a>";
+            ubuntuCommunity.className = "siteLink";
+            askubuntu.innerHTML = "<a href=\"http://askubuntu.com\">Ask!</a>";
+            askubuntu.className = "activeSite siteLink";
+            developer.innerHTML = "<a href=\"http://developer.ubuntu.com\">Developer</a>";
+            developer.className = "siteLink";
+            design.innerHTML = "<a href=\"http://design.ubuntu.com\">Design</a>";
+            design.className = "siteLink";
+            discourse.innerHTML = "<a href=\"http://discourse.ubuntu.com\">Discourse</a>";
+            discourse.className = "siteLink";
+            hardware.innerHTML = "<a href=\"http://www.ubuntu.com/certification\">Hardware</a>";
+            hardware.className = "siteLink";
+            insights.innerHTML = "<a href=\"http://insights.ubuntu.com/\">Insights</a>";
+            insights.className = "siteLink";
+            juju.innerHTML = "<a href=\"http://juju.ubuntu.com\">Juju</a>";
+            juju.className = "siteLink";
+            shop.innerHTML = "<a href=\"http://shop.ubuntu.com\">Shop</a>";
+            shop.className = "siteLink";
+            apps.innerHTML = "<a href=\"http://apps.ubuntu.com\">Apps</a>";
+            apps.className = "siteLink";
+            help.innerHTML = "<a href=\"https://help.ubuntu.com\">Help</a>";
+            help.className = "siteLink";
+            forum.innerHTML = "<a href=\"http://ubuntuforums.org\">Forum</a>";
+            forum.className = "siteLink";
+            launchpad.innerHTML = "<a href=\"http://launchpad.net\">Launchpad</a>";
+            launchpad.className = "siteLink";
+            MAAS.innerHTML = "<a href=\"http://maas.ubuntu.com\">MAAS</a>";
+            MAAS.className = "siteLink";
+            canonical.innerHTML = "<a href=\"http://canonical\">Canonical</a>";
+            canonical.className = "siteLink";
+            listOfSites.appendChild(ubuntuHome);
+            listOfSites.appendChild(ubuntuCommunity);
+            listOfSites.appendChild(askubuntu);
+            listOfSites.appendChild(developer);
+            listOfSites.appendChild(design);
+            listOfSites.appendChild(discourse);
+            listOfSites.appendChild(hardware);
+            listOfSites.appendChild(insights);
+            listOfSites.appendChild(juju);
+            listOfSites.appendChild(shop);
+            listOfSites.appendChild(apps);
+            listOfSites.appendChild(help);
+            listOfSites.appendChild(forum);
+            listOfSites.appendChild(launchpad);
+            listOfSites.appendChild(MAAS);
+            listOfSites.appendChild(canonical);
+            linksWrapper.appendChild(listOfSites);
+            newUbuntuLinks.appendChild(linksWrapper);
+            document.body.appendChild(newUbuntuLinks);
+            var toolbar = document.getElementsByClassName('topbar')[0];
+            toolbar.className += " stickyToolbar";
+            var line = document.createElement('div');
+            line.innerHTML = "<br><br>";
+            toolbar.parentElement.insertBefore(line, toolbar);            
+        } else { //for all the normal, unannoying sites ;)            
+            $('.topbar').css({
+                'position': 'fixed',
+                'z-index': '1'
+            });
+            
+            //Thanks ArtOfCode (http://worldbuilding.stackexchange.com/users/2685/artofcode) for fixing the topbar covering the header :)
+            $("#header").css("margin-top", "34px");
+            $(".topbar").css("margin-top", "-34px");
+        }
+        
+        $("#rep-card-next .percent").after($("#rep-card-next .label").css("z-index",0)).css("position","absolute");
+        $("#badge-card-next .percent").after($("#badge-card-next .label").css("z-index",0)).css("position","absolute");
     },
 
     highlightQuestions: function() { // For highlighting only the tags of favorite questions
@@ -155,7 +247,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     displayName: function() { // For displaying username next to avatar on topbar
-        var uname = $('.gravatar-wrapper-24').attr('title');
+        var uname = SEHelper.getUsername();
         var insertme = "<span class='reputation links-container' style='color:white;' title='" + uname + "'>" + uname + "</span>";
         $(insertme).insertBefore('.gravatar-wrapper-24');
     },
@@ -411,7 +503,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     quickCommentShortcutsMain: function() { // For adding shortcuts to insert pre-defined text into comment fields
-        var sitename = $('a.current-site-link div').attr('title'), //Get sitename from favicon's title
+        var sitename = SEHelper.getSiteName(),
             siteurl = 'http://' + $(location).attr('hostname'),
             op = $('.post-signature.owner .user-info .user-details a').text(),
             data = [],
@@ -441,7 +533,7 @@ var functionsToCall = { //ALL the functions must go in here
             $(document).on('click', 'a.js-add-link.comments-link', function() {
                 var answererName = $(this).parents('div').find('.post-signature:last').first().find('.user-details a').text(),
                     answererId = $(this).parents('div').find('.post-signature:last').first().find('.user-details a').attr('href').split('/')[2],
-                    apiUrl = "https://api.stackexchange.com/2.2/users/" + answererId + "?site=" + $(location).attr('hostname').split('.')[0];
+                    apiUrl = "https://api.stackexchange.com/2.2/users/" + answererId + "?site=" + SEHelper.getSiteName('api');
 
                 setTimeout(function() {
                     $('.comments textarea').attr('placeholder', "Use comments to ask for clarification or add more information. Avoid answering questions in comments. Press Alt+O to view/edit/delete Quick Comment Shortcuts data, or press Alt+R to open a box to remind you of the shortcuts.");
@@ -779,7 +871,7 @@ var functionsToCall = { //ALL the functions must go in here
     
     autoShowCommentImages: function() { //For auto-inlining any links to imgur images in comments
         $('.comment .comment-text .comment-copy a').each(function() {
-            if($(this).attr('href').indexOf('imgur') != -1) {
+            if($(this).attr('href').indexOf('imgur.com') != -1) {
                 var image = $(this).attr('href');
                 $(this).replaceWith("<img src='"+image+"' width='100%'>");
             }
@@ -787,7 +879,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
     
     showCommentScores: function () { //For adding a button on your profile comment history pages to show your comment's scores
-        var sitename = $(location).attr('hostname').split('.')[0];
+        var sitename = SEHelper.getSiteName('api');
         $('.history-table td b a').each(function() {
             id = $(this).attr('href').split('#')[1].split('_')[0].replace('comment', '');
             $(this).after("<span class='showCommentScore' id='"+id+"'>&nbsp;&nbsp;&nbsp;show comment score</span>");
@@ -802,7 +894,7 @@ var functionsToCall = { //ALL the functions must go in here
     
     answerTagsSearch: function() { //For adding tags to answers in search     
         if (window.location.href.indexOf('search?q=') > -1) { //ONLY ON SEARCH PAGES!
-            var sitename = $(location).attr('hostname').split('.')[0], //sitename for API call
+            var sitename = SEHelper.getSiteName('api'),
                 ids = [],
                 idsAndTags = {};
 
@@ -835,9 +927,39 @@ var functionsToCall = { //ALL the functions must go in here
     },
     
     stickyVoteButtons: function() { //For making the vote buttons stick to the screen as you scroll through a post   
-        $('.vote').sticky($('.vote').parent().parent().parent().parent().parent());
+        //https://github.com/shu8/SE_OptionalFeatures/pull/14:
+        $(window).scroll(function() {
+            $(".votecell").each(function() {
+                var offset = 0;
+                if ($(".topbar").css("position") == "fixed") {
+                    offset = 34;
+                }
+                var vote = $(this).find(".vote");
+                if ($(this).offset().top - $(window).scrollTop() + offset <= 0) {
+                    if ($(this).offset().top + $(this).height() + offset - $(window).scrollTop() - vote.height() > 0) {
+                        vote.css({
+                            position: "fixed",
+                            left: $(this).offset().left,
+                            top: 0 + offset
+                        });
+                    } else {
+                        vote.css({
+                            position: "relative",
+                            left: 0,
+                            top: $(this).height() - vote.height()
+                        });
+                    }
+                } else {
+                    vote.css({
+                        position: "relative",
+                        left: 0,
+                        top: 0
+                    });
+                }
+            });
+        });
     },
-    
+
     titleEditDiff: function() { //For showing the new version of a title in a diff separately rather than loads of crossing outs in red and additions in green
         setTimeout(function() {
             var $questionHyperlink = $('.summary h2 .question-hyperlink').clone(),
@@ -862,7 +984,7 @@ var functionsToCall = { //ALL the functions must go in here
                     blogLink = '//' + $(this).attr('href').split('/')[2].split('.')[0] + '.blogoverflow.com';
                 }
 
-                $(this).find('.rep-score').hide(500);
+                $(this).find('.rep-score').hide();
                 $(this).append('<div class="related-links" style="float: right;">\
                                  <a href="'+link+'">meta</a>\
                                  <a href="http://chat.stackexchange.com">chat</a>\
@@ -870,7 +992,7 @@ var functionsToCall = { //ALL the functions must go in here
                                 </div>');
             }
         }, function () {
-            $(this).find('.rep-score').show(500);
+            $(this).find('.rep-score').show();
             $(this).find('.related-links').remove();
         });        
     },
@@ -881,8 +1003,8 @@ var functionsToCall = { //ALL the functions must go in here
         var apiLink = "https://api.stackexchange.com/2.2/questions?pagesize=5&order=desc&sort=activity&site=" + metaName;
 
         $('.topbar-links').prepend('<span id="mod-extra-icon" class="reputation links-container diamondOff">♦</span>');
-        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog js-help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none; z-index:1001;">\
-<div class="modal-content" id="newMetaQuestionsList"><span id="closeNewQuestionList" style="float:right">x</span>\
+        $('.js-topbar-dialog-corral').prepend('<div class="topbar-dialog help-dialog dno" id="newMetaQuestionsDialog" style="top: 34px; left: 380px; display: none; overflow: auto;">\
+<div class="modal-content" id="newMetaQuestionsList" style="max-height:none"><span id="closeNewQuestionList" style="float:right">x</span>\
 <ul>\
 <li>\
 <a>No new questions!<span class="item-summary">\
@@ -1028,7 +1150,6 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='bulletReplace'/> Replace triangluar bullets with normal ones</label> <br /> \
                 <label><input type='checkbox' id='addEllipsis'/> Add ellipsis to long names</label> <br /> \
                 <label><input type='checkbox' id='moveCommentsLink'/> Move 'show x more comments' to the top</label> <br /> \
-                <label><input type='checkbox' id='unHideAnswer'/> Un-gray-out downvoted answers</label> <br /> \
                 <label><input type='checkbox' id='fixedTopbar'/> Fix topbar position</label> <br /> \
                 <label><input type='checkbox' id='highlightQuestions'/> Alternate favourite questions highlighing</label> <br /> \
                 <label><input type='checkbox' id='displayName'/> Display name before gravatar</label> <br />\
@@ -1066,7 +1187,7 @@ $(function() {
     $('#featureTitle').css('cursor', 'move');
     $('head').append("<link rel='stylesheet' type='text/css' href='https://rawgit.com/shu8/SE_OptionalFeatures/develop/extraCSS.css' />"); //Add SE Extra CSS for functions
 
-    if (window.location.href.indexOf('/users/') > -1) { //Add the add features link
+    if (SEHelper.isOnUserProfile()) { //Add the add features link
         $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)
         $('.additional-links').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //New profile (post Feb-2015)
 
@@ -1085,7 +1206,7 @@ $(function() {
     });
     
     if (GM_getValue("featureOptions", -1) != -1) { //If the setting is already set
-        if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1) { //if a deprecated feature exists, make user set options again!
+        if (JSON.parse(GM_getValue('featureOptions')).indexOf("answerCountSidebar") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("highlightClosedQuestions") != -1 || JSON.parse(GM_getValue('featureOptions')).indexOf("unHideAnswer") != -1) { //if a deprecated feature exists, make user set options again!
             $('#featureGMOptions input').prop('checked', true);
             $('#featureGMOptions').show(); //Show the dialog
             var featureOptions = [];

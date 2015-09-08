@@ -103,3 +103,53 @@
     text-align: center;
     overflow: auto;
 }
+         
+/*fixedTopbar (by @UnicornsAreVeryVeryYummy - http://stackapps.com/users/33746/unicorns-are-very-very-yummy):*/
+.links {
+	position: fixed;
+	z-index: 10001;
+	width: 100px;
+	height: 310px;
+	line-height: 19.2px;
+	display: block;
+	-moz-box-shadow: 0 0 4px #ccc;
+	-webkit-box-shadow: 0 0 4px #ccc;
+	box-shadow: 0 0 4px #ccc;
+	font-family: Ubuntu, Arial, "libra sans", sans-serif;
+	font-weight: 300;
+	top: 50%;
+	margin-top: -155px;
+}
+
+.linksList {
+	-moz-box-sizing: border-box;
+	background: none repeat scroll 0 0 #fff;
+	margin: 0 auto;
+	width: 100px;
+	height: 310px;
+	position: fixed;
+	z-index: 10001;
+	top: 50%;
+	margin-top: -155px;
+}
+
+li.activeSite {
+	border-right: 3px solid #dd4814;
+}
+
+ul.siteLink {
+	list-style: none;
+	list-style-type: none;
+}
+
+li.siteLink {
+	display: block;
+}
+
+.stickyToolbar {
+	position: fixed;
+	top: 0px;
+	left: 50%;
+	margin-left: -515px;
+	z-index: 1000;
+}
