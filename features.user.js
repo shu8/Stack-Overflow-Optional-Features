@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         SE Additional Optional Features
 // @namespace    http://stackexchange.com/users/4337810/
 // @version      1.6
