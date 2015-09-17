@@ -287,7 +287,7 @@ var functionsToCall = { //ALL the functions must go in here
             $('#wmd-kbd-button').on('click', function() {
                 functionsToCall.addKbd();
             });
-            $('#wmd-list-button').on('click', function() {
+            $('#wmd-bullet-button').on('click', function() {
                 functionsToCall.addBullets();
             });
         }, 500);
