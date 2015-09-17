@@ -880,7 +880,7 @@ var functionsToCall = { //ALL the functions must go in here
     
     showCommentScores: function () { //For adding a button on your profile comment history pages to show your comment's scores
         var sitename = SEHelper.getSiteName('api');
-        $('.history-table td b a').each(function() {
+        $('.history-table td b a[href*="#comment"]').each(function() {
             id = $(this).attr('href').split('#')[1].split('_')[0].replace('comment', '');
             $(this).after("<span class='showCommentScore' id='"+id+"'>&nbsp;&nbsp;&nbsp;show comment score</span>");
         });    
