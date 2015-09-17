@@ -99,7 +99,10 @@ var functionsToCall = { //ALL the functions must go in here
             var $this2 = $(this);
             $("<tr><td></td><td>" + $this2.clone().wrap('<div>').parent().html() + "</td></tr>").insertBefore($(this).parent().closest('tr')).click(function() {
                 $(this).hide();
-            });
+			});
+			$(this).click(function(){
+				$(this).closest(".answer").find(".js-show-link.comments-link").hide();            
+			});
         });
 
     },
