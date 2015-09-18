@@ -99,7 +99,18 @@ var functionsToCall = { //ALL the functions must go in here
             var $this2 = $(this);
             $("<tr><td></td><td>" + $this2.clone().wrap('<div>').parent().html() + "</td></tr>").insertBefore($(this).parent().closest('tr')).click(function() {
                 $(this).hide();
-            });
+			});
+
+			// Determine if comment is on a question or an answer
+			if ($(this).parents(".answer").length){
+				commentParent=".answer";
+			} else {
+				commentParent=".question";
+			}
+
+			$(this).click(function(){
+				$(this).closest(commentParent).find(".js-show-link.comments-link").hide();            
+			});
         });
 
     },
