@@ -58,6 +58,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - [Make it stand out that a question has been put on hold/closed/marked as a dupe/migrated](http://meta.stackexchange.com/questions/257021/proposal-to-make-duplicate-closed-and-migrated-in-the-title-more-obvious) (v1.4)
 - [Add a tooltip to posts showing the latest revision's comment on 'edited [date] at [time]'](http://meta.stackexchange.com/questions/2315/show-reason-for-edit-without-clicking-through-to-diff) (v1.5)
 - [Add a button the the editor toolbar to start side-by-side editing](http://meta.stackexchange.com/questions/253112/the-discourse-layout-for-side-by-side-markdown-preview) (v1.5)
+- [Always show 'Link from the web' input field when uploading an image](http://meta.stackoverflow.com/q/306888/3541881) (v1.7)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -99,6 +100,9 @@ In the latest version: (these link to their corresponding feature-request (from 
     - used my own [SE Helper functions](https://github.com/shu8/SE_OptionalFeatures/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc..., 
     - removed fade effect on the `metaChatBlogStackExchangeButton` feature, 
     - [reimplemented the sticky vote buttons](https://github.com/shu8/SE_OptionalFeatures/pull/14), to fix a few bugs!
+- DEVELOP - v1.7:
+    - Added more features (mentioned above),
+    - Changed `addSBSBtn` function (Side-by-side editing) to use [zsego's](https://github.com/shu8/SE-Answers_scripts/pull/2) rewritten version to add more features: You can now use side-by-side editing in edits, and you can toggle it on and off! Thanks zsego! :)
 
 ---
 
@@ -225,6 +229,9 @@ Hovering over the `edited [date] at [time]` will show that post's latest revisio
 
 - Add a button the the editor toolbar to start side-by-side editing:
 A button `SBS` is added to the editor toolbar when answering/asking a question. Clicking it will change some CSS to cause the preview and the markdown to appear side-by-side
+
+- Always show 'Link from the web' input field when uploading an image:
+Removes the annoying 'you can also provide a link from the web' button, and shows the URL input field by default! Code by Siguza <http://meta.stackoverflow.com/a/306901/3541881>! :)
 
 ---
 
