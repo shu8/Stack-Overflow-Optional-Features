@@ -23,7 +23,7 @@
 // @updateURL    https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js
 // ==/UserScript==
 /*jshint multistr: true */
-// @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
+
 var functionsToCall = { //ALL the functions must go in here
 
     grayOutVotes: function () { // For graying out votes AND vote count:
