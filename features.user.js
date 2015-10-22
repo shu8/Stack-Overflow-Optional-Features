@@ -1264,6 +1264,61 @@ Toggle SBS?</div></li>';
                 });
             }).observe(header, {childList: true});
         }
+    },
+    
+    getAuthorName: function($node) { //Part of addAuthorNameToInboxNotifications
+        var getFromAPI = {
+            'comment': function (d) {
+                var comment_id = d.link.split('/')[5].split('?')[0];
+                $.getJSON("https://api.stackexchange.com/2.2/comments/" + comment_id + "?order=desc&sort=creation&site=" + d.sitename, function (json) {
+                    d.n.find('.item-header .item-type').text(d.n.find('.item-header .item-type').text() + ' (' + json.items[0].owner.display_name + ')');
+                });
+            },
+            'answer': function (d) {
+                var answer_id = d.link.split('/')[4].split('?')[0];
+                $.getJSON("https://api.stackexchange.com/2.2/answers/" + answer_id + "?order=desc&sort=creation&site=" + d.sitename, function (json) {
+                    d.n.find('.item-header .item-type').text(d.n.find('.item-header .item-type').text() + ' (' + json.items[0].owner.display_name + ')');
+                });
+            },
+            'edit suggested': function (d) {
+                var edit_id = d.link.split('/')[4];
+                $.getJSON("https://api.stackexchange.com/2.2/suggested-edits/" + edit_id + "?order=desc&sort=creation&site=" + d.sitename, function (json) {
+                    d.n.find('.item-header .item-type').text(d.n.find('.item-header .item-type').text() + ' (' + json.items[0].proposing_user.display_name + ')');
+                });
+            },
+            'other': function (d) {
+                console.log('Script does not currently support getting author information for type "' + d.n.find('.item-header .item-type').text() + '"!');
+            }
+        };    
+        var type = $node.find('.item-header .item-type').text();
+        
+        (getFromAPI[type] || getFromAPI['other'])({
+            n: $node,
+            link: $node.find('a').eq(0).attr('href'),
+            sitename: $node.find('a').eq(0).attr('href').split('/')[2].split('.')[0]
+        });
+    },
+    
+    addAuthorNameToInboxNotifications: function() { //To add the author's name to inbox notifications
+        new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                var length = mutation.addedNodes.length;
+                for (var i = 0; i < length; i++) {
+                    var $addedNode = $(mutation.addedNodes[i]);
+                    if (!$addedNode.hasClass('inbox-dialog')) {
+                        return;
+                    }
+
+                    for (var x = 0; x < 16; x++) { //first 15 items
+                        functionsToCall.getAuthorName($addedNode.find('.inbox-item').eq(x));
+                    }
+                }
+            });
+        }).observe(document.body, {
+            childList: true,
+            attributes: true,
+            subtree: true
+        });    
     }
 };
 
@@ -1310,6 +1365,7 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='editReasonTooltip'/> Add a tooltip to posts showing the latest revision's comment on 'edited [date] at [time]'</label> <br />\
                 <label><input type='checkbox' id='addSBSBtn'/> Add a button the the editor toolbar to start side-by-side editing</label> <br />\
                 <label><input type='checkbox' id='alwaysShowImageUploadLinkBox'/> Always show the 'Link from the web' box when uploading an image</label> <br />\
+                <label><input type='checkbox' id='addAuthorNameToInboxNotifications'/> Add the author's name to notifications in the inbox</label> <br />\
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
