@@ -418,8 +418,16 @@ var functionsToCall = { //ALL the functions must go in here
             } else {
                 var arrayToAdd = [$('#displayReason').val(), $('#actualReason').val()];
                 options.push(arrayToAdd); //actually add the value to array
-                functionsToCall.displayDeleteValues(); //display the items again (update them)
+                
                 GM_setValue('editReasons', JSON.stringify(options)); //Save the value
+                
+                // moved display call after setvalue call, list now refreshes when items are added
+                functionsToCall.displayDeleteValues(); //display the items again (update them)
+                
+                //reset textbox values to empty
+                $('#displayReason').val('');
+                $('#actualReason').val('');
+                
             }
         });
 
