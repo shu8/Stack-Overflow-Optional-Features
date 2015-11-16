@@ -60,29 +60,17 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     employeeStar: function () { // For looking for employees:
-        var employees = ["Jeff Atwood", "Joel Spolsky", "Jarrod Dixon", "Geoff Dalgas", "David Fullerton", "Korneel Bouman", "Robert Cartaino", "Kevin Montrose",
-            "MandyK", "Marc Gravell", "balpha", "Matt Sherman", "Danny Miller", "Jason Punyon", "NickC", "Kyle Brandt", "Jin", "Tall Jeff", "Zypher",
-            "Nick Craver", "Nick Larsen", "Shog9", "Greg", "Alex Miller", "GuyZee", "abby hairboat", "samthebrand", "Laura", "Grace Note", "Dimitar Stanimiroff",
-            "Hammer", "Peter Grace", "Charles", "Anna Lear", "stevvve", "Bethany", "Andrew17", "Kizzle", "Jay", "mjibson", "Stefan Schwarzgruber", "Will Cole", "Sean Bave",
-            "Robyn", "Bart Silverstrim", "Jaydles", "Maxwell Applebaum", "Snails", "Jordan Conner", "Bodhi", "cashenhu", "rb4", "Maurbawlz", "CMartin", "Joe Humphries", "Max",
-            "Oded", "Val Perez", "rossipedia", "Derek Still", "Tim Post", "Paul", "PDePree", "Sklivvz", "Todd Jenkins", "Jim Egan", "Kaziorex", "Ben Collins", "TomOnTime", "Dr.D",
-            "David", "Sara Rayman", "Monika P", "Prefontaine", "m0sa", "Jon Ericson", "Juice", "Tania", "Angela", "Hynes", "Kasra Rahjerdi", "Gabe", "Bret Copeland", "Arie Litovsky",
-            "Pops", "Megan Spaans", "Whitney Dwyer", "Philip Camillo", "onesysadmin", "Aurelien Gasser", "Alyssa Tomback", "Alex Cresswell", "couchand", "Brian Nickel", "Princess",
-            "Yaakov Ellis", "Ana Hevesi", "Noureddine Latrech", "Hertz", "Jill Ciaccia", "Tobias Schmidt", "Jon Chan", "Johanna Perrin", "Kristian Bright", "John LeClerc",
-            "Rob Dandorph", "Jessica Genther", "Courtny Cotten", "Stephanie", "Sean Durkin", "rla4", "Alex Warren", "Jaime Kronick", "Alexa", "Samuel Rouayrenc", "Josh Helfgott",
-            "Peter Tarr", "Shane Madden", "Nextraztus", "G-Wiz", "Dan O'Boyle", "yolovolo", "Griffin Sandberg", "ODB", "Mark Villarreal", "Lowell Gruman Jr.", "bweber", "Natalie How",
-            "Haney", "jmac", "Emmanuel Andem-Ewa", "Jess Pardue", "Dean Ward", "Steve Trout", "Nicholas Chabanovsky", "Kelli Ward", "Noah Neuman", "Lauren Roemer", "Heidi Hays",
-            "Joe Wilkie", "Mackenzie Ralston", "animuson"
-        ];
-
-        $('.comment, .deleted-answer-info, .employee-name, .started, .user-details').each(function () { //normal comments, deleted answers (deleted by), SE.com/about, question feed users, question/answer/edit owners
-            var $divtext = $(this);
-            $.each(employees, function (index, value) {
-                if ($divtext.find('a[href*="/users"]').html() == value) {
-                    $divtext.find('a[href*="/users"]').append('<span class="mod-flair" title="possible employee">&Star;</span>');
-                }
-            });
-        });
+        //employee ids pulled from https://stackexchange.com/about/team
+        var employeeIDs = ["5960", "98786", "272910", "131713", "1438", "6254215", "238110", "620", "146126", "1399708", "209637", "165581", "50049", "188123", "89201", "77247", "87273", "6381658", "5054757", "6396774", "5128683", "5161054", "3426677", "3109039", "3758460", "21721", "506687", "1790064", "1685620", "87602", "166581", "37483", "9409", "23123", "7028", "1036558", "2545189", "1190", "13249", "2", "3", "166017", "40051", "41", "1454845", "11975", "2815887", "4548420", "26682", "202841", "13", "59521", "37099", "27319", "504912", "480781", "180043", "14471", "130213", "235711", "467632", "41825", "1566310", "6212", "216645", "712603", "39819", "423355", "26961", "996254", "49748", "466409", "15006", "184698", "146719", "147336", "328700", "4234911", "1124319", "4", "1553", "383041", "287940", "490194", "177500", "28003", "15346", "258223", "1178468", "1749046", "6679625", "6153834", "1266634", "6858470", "3058706", "5885111", "6432092", "4891778", "3786405", "4767982", "1895612", "2510733", "5624892", "2036889", "5967102", "6272620", "921641", "1978211", "237721", "3316794", "353675", "2701433", "6635230", "521174417", "4540143", "6418780", "5108479", "4540164", "5891822", "1306193", "5579045", "3540366", "2044618", "4573249", "6124377", "4383238", "1285330", "1246026", "3535184", "4795462", "5086553", "180005", "6076164", "13381"];
+        for (id in employeeIDs) {
+        	var searchString = '.comment a[href*="/{0}/"],\
+				    .deleted-answer-info a[href*="/{0}/"],\
+				    .employee-name a[href*="/{0}/"],\
+                        	    .started a[href*="/{0}/"],\
+				    .user-details a[href*="/{0}/"]';
+        	var search = searchString.replace(/({\d})/g, employeeIDs[id]);
+        	$(search).append('<span class="mod-flair" title="Verified Employee">&Star;</span>');
+        }
     },
 
     bulletReplace: function () { // For replacing disclosure bullets with normal ones:
