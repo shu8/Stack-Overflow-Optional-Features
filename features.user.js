@@ -25,6 +25,11 @@
 /*jshint multistr: true */
 
 var functionsToCall = { //ALL the functions must go in here
+    flagOutcomeTime: function () {
+        $(".flag-outcome").each(function() {
+            $(this).append(" – " + $(this).attr("title"));
+        });
+    },
 
     grayOutVotes: function () { // For graying out votes AND vote count:
         if ($('.deleted-answer').length) {
@@ -1374,6 +1379,7 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='addSBSBtn'/> Add a button the the editor toolbar to start side-by-side editing</label> <br />\
                 <label><input type='checkbox' id='alwaysShowImageUploadLinkBox'/> Always show the 'Link from the web' box when uploading an image</label> <br />\
                 <label><input type='checkbox' id='addAuthorNameToInboxNotifications'/> Add the author's name to notifications in the inbox</label> <br />\
+                <label><input type='checkbox' id='flagOutcomeTime'>Show the flag outcome time when viewing your flag history</label><br /> \
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
