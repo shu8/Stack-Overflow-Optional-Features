@@ -26,32 +26,6 @@
 
 var functionsToCall = { //ALL the functions must go in here
 
-    scrollToTop: function(){
-        $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&#9650; TOP</a></span></div>");
-        if ($(window).scrollTop() < 100) {
-            $('#scroll-container').hide();
-        }
-        
-        $(window).scroll(function(){
-            if ($(this).scrollTop() > 100) {
-                $('#scroll-container').fadeIn();                
-            } else {
-                $('#scroll-container').fadeOut();
-            }
-        });
-        
-        $('#scrollToTop').click(function(){
-            $('html, body').animate({scrollTop : 0},800);
-		return false;
-        });
-    },
-
-    flagOutcomeTime: function () {
-        $(".flag-outcome").each(function() {
-            $(this).append(" – " + $(this).attr("title"));
-        });
-    },
-
     grayOutVotes: function () { // For graying out votes AND vote count:
         if ($('.deleted-answer').length) {
             $('.deleted-answer .vote-down-off, .deleted-answer .vote-up-off, .deleted-answer .vote-count-post').css('opacity', '0.5');
@@ -1353,6 +1327,32 @@ Toggle SBS?</div></li>';
             attributes: true,
             subtree: true
         });    
+    },
+
+    flagOutcomeTime: function () {
+        $(".flag-outcome").each(function() {
+            $(this).append(" – " + $(this).attr("title"));
+        });
+    },
+    
+    scrollToTop: function(){
+        $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&#9650; TOP</a></span></div>");
+        if ($(window).scrollTop() < 100) {
+            $('#scroll-container').hide();
+        }
+        
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-container').fadeIn();                
+            } else {
+                $('#scroll-container').fadeOut();
+            }
+        });
+        
+        $('#scrollToTop').click(function(){
+            $('html, body').animate({scrollTop : 0},800);
+		return false;
+        });
     }
 };
 
