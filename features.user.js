@@ -25,12 +25,6 @@
 /*jshint multistr: true */
 
 var functionsToCall = { //ALL the functions must go in here
-    flagOutcomeTime: function () {
-        $(".flag-outcome").each(function() {
-            $(this).append(" – " + $(this).attr("title"));
-        });
-    },
-
     grayOutVotes: function () { // For graying out votes AND vote count:
         if ($('.deleted-answer').length) {
             $('.deleted-answer .vote-down-off, .deleted-answer .vote-up-off, .deleted-answer .vote-count-post').css('opacity', '0.5');
@@ -1332,6 +1326,12 @@ Toggle SBS?</div></li>';
             attributes: true,
             subtree: true
         });    
+    },
+
+    flagOutcomeTime: function () {
+        $(".flag-outcome").each(function() {
+            $(this).append(" – " + $(this).attr("title"));
+        });
     }
 };
 
