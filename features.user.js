@@ -25,6 +25,7 @@
 /*jshint multistr: true */
 
 var functionsToCall = { //ALL the functions must go in here
+
     grayOutVotes: function () { // For graying out votes AND vote count:
         if ($('.deleted-answer').length) {
             $('.deleted-answer .vote-down-off, .deleted-answer .vote-up-off, .deleted-answer .vote-count-post').css('opacity', '0.5');
@@ -1332,6 +1333,26 @@ Toggle SBS?</div></li>';
         $(".flag-outcome").each(function() {
             $(this).append(" – " + $(this).attr("title"));
         });
+    },
+    
+    scrollToTop: function(){
+        $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&#9650; TOP</a></span></div>");
+        if ($(window).scrollTop() < 100) {
+            $('#scroll-container').hide();
+        }
+        
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-container').fadeIn();                
+            } else {
+                $('#scroll-container').fadeOut();
+            }
+        });
+        
+        $('#scrollToTop').click(function(){
+            $('html, body').animate({scrollTop : 0},800);
+		return false;
+        });
     }
 };
 
@@ -1380,6 +1401,7 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='alwaysShowImageUploadLinkBox'/> Always show the 'Link from the web' box when uploading an image</label> <br />\
                 <label><input type='checkbox' id='addAuthorNameToInboxNotifications'/> Add the author's name to notifications in the inbox</label> <br />\
                 <label><input type='checkbox' id='flagOutcomeTime'/>Show the flag outcome time when viewing your flag history</label><br /> \
+                <label><input type='checkbox' id='scrollToTop'/>Add Scroll To Top button</label><br /> \
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
