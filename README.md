@@ -60,6 +60,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - [Add a button the the editor toolbar to start side-by-side editing](http://meta.stackexchange.com/questions/253112/the-discourse-layout-for-side-by-side-markdown-preview) (v1.5)
 - [Always show 'Link from the web' input field when uploading an image](http://meta.stackoverflow.com/q/306888/3541881) (v1.7)
 - Show the flag outcome time when viewing your flag history (v1.7)
+- Add Scroll To Top button to the topbar (v1.7)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -235,8 +236,10 @@ A button `SBS` is added to the editor toolbar when answering/asking a question. 
 Removes the annoying 'you can also provide a link from the web' button, and shows the URL input field by default! Code by Siguza <http://meta.stackoverflow.com/a/306901/3541881>! :)
 
 - Show the flag outcome time when viewing your flag history:
-Shows the time the flags were marked as helpful/declined/etc... in the flag history page (this is currently only a tooltip, so the script adds it as real text)
+Shows the time the flags were marked as helpful/declined/etc... in the flag history page (this is currently only a tooltip, so the script adds it as real text). More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/32).
 
+- Add Scroll To Top button to the topbar:
+Adds a button to the topbar to scroll back to the top if the top of the page is more than 100px. **Requires 'Fixed Topbar' to be enabled!** More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/34).
 ---
 
 I've 'migrated' this from my Gist over [here](https://gist.github.com/shu8/daae9127fa0fe06d5e4d) because I think a proper repo is better - so I've 'edited' the script a few times in a few minutes at the start - those are the first 6 versions (0.1 up to and including 0.6).
