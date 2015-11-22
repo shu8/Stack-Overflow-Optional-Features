@@ -240,6 +240,7 @@ Shows the time the flags were marked as helpful/declined/etc... in the flag hist
 
 - Add Scroll To Top button to the topbar:
 Adds a button to the topbar to scroll back to the top if the top of the page is more than 100px. **Requires 'Fixed Topbar' to be enabled!** More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/34).
+
 ---
 
 I've 'migrated' this from my Gist over [here](https://gist.github.com/shu8/daae9127fa0fe06d5e4d) because I think a proper repo is better - so I've 'edited' the script a few times in a few minutes at the start - those are the first 6 versions (0.1 up to and including 0.6).
