@@ -61,6 +61,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - [Always show 'Link from the web' input field when uploading an image](http://meta.stackoverflow.com/q/306888/3541881) (v1.7)
 - Show the flag outcome time when viewing your flag history (v1.7)
 - Add Scroll To Top button to the topbar (v1.7)
+- Show Helpful Flag percentage when viewing your flag history (v1.7)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -240,6 +241,15 @@ Shows the time the flags were marked as helpful/declined/etc... in the flag hist
 
 - Add Scroll To Top button to the topbar:
 Adds a button to the topbar to scroll back to the top if the top of the page is more than 100px. **Requires 'Fixed Topbar' to be enabled!** More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/34).
+
+- Show Overall Helpful Flag Percentage when viewing your flag history:
+Shows the overall helpful flag percentage when viewing your flag history, takes into concidertion pending, aged away and [disputed flags](http://meta.stackexchange.com/a/95277/307724). The percentage is displayed in 5 colors
+  * > 90% will be displayed in Green
+  * > 80% will be displayed in Blue
+  * > 70% will be displayed in Gold
+  * > 60% will be displayed in Orange
+  * < 60% will be displayed in Red
+
 
 ---
 
