@@ -1355,8 +1355,8 @@ Toggle SBS?</div></li>';
         });
     },
     
-    helpfulFlagPercentage: function() {
-    	var totalFlags = 0;
+    helpfulFlagPercentage: function(){
+	    var totalFlags = 0;
 	    $("td > a:contains('flags')").parent().prev().each(function(index){
 	        totalFlags += parseInt($(this).text());
 	    });
@@ -1409,13 +1409,8 @@ Toggle SBS?</div></li>';
 	        case percentHelpful <=60:
 	            $("span#percent").css( "color", "red" )
 	            break;            
-	
-	        default:
-	            break;
-	    }
-    
-    	
-    }
+	    }//end switch
+    }//end helpfulFlagPercentage
 };
 
 // Format for options below: <label><input type='checkbox' id='id'>Text</label><br />
@@ -1465,7 +1460,6 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='flagOutcomeTime'/>Show the flag outcome time when viewing your flag history</label><br /> \
                 <label><input type='checkbox' id='scrollToTop'/>Add Scroll To Top button</label><br /> \
                 <label><input type='checkbox' id='helpfulFlagPercentage'/>Show Overall Percentage of Helpful Flags when viewing your flag history</label><br /> \
-                
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
