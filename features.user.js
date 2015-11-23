@@ -1353,6 +1353,68 @@ Toggle SBS?</div></li>';
             $('html, body').animate({scrollTop : 0},800);
 		return false;
         });
+    },
+    
+    helpfulFlagPercentage: function() {
+    	var totalFlags = 0;
+	    $("td > a:contains('flags')").parent().prev().each(function(index){
+	        totalFlags += parseInt($(this).text());
+	    });
+	        
+	    var helpfulFlags = 0;
+	    $("td > a:contains('helpful')").parent().prev().each(function(index){
+	        helpfulFlags += parseInt($(this).text());
+	    });
+	    
+	    var declinedFlags = 0;
+	    $("td > a:contains('declined')").parent().prev().each(function(index){
+	        declinedFlags += parseInt($(this).text());
+	    });
+	    
+	    var pendingFlags = 0;
+	    $("td > a:contains('waiting')").parent().prev().each(function(index){
+	        pendingFlags += parseInt($(this).text());
+	    });
+	    
+	    var disputedFlags = 0;
+	    $("td > a:contains('disputed')").parent().prev().each(function(index){
+	        disputedFlags += parseInt($(this).text());
+	    });
+	    
+	    var agedFlags = 0;
+	    $("td > a:contains('aged')").parent().prev().each(function(index){
+	        agedFlags += parseInt($(this).text());
+	    });
+	    
+	    // subtract pending, aged away and disputed flags from total.  
+	    totalFlags -= (pendingFlags + agedFlags + disputedFlags);
+	    
+	    //var percentHelpful = (helpfulFlags / totalFlags) * 100;
+	    var percentHelpful = Number(Math.round((helpfulFlags / totalFlags) * 100 +'e2')+'e-2');
+	    
+	    $("#flag-stat-info-table").before("<h3 id='percentHelpful' title='pending, aged away and disputed flags are not counted'><span id='percent'>" + percentHelpful + "%</span> helpful</h3>");
+	    switch(true) {
+	        case percentHelpful > 90:
+	            $("span#percent").css( "color", "limegreen" )
+	            break;
+	        case percentHelpful >80:
+	            $("span#percent").css( "color", "dodgerblue" )
+	            break;
+	        case percentHelpful >70:
+	            $("span#percent").css( "color", "gold" )
+	            break;
+	        case percentHelpful >60:
+	            $("span#percent").css( "color", "darkorange" )
+	            break;
+	        case percentHelpful <=60:
+	            $("span#percent").css( "color", "red" )
+	            break;            
+	
+	        default:
+	            break;
+	    }
+    
+    	
     }
 };
 
@@ -1402,6 +1464,8 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='addAuthorNameToInboxNotifications'/> Add the author's name to notifications in the inbox</label> <br />\
                 <label><input type='checkbox' id='flagOutcomeTime'/>Show the flag outcome time when viewing your flag history</label><br /> \
                 <label><input type='checkbox' id='scrollToTop'/>Add Scroll To Top button</label><br /> \
+                <label><input type='checkbox' id='helpfulFlagPercentage'/>Show Overall Percentage of Helpful Flags when viewing your flag history</label><br /> \
+                
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
