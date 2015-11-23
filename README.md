@@ -243,7 +243,7 @@ Shows the time the flags were marked as helpful/declined/etc... in the flag hist
 Adds a button to the topbar to scroll back to the top if the top of the page is more than 100px. **Requires 'Fixed Topbar' to be enabled!** More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/34).
 
 - Show Overall Helpful Flag Percentage when viewing your flag history:
-Shows the overall helpful flag percentage when viewing your flag history, takes into concidertion pending, aged away and [disputed flags](http://meta.stackexchange.com/a/95277/307724). The percentage is displayed in 5 colors
+Shows the overall helpful flag percentage when viewing your flag history, takes into concidertion pending, aged away and [disputed flags](http://meta.stackexchange.com/a/95277/307724). More info [here](https://github.com/shu8/SE_OptionalFeatures/issues/37) The percentage is displayed in 5 colors:
   * > 90% will be displayed in Green
   * > 80% will be displayed in Blue
   * > 70% will be displayed in Gold
