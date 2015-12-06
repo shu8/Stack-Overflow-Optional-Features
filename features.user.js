@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         Stack Overflow Optional Features (SOOF)
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.7 DEV
+// @version      1.7
 // @description  Adds a bunch of optional features to sites in the Stack Exchange Network.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
