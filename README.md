@@ -61,7 +61,8 @@ In the latest version: (these link to their corresponding feature-request (from 
 - [Always show 'Link from the web' input field when uploading an image](http://meta.stackoverflow.com/q/306888/3541881) (v1.7)
 - Show the flag outcome time when viewing your flag history (v1.7)
 - Add Scroll To Top button to the topbar (v1.7)
-- Show Helpful Flag percentage when viewing your flag history (v1.7)
+- [Show Helpful Flag percentage when viewing your flag history](https://meta.stackoverflow.com/questions/310881/overall-percentage-of-helpful-flags) (v1.7)
+- View content of linked posts inline (v1.7)
 
 #Change Log
 - 15/01/15 - v0.2: Switched from cookies to GM setValue (thanks for idea @BrockAdams)
@@ -250,6 +251,8 @@ Shows the overall helpful flag percentage when viewing your flag history, takes 
   * > 60% will be displayed in Orange
   * < 60% will be displayed in Red
 
+- View content of linked posts inline:
+Adds arrows to expand and show the content of linked posts (works only for links on the same site!)
 
 ---
 
