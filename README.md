@@ -103,7 +103,7 @@ In the latest version: (these link to their corresponding feature-request (from 
     - used my own [SE Helper functions](https://github.com/shu8/Stack-Overflow-Optional-Features/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc..., 
     - removed fade effect on the `metaChatBlogStackExchangeButton` feature, 
     - [reimplemented the sticky vote buttons](https://github.com/shu8/Stack-Overflow-Optional-Features/pull/14), to fix a few bugs!
-- DEVELOP - v1.7:
+- 06/12/15 - v1.7:
     - Added more features (mentioned above),
     - Changed `addSBSBtn` function (Side-by-side editing) to use [zsego's](https://github.com/shu8/SE-Answers_scripts/pull/2) rewritten version to add more features: You can now use side-by-side editing in edits, and you can toggle it on and off! Thanks zsego! :)
     - Renamed project to `Stack Overflow Optional Features`, as suggested at https://github.com/shu8/Stack-Overflow-Optional-Features/issues/42
