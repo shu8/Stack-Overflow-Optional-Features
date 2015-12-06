@@ -1,7 +1,6 @@
-# Stack Exchange Additional Optional Features 
-<sup>acronym coming soon, I hope :)</sup>
+# Stack Overflow Optional Features (SOOF)
 
-A userscript for the Stack Exchange websites to add a bunch of optional, user-selectable features via an easy-to-use control panel.
+A userscript for sites in the Stack Exchange Network to add a bunch of optional, user-selectable features via an easy-to-use control panel.
 
 #How to use, requirements, how it works
 1. Install [Tampermonkey](http://tampermonkey.net/) (for Chrome), or [Greasemonkey](http://www.greasespot.net/) (for Firefox) or similar. These are userscript managers that are required for this script to work, because they also provide support for `GM_*` functions, which this script relies on to save the options you set!
@@ -107,7 +106,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - DEVELOP - v1.7:
     - Added more features (mentioned above),
     - Changed `addSBSBtn` function (Side-by-side editing) to use [zsego's](https://github.com/shu8/SE-Answers_scripts/pull/2) rewritten version to add more features: You can now use side-by-side editing in edits, and you can toggle it on and off! Thanks zsego! :)
-
+    - Renamed project to `Stack Overflow Optional Features`, as suggested at https://github.com/shu8/SE_OptionalFeatures/issues/42
 ---
 
 Descriptions of features
