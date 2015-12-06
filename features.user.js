@@ -1410,7 +1410,51 @@ Toggle SBS?</div></li>';
 	            $("span#percent").css( "color", "red" )
 	            break;            
 	    }//end switch
-    }//end helpfulFlagPercentage
+    },
+    
+    getIdFromUrl: function(url) { //Part of linkedPostsInline
+        if (url.indexOf('/a/') > -1) { //eg. http://meta.stackexchange.com/a/26764/260841
+            return url.split('/a/')[1].split('/')[0];
+
+        } else if (url.indexOf('/q/') > -1) { //eg. http://meta.stackexchange.com/q/26756/260841
+            return url.split('/q/')[1].split('/')[0];
+
+        } else if (url.indexOf('/questions/') > -1) {
+            if (url.indexOf('#') > -1) { //then it's probably an answer, eg. http://meta.stackexchange.com/questions/26756/how-do-i-use-a-small-font-size-in-questions-and-answers/26764#26764
+                return url.split('#')[1];
+
+            } else { //then it's a question
+                return url.split('/questions/')[1].split('/')[0];
+            }
+        }
+    }, 
+    
+    linkedPostsInline: function() { //Displays linked posts inline with an arrow
+        $('.post-text a, .comments .comment-copy a').each(function () {
+            var url = $(this).attr('href');
+            if (url && url.indexOf($(location).attr('hostname')) > -1 && url.indexOf('/questions/') > -1 && url.indexOf('#comment') == -1) {
+                $(this).css('color', '#0033ff');
+                $(this).before('<a class="expander-arrow-small-hide expand-post-shub"></a>');
+            }
+        });
+
+        $(document).on('click', 'a.expand-post-shub', function () {
+            if ($(this).hasClass('expander-arrow-small-show')) {
+                $(this).removeClass('expander-arrow-small-show');
+                $(this).addClass('expander-arrow-small-hide');
+                $('.loaded-body-shub').remove();
+            } else if ($(this).hasClass('expander-arrow-small-hide')) {
+                $(this).removeClass('expander-arrow-small-hide');
+                $(this).addClass('expander-arrow-small-show');
+                $that = $(this);
+                id = functionsToCall.getIdFromUrl($(this).next().attr('href'));
+                $.get("http://" + $(location).attr('hostname') + "/posts/" + id + "/body", function (d) {
+                    var div = "<div class='loaded-body-shub' style='background-color: #ffffcc;'>" + d + "</div>";
+                    $that.next().after(div);        
+                });
+            }
+        });     
+    }
 };
 
 // Format for options below: <label><input type='checkbox' id='id'>Text</label><br />
@@ -1460,6 +1504,7 @@ var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
                 <label><input type='checkbox' id='flagOutcomeTime'/>Show the flag outcome time when viewing your flag history</label><br /> \
                 <label><input type='checkbox' id='scrollToTop'/>Add Scroll To Top button</label><br /> \
                 <label><input type='checkbox' id='helpfulFlagPercentage'/>Show Overall Percentage of Helpful Flags when viewing your flag history</label><br /> \
+                <label><input type='checkbox' id='linkedPostsInline'/>Display linked posts inline (with an arrow)</label><br /> \
                 <input type='submit' id='submitOptions' value='Save settings' /><br /> \
            </div>";
 
