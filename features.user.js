@@ -16,11 +16,11 @@
 // @require      https://cdn.rawgit.com/timdown/rangyinputs/master/rangyinputs-jquery-src.js
 // @require      https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js
 // @require      https://cdn.rawgit.com/camagu/jquery-feeds/master/jquery.feeds.js
-// @require      https://cdn.rawgit.com/shu8/SE_OptionalFeatures/develop/helperFunctions.js
+// @require      https://cdn.rawgit.com/shu8/Stack-Overflow-Optional-Features/develop/helperFunctions.js
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
-// @updateURL    https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js
+// @updateURL    https://github.com/shu8/Stack-Overflow-Optional-Features/raw/master/features.user.js
 // ==/UserScript==
 /*jshint multistr: true */
 
@@ -125,7 +125,7 @@ var functionsToCall = { //ALL the functions must go in here
      },*/
 
     fixedTopbar: function () { // For making the topbar fixed (always stay at top of screen)        
-        if ($(location).attr('hostname') == 'askubuntu.com') { //AskUbuntu is annoying. UnicornsAreVeryVeryYummy made the below code for AskUbuntu: https://github.com/shu8/SE_OptionalFeatures/issues/11 Thanks!
+        if ($(location).attr('hostname') == 'askubuntu.com') { //AskUbuntu is annoying. UnicornsAreVeryVeryYummy made the below code for AskUbuntu: https://github.com/shu8/Stack-Overflow-Optional-Features/issues/11 Thanks!
             var head = document.getElementsByTagName('head')[0],
                 ubuntuLinks = document.getElementsByClassName('nav-global')[0],
                 remove = document.getElementById('custom-header'),
@@ -945,7 +945,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     stickyVoteButtons: function () { //For making the vote buttons stick to the screen as you scroll through a post   
-        //https://github.com/shu8/SE_OptionalFeatures/pull/14:
+        //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/14:
         $(window).scroll(function () {
             $(".votecell").each(function () {
                 var offset = 0;
@@ -1512,7 +1512,7 @@ $(function () {
     $('body').append(div);
     $('#featureGMOptions').draggable().css('position', 'absolute').hide(); //Hide it at first
     $('#featureTitle').css('cursor', 'move');
-    $('head').append("<link rel='stylesheet' type='text/css' href='https://rawgit.com/shu8/SE_OptionalFeatures/develop/extraCSS.css' />"); //Add SE Extra CSS for functions
+    $('head').append("<link rel='stylesheet' type='text/css' href='https://rawgit.com/shu8/Stack-Overflow-Optional-Features/develop/extraCSS.css' />"); //Add SE Extra CSS for functions
 
     if (SEHelper.isOnUserProfile()) { //Add the add features link
         $('.sub-header-links.fr').append('<span class="lsep">|</span><a href="javascript:;" id="addFeaturesLink">add features</a>'); //Old profile (pre Feb-2015)

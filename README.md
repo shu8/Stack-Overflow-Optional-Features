@@ -4,7 +4,7 @@ A userscript for sites in the Stack Exchange Network to add a bunch of optional,
 
 #How to use, requirements, how it works
 1. Install [Tampermonkey](http://tampermonkey.net/) (for Chrome), or [Greasemonkey](http://www.greasespot.net/) (for Firefox) or similar. These are userscript managers that are required for this script to work, because they also provide support for `GM_*` functions, which this script relies on to save the options you set!
-2. Install [the script](https://github.com/shu8/SE_OptionalFeatures/raw/master/features.user.js)
+2. Install [the script](https://github.com/shu8/Stack-Overflow-Optional-Features/raw/master/features.user.js)
 3. Go to any SE site (eg. www.superuser.com or www.stackoverflow.com)
 4. A dialog box should popup asking you to select the features you want
 
@@ -100,13 +100,13 @@ In the latest version: (these link to their corresponding feature-request (from 
 - 08/09/15 - v1.6: 
     - Removed no longer neccessary feature (implemented by SE now), 
     - fixed bug where the mod diamond and help menu would merge together, 
-    - used my own [SE Helper functions](https://github.com/shu8/SE_OptionalFeatures/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc..., 
+    - used my own [SE Helper functions](https://github.com/shu8/Stack-Overflow-Optional-Features/blob/develop/helperFunctions.js) to avoid repetitive code in getting common info like site names, reputation, usernames, etc..., 
     - removed fade effect on the `metaChatBlogStackExchangeButton` feature, 
-    - [reimplemented the sticky vote buttons](https://github.com/shu8/SE_OptionalFeatures/pull/14), to fix a few bugs!
+    - [reimplemented the sticky vote buttons](https://github.com/shu8/Stack-Overflow-Optional-Features/pull/14), to fix a few bugs!
 - DEVELOP - v1.7:
     - Added more features (mentioned above),
     - Changed `addSBSBtn` function (Side-by-side editing) to use [zsego's](https://github.com/shu8/SE-Answers_scripts/pull/2) rewritten version to add more features: You can now use side-by-side editing in edits, and you can toggle it on and off! Thanks zsego! :)
-    - Renamed project to `Stack Overflow Optional Features`, as suggested at https://github.com/shu8/SE_OptionalFeatures/issues/42
+    - Renamed project to `Stack Overflow Optional Features`, as suggested at https://github.com/shu8/Stack-Overflow-Optional-Features/issues/42
 ---
 
 Descriptions of features
@@ -237,13 +237,13 @@ A button `SBS` is added to the editor toolbar when answering/asking a question. 
 Removes the annoying 'you can also provide a link from the web' button, and shows the URL input field by default! Code by Siguza <http://meta.stackoverflow.com/a/306901/3541881>! :)
 
 - Show the flag outcome time when viewing your flag history:
-Shows the time the flags were marked as helpful/declined/etc... in the flag history page (this is currently only a tooltip, so the script adds it as real text). More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/32).
+Shows the time the flags were marked as helpful/declined/etc... in the flag history page (this is currently only a tooltip, so the script adds it as real text). More info [here](https://github.com/shu8/Stack-Overflow-Optional-Features/pull/32).
 
 - Add Scroll To Top button to the topbar:
-Adds a button to the topbar to scroll back to the top if the top of the page is more than 100px. **Requires 'Fixed Topbar' to be enabled!** More info [here](https://github.com/shu8/SE_OptionalFeatures/pull/34).
+Adds a button to the topbar to scroll back to the top if the top of the page is more than 100px. **Requires 'Fixed Topbar' to be enabled!** More info [here](https://github.com/shu8/Stack-Overflow-Optional-Features/pull/34).
 
 - Show Overall Helpful Flag Percentage when viewing your flag history:
-Shows the overall helpful flag percentage when viewing your flag history, takes into concidertion pending, aged away and [disputed flags](http://meta.stackexchange.com/a/95277/307724). More info [here](https://github.com/shu8/SE_OptionalFeatures/issues/37) The percentage is displayed in 5 colors:
+Shows the overall helpful flag percentage when viewing your flag history, takes into concidertion pending, aged away and [disputed flags](http://meta.stackexchange.com/a/95277/307724). More info [here](https://github.com/shu8/Stack-Overflow-Optional-Features/issues/37) The percentage is displayed in 5 colors:
   * > 90% will be displayed in Green
   * > 80% will be displayed in Blue
   * > 70% will be displayed in Gold
