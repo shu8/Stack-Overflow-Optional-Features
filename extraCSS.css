@@ -153,3 +153,78 @@ li.siteLink {
 	margin-left: -515px;
 	z-index: 1000;
 }
+         
+/*Side by Side Editing (SBS, addSBSBtn, startSBS): https://github.com/szego/SE-Answers_scripts/blob/side-by-side/editing-and-toggling/side-by-side-editing.user.js:*/
+#sidebar.sbs-on {                               
+    display: none !important;                   
+}                                               
+                                                
+#content.sbs-on {                               
+    width: 1360px !important;                   
+}                                               
+                                                
+.draft-saved.sbs-on {                           
+    margin-left: 35px !important;               
+}                                               
+                                                
+.draft-discarded.sbs-on {                       
+    margin-left: 35px !important;               
+}                                               
+                                                
+.draft-saved.sbs-on.sbs-newq {                  
+    margin-left: 40px !important;               
+    height: 15px !important;                    
+    float: left !important;                     
+}                                               
+                                                
+.draft-discarded.sbs-on.sbs-newq {              
+    margin-left: 40px !important;               
+    height: 15px !important;                    
+    float: left !important;                     
+}                                               
+                                                
+.votecell.sbs-on {                              
+    display: none !important;                   
+}                                               
+                                                
+.hide-preview.sbs-on {                          
+    margin-left: 35px !important;               
+}                                               
+                                                
+.edit-comment-p1.sbs-on {                       
+    float: left !important;                     
+}                                               
+                                                
+.edit-comment-p2.sbs-on {                       
+    float: left !important;                     
+    margin-left: 10px !important;               
+}                                               
+         
+.post-editor.sbs-on {                           
+    width: 1360px !important;                   
+}                                               
+         
+.wmd-button-bar.sbs-on {                        
+    float: none !important;                     
+}                                               
+                                                
+.wmd-container.sbs-on {                         
+    float: left !important;                     
+}                                               
+                                                
+.wmd-preview.sbs-on {                           
+    clear: none !important;                     
+    float: right !important;                    
+}                                               
+                                                
+.wmd-preview.sbs-on.sbs-newq {                  
+    margin-top: 10px !important;                
+}                                               
+                                                
+.tag-editor-p.sbs-on.sbs-newq {                 
+    float: left !important;                     
+}                                               
+                                                
+.form-item.sbs-on.sbs-newq {                    
+    float: left !important;                     
+}             
