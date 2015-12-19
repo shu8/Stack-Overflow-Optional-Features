@@ -4,6 +4,10 @@
 // @version      1.7
 // @description  Adds a bunch of optional features to sites in the Stack Exchange Network.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
+// @contributor  ᴉʞuǝ (https://stackoverflow.com/users/1454538/)
+// @contributor  nwinkler
+// @contributor  SnoringFrog
+// @contributor  Loxos
 // @match        *://*.stackexchange.com/*
 // @match        *://*.stackoverflow.com/*
 // @match        *://*.superuser.com/*
@@ -20,6 +24,7 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
+// @grant        GM_addValueChangeListener
 // @updateURL    https://github.com/shu8/Stack-Overflow-Optional-Features/raw/master/features.user.js
 // ==/UserScript==
 /*jshint multistr: true */
@@ -1551,13 +1556,20 @@ $(function () {
     }
 
     $('#submitOptions').click(function () {
-        var featureOptions = [];
-        $('input[type=checkbox]:checked').each(function () {
-            var x = $(this).attr('id');
-            featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
-        });
-        GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
-        console.log('Options saved: ' + featureOptions);
-        $('#featureGMOptions').hide(500);
+        if (confirm("Saving Changes will sync them across all open tabs which might result in the loss of any questions or answers that have not been saved as drafts.")){
+            var featureOptions = [];
+            $('input[type=checkbox]:checked').each(function () {
+                var x = $(this).attr('id');
+                featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
+            });
+            GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
+            console.log('Options saved: ' + featureOptions);
+            $('#featureGMOptions').hide(500);
+        }
+    });
+
+    GM_addValueChangeListener("featureOptions", function () {
+        console.log("SOOF Feature Options have changed, reloading page to refresh styles");
+        location.reload();
     });
 });
