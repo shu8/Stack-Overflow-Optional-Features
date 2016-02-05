@@ -1,5 +1,5 @@
 /*Main centered divs, SE-style:*/
-.SEAOP-centered {
+.SOOF-centered {
     width:400px;
     z-index:1001;
     top:102px;
@@ -82,7 +82,7 @@
 }
 
 /*addHotText:*/
-.SEAOF-hot {
+.SOOF-hot {
      float:right; 
      -ms-transform: rotate(30deg); 
      -webkit-transform: rotate(30deg); 
