@@ -616,8 +616,8 @@ var functionsToCall = { //ALL the functions must go in here
 
                         $('.comments textarea').on('keydown', null, 'alt+o', function() {
                             $('#quickCommentShortcuts').show();
-                            $("body").animate({ 
-                                scrollTop: 0 
+                            $("body").animate({
+                                scrollTop: 0
                             }, "slow");
                         });
                         $('.comments textarea').bind('keydown', 'alt+r', function() {
@@ -947,7 +947,8 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     stickyVoteButtons: function() { //For making the vote buttons stick to the screen as you scroll through a post   
-        //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/14:
+        //https://github.com/shu8/SE_OptionalFeatures/pull/14:
+        //https://github.com/shu8/Stack-Overflow-Optional-Features/issues/28: Thanks @SnoringFrog for fixing this!
         $(window).scroll(function() {
             $(".votecell").each(function() {
                 var offset = 0;
@@ -955,6 +956,7 @@ var functionsToCall = { //ALL the functions must go in here
                     offset = 34;
                 }
                 var vote = $(this).find(".vote");
+                var post_contents = $(this).next("td.postcell, td.answercell");
                 if ($(this).offset().top - $(window).scrollTop() + offset <= 0) {
                     if ($(this).offset().top + $(this).height() + offset - $(window).scrollTop() - vote.height() > 0) {
                         vote.css({
@@ -962,11 +964,19 @@ var functionsToCall = { //ALL the functions must go in here
                             left: $(this).offset().left,
                             top: 0 + offset
                         });
+                        post_contents.css({
+                            position: "relative",
+                            left: "45px"
+                        });
                     } else {
                         vote.css({
                             position: "relative",
                             left: 0,
                             top: $(this).height() - vote.height()
+                        });
+                        post_contents.css({
+                            position: "relative",
+                            left: "0px"
                         });
                     }
                 } else {
@@ -974,6 +984,10 @@ var functionsToCall = { //ALL the functions must go in here
                         position: "relative",
                         left: 0,
                         top: 0
+                    });
+                    post_contents.css({
+                        position: "relative",
+                        left: "0px"
                     });
                 }
             });
