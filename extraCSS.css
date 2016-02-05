@@ -11,6 +11,17 @@
     height:90%;   
 }
 
+/*Specifically for quickCommentShortcuts -- the div's too wide! https://github.com/shu8/Stack-Overflow-Optional-Features/issues/36*/
+#quickCommentShortcuts.SOOF-centered {
+    width: 75%;
+    height:90%;   
+    z-index:1001;
+    top:20%;
+    left:14%;
+    display:inline-block;
+    overflow:auto;
+}
+
 /*standOutDupeCloseMigrated:*/
 .duplicate, .closed, .migrated, .onhold{
     color: #FFF;
