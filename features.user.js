@@ -616,6 +616,9 @@ var functionsToCall = { //ALL the functions must go in here
 
                         $('.comments textarea').on('keydown', null, 'alt+o', function() {
                             $('#quickCommentShortcuts').show();
+                            $("body").animate({ 
+                                scrollTop: 0 
+                            }, "slow");
                         });
                         $('.comments textarea').bind('keydown', 'alt+r', function() {
                             $('#quickCommentShortcutsReminder').show();
