@@ -1,7 +1,7 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         Stack Overflow Optional Features (SOOF)
 // @namespace    http://stackexchange.com/users/4337810/
-// @version      1.7
+// @version      1.8 DEV
 // @description  Adds a bunch of optional features to sites in the Stack Exchange Network.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
 // @match        *://*.stackexchange.com/*
@@ -366,7 +366,7 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     editComment: function () { // For adding checkboxes when editing to add pre-defined edit reasons
-        var div = "<div id='dialogEditReasons' class='SEAOP-centered wmd-prompt-dialog'><span id='closeDialogEditReasons' style='float:right;'>Close</span><span id='resetEditReasons' style='float:left;'>Reset</span>  \
+        var div = "<div id='dialogEditReasons' class='SOOF-centered wmd-prompt-dialog'><span id='closeDialogEditReasons' style='float:right;'>Close</span><span id='resetEditReasons' style='float:left;'>Reset</span>  \
                         <h2>View/Remove Edit Reasons</h2>																														\
                         <div id='currentValues'></div>																															\
                         <br />																																					\
@@ -531,7 +531,7 @@ var functionsToCall = { //ALL the functions must go in here
                 'vertical-align': 'middle'
             };
 
-        $('body').append("<div id='quickCommentShortcuts' class='SEAOP-centered wmd-prompt-dialog' style='display:none;'><table></table></div>");
+        $('body').append("<div id='quickCommentShortcuts' class='SOOF-centered wmd-prompt-dialog' style='display:none;'><table></table></div>");
         $('#quickCommentShortcuts').css('width', '100%').css('position', 'absolute').draggable();
         $('body').append("<div id='quickCommentShortcutsReminder' class='quickCommentShortcutsReminder' style='display:none;'></div>");
 
@@ -751,7 +751,7 @@ var functionsToCall = { //ALL the functions must go in here
     },*/
 
     linkQuestionAuthorName: function () { //For adding a button to the editor toolbar to insert a link to a post and automatically add the author's name
-        var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog SEAOP-centered' style='display:none'> \
+        var div = "<div id='addLinkAuthorName' class='wmd-prompt-dialog SOOF-centered' style='display:none'> \
             <h5>Insert hyperlink with author's name</h5> \
             <br /> \
             <input id='link' placeholder='http://example.com/ \"optional title\"' size='50'> \
@@ -864,7 +864,7 @@ var functionsToCall = { //ALL the functions must go in here
 
     addHotText: function () { //Part of isQuestionHot
         $('#feed').html('<p>In the top 30 most recent hot network questions!</p>');
-        $('#question-header').prepend("<div title='this question is in the top 30 most recent hot network questions!' class='SEAOF-hot'>HOT<div>");
+        $('#question-header').prepend("<div title='this question is in the top 30 most recent hot network questions!' class='SOOF-hot'>HOT<div>");
     },
 
     isQuestionHot: function () { //For adding some text to questions that are in the 30 most recent hot network questions
@@ -1460,8 +1460,8 @@ Toggle SBS?</div></li>';
 // Format for options below: <label><input type='checkbox' id='id'>Text</label><br />
 //var div = "<div id='featureGMOptions' style='display:inline-block; position:fixed; top:10px; left:50%; height: 90%; overflow: auto; width:500px; margin-left:-250px; z-index:2; background-color:gray; color:white; padding: 10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;'>\
 //var div = "<div id='featureGMOptions' class='wmd-prompt-dialog' style='position:fixed;width:400px;z-index:1001;top:102px;left:615.5px;display:inline-block;margin-top:-95.5px;margin-left:-216px;overflow:auto;height:90%;'>\
-var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SEAOP-centered'>\
-                <span id='closeFeature' style='float:right;'>Close</span> <span id='resetFeature' style='float:right;'>Reset&nbsp;</span>    <span id='featureTitle'><h2>Additional Optional Features - settings</h2></span> \
+var div = "<div id='featureGMOptions' class='wmd-prompt-dialog SOOF-centered'>\
+                <span id='closeFeature' style='float:right;'>Close</span> <span id='resetFeature' style='float:right;'>Reset&nbsp;</span>    <span id='featureTitle'><h2>SOOF settings</h2></span> \
                 <label><input type='checkbox' id='grayOutVotes'/> Gray out deleted votes</label> <br /> \
                 <label><input type='checkbox' id='moveBounty'/> Move 'start bounty' to top</label> <br /> \
                 <label><input type='checkbox' id='dragBounty'/> Make bounty box draggable</label> <br /> \
