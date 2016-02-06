@@ -110,6 +110,7 @@ In the latest version: (these link to their corresponding feature-request (from 
 - DEVELOP - v1.8: (mainly a 'behind the scenes' update :)
     - Fixed a bunch of bugs that had been standing for quite a while
     - Completed the rename of the project to SOOF (in the CSS and UI elements)
+    - Added feature to sync option changes across all open tabs (Chrome-only), see [this issue](https://github.com/shu8/Stack-Overflow-Optional-Features/issues/44) for details.
 
 ---
 
