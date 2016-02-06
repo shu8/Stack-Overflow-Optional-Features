@@ -820,13 +820,13 @@ var functionsToCall = { //ALL the functions must go in here
 
     confirmNavigateAway: function() { //For adding a 'are you ure you want to go away' confirmation on pages where you have started writing something
         if (window.location.href.indexOf('questions/') >= 0) {
-            window.onbeforeunload = function() {
-                if ($('.comment-form textarea').length) {
+            $(window).bind('beforeunload', function() {
+                if ($('.comment-form textarea').length  && $('.comment-form textarea').val() != '') {
                     return "Do you really want to navigate away? Anything you have written will be lost!";
                 } else {
                     return;
                 }
-            };
+            });
         }
     },
 
