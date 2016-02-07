@@ -213,7 +213,7 @@ var functionsToCall = { //ALL the functions must go in here
         } else if ($(location).attr('hostname').indexOf('chat.') == -1) { //for all the normal, unannoying sites, excluding chat ;)            
             $('.topbar').css({
                 'position': 'fixed',
-                'z-index': '1'
+                'z-index': '1001'
             });
 
             //Thanks ArtOfCode (http://worldbuilding.stackexchange.com/users/2685/artofcode) for fixing the topbar covering the header :)
@@ -837,36 +837,38 @@ var functionsToCall = { //ALL the functions must go in here
     },
 
     sortByBountyAmount: function() { //For adding some buttons to sort bounty's by size
-        if ($('.bounty-indicator').length) { //if there is at least one bounty on the page
-            $('.question-summary').each(function() {
-                bountyAmount = $(this).find('.bounty-indicator').text().replace('+', '');
-                $(this).attr('data-bountyamount', bountyAmount); //add a 'bountyamount' attribute to all the questions
-            });
+        if (!SEHelper.isOnUserProfile()) { //not on the user profile page
+            if ($('.bounty-indicator').length) { //if there is at least one bounty on the page
+                $('.question-summary').each(function() {
+                    bountyAmount = $(this).find('.bounty-indicator').text().replace('+', '');
+                    $(this).attr('data-bountyamount', bountyAmount); //add a 'bountyamount' attribute to all the questions
+                });
 
-            if ($('#question-mini-list').length) { //if on homepage featured tab
-                var $wrapper = $('#question-mini-list');
-            } else {
-                var $wrapper = $('#questions'); //if on questions featured tab
+                if ($('#question-mini-list').length) { //if on homepage featured tab
+                    var $wrapper = $('#question-mini-list');
+                } else {
+                    var $wrapper = $('#questions'); //if on questions featured tab
+                }
+
+                setTimeout(function() {
+                    //filter buttons:
+                    $('.subheader').after('<span>sort by bounty amount:&nbsp;&nbsp;&nbsp;</span><span id="largestFirst">largest first&nbsp;&nbsp;</span><span id="smallestFirst">smallest first</span>');
+
+                    //Thanks: http://stackoverflow.com/a/14160529/3541881
+                    $('#largestFirst').css('cursor', 'pointer').on('click', function() { //largest first
+                        $wrapper.find('.question-summary').sort(function(a, b) {
+                            return +b.getAttribute('data-bountyamount') - +a.getAttribute('data-bountyamount');
+                        }).prependTo($wrapper);
+                    });
+
+                    //Thanks: http://stackoverflow.com/a/14160529/3541881
+                    $('#smallestFirst').css('cursor', 'pointer').on('click', function() { //smallest first
+                        $wrapper.find('.question-summary').sort(function(a, b) {
+                            return +a.getAttribute('data-bountyamount') - +b.getAttribute('data-bountyamount');
+                        }).prependTo($wrapper);
+                    });
+                }, 500);
             }
-
-            setTimeout(function() {
-                //filter buttons:
-                $('.subheader').after('<span>sort by bounty amount:&nbsp;&nbsp;&nbsp;</span><span id="largestFirst">largest first&nbsp;&nbsp;</span><span id="smallestFirst">smallest first</span>');
-
-                //Thanks: http://stackoverflow.com/a/14160529/3541881
-                $('#largestFirst').css('cursor', 'pointer').on('click', function() { //largest first
-                    $wrapper.find('.question-summary').sort(function(a, b) {
-                        return +b.getAttribute('data-bountyamount') - +a.getAttribute('data-bountyamount');
-                    }).prependTo($wrapper);
-                });
-
-                //Thanks: http://stackoverflow.com/a/14160529/3541881
-                $('#smallestFirst').css('cursor', 'pointer').on('click', function() { //smallest first
-                    $wrapper.find('.question-summary').sort(function(a, b) {
-                        return +a.getAttribute('data-bountyamount') - +b.getAttribute('data-bountyamount');
-                    }).prependTo($wrapper);
-                });
-            }, 500);
         }
     },
 
@@ -1363,7 +1365,7 @@ Toggle SBS?</div></li>';
 
     scrollToTop: function() { //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/34
         if ($(location).attr('hostname').indexOf('chat.') == -1) { //fixed topbar is disabled in chat, so there's no point running this in chat
-            $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&#9650; TOP</a></span></div>");
+            $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&nbsp;&uarr; top</a></span></div>");
             if ($(window).scrollTop() < 100) {
                 $('#scroll-container').hide();
             }
@@ -1385,61 +1387,55 @@ Toggle SBS?</div></li>';
         }
     },
 
-    helpfulFlagPercentage: function() { //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/38
-        var totalFlags = 0;
-        $("td > a:contains('flags')").parent().prev().each(function(index) {
-            totalFlags += parseInt($(this).text());
-        });
-
+    helpfulFlagPercentage: function() { //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/38, http://meta.stackoverflow.com/q/310881/3541881
         var helpfulFlags = 0;
-        $("td > a:contains('helpful')").parent().prev().each(function(index) {
-            helpfulFlags += parseInt($(this).text());
+        $("td > a:contains('helpful')").parent().prev().each(function () {
+            helpfulFlags += parseInt($(this).text().replace(",",""));
         });
-
         var declinedFlags = 0;
-        $("td > a:contains('declined')").parent().prev().each(function(index) {
-            declinedFlags += parseInt($(this).text());
+        $("td > a:contains('declined')").parent().prev().each(function () {
+            declinedFlags += parseInt($(this).text().replace(",",""));
         });
+        if (helpfulFlags > 0) {
+            var percentHelpful = Number(Math.round((helpfulFlags / (helpfulFlags + declinedFlags)) * 100 + 'e2') + 'e-2');
+            if (percentHelpful > 100 ) {
+                percentHelpful = 100;
+            }
+            
+            var percentColor;
+            if (percentHelpful >= 90) {
+                percentColor = "limegreen";
+            } else if (percentHelpful >= 80) {
+                percentColor = "darkorange";
+            } else if (percentHelpful < 80) {
+                percentColor = "red";
+            } 
+            var css = "<style>\
+#progress {\
+background: #ccc;\
+height: 10px;\
+width: 220px;\
+margin: 6px 10px 10px 0;\
+padding: 0px;\
+}\
+#progress:after {\
+content: '';\
+display: block;\
+background: " + percentColor + ";\
+width: " + percentHelpful + "%;\
+height: 100%;\
+}\
+#percentHelpful {\
+margin-bottom: 5px;\
+}\
+</style>";
 
-        var pendingFlags = 0;
-        $("td > a:contains('waiting')").parent().prev().each(function(index) {
-            pendingFlags += parseInt($(this).text());
-        });
+            $('head').append(css);
+            $("#flag-stat-info-table").before("<h3 id='percentHelpful' title='pending, aged away and disputed flags are not counted'><span id='percent'>" + percentHelpful + "%</span> helpful</h3>");
+            $("span#percent").css("color", percentColor);
 
-        var disputedFlags = 0;
-        $("td > a:contains('disputed')").parent().prev().each(function(index) {
-            disputedFlags += parseInt($(this).text());
-        });
-
-        var agedFlags = 0;
-        $("td > a:contains('aged')").parent().prev().each(function(index) {
-            agedFlags += parseInt($(this).text());
-        });
-
-        // subtract pending, aged away and disputed flags from total.  
-        totalFlags -= (pendingFlags + agedFlags + disputedFlags);
-
-        //var percentHelpful = (helpfulFlags / totalFlags) * 100;
-        var percentHelpful = Number(Math.round((helpfulFlags / totalFlags) * 100 + 'e2') + 'e-2');
-
-        $("#flag-stat-info-table").before("<h3 id='percentHelpful' title='pending, aged away and disputed flags are not counted'><span id='percent'>" + percentHelpful + "%</span> helpful</h3>");
-        switch (true) {
-            case percentHelpful > 90:
-                $("span#percent").css("color", "limegreen");
-                break;
-            case percentHelpful > 80:
-                $("span#percent").css("color", "dodgerblue");
-                break;
-            case percentHelpful > 70:
-                $("span#percent").css("color", "gold");
-                break;
-            case percentHelpful > 60:
-                $("span#percent").css("color", "darkorange");
-                break;
-            case percentHelpful <= 60:
-                $("span#percent").css("color", "red");
-                break;
-        } //end switch
+            $("#percentHelpful").after("<div id='progress'></div>");
+        }
     },
 
     getIdFromUrl: function(url) { //Part of linkedPostsInline
