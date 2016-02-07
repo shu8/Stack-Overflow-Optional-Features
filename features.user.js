@@ -1,13 +1,9 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         Stack Overflow Optional Features (SOOF)
 // @namespace    http://stackexchange.com/users/4337810/
 // @version      1.8 DEV
 // @description  Adds a bunch of optional features to sites in the Stack Exchange Network.
 // @author       ᔕᖺᘎᕊ (http://stackexchange.com/users/4337810/)
-// @contributor  ᴉʞuǝ (https://stackoverflow.com/users/1454538/)
-// @contributor  nwinkler
-// @contributor  SnoringFrog
-// @contributor  Loxos
 // @match        *://*.stackexchange.com/*
 // @match        *://*.stackoverflow.com/*
 // @match        *://*.superuser.com/*
@@ -24,7 +20,6 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
-// @grant        GM_addValueChangeListener
 // @updateURL    https://github.com/shu8/Stack-Overflow-Optional-Features/raw/master/features.user.js
 // ==/UserScript==
 /*jshint multistr: true */
@@ -215,7 +210,7 @@ var functionsToCall = { //ALL the functions must go in here
             var line = document.createElement('div');
             line.innerHTML = "<br><br>";
             toolbar.parentElement.insertBefore(line, toolbar);
-        } else { //for all the normal, unannoying sites ;)            
+        } else if ($(location).attr('hostname').indexOf('chat.') == -1) { //for all the normal, unannoying sites, excluding chat ;)            
             $('.topbar').css({
                 'position': 'fixed',
                 'z-index': '1'
@@ -389,7 +384,7 @@ var functionsToCall = { //ALL the functions must go in here
             $(this).parent().hide(500);
         });
 
-        $('#resetEditReasons').css('cursor', 'pointer').click(function() {
+        $('#resetEditReasons').css('cursor', 'pointer').click(function() { //manual reset
             var options = [ //Edit these to change the default settings
                 ['formatting', 'Improved Formatting'],
                 ['spelling', 'Corrected Spelling'],
@@ -404,7 +399,13 @@ var functionsToCall = { //ALL the functions must go in here
         });
 
         if (GM_getValue('editReasons', -1) == -1) { //If settings haven't been set
-            $('#dialogEditReasons').show(); //Show the dialog
+            var defaultOptions = [
+                ['formatting', 'Improved Formatting'],
+                ['spelling', 'Corrected Spelling'],
+                ['grammar', 'Fixed grammar'],
+                ['greetings', 'Removed thanks/greetings']
+            ];
+            GM_setValue('editReasons', JSON.stringify(options)); //save the default settings
         } else {
             var options = JSON.parse(GM_getValue('editReasons')); //If they have, get the options
         }
@@ -1361,25 +1362,27 @@ Toggle SBS?</div></li>';
     },
 
     scrollToTop: function() { //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/34
-        $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&#9650; TOP</a></span></div>");
-        if ($(window).scrollTop() < 100) {
-            $('#scroll-container').hide();
-        }
-
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 100) {
-                $('#scroll-container').fadeIn();
-            } else {
-                $('#scroll-container').fadeOut();
+        if ($(location).attr('hostname').indexOf('chat.') == -1) { //fixed topbar is disabled in chat, so there's no point running this in chat
+            $(".topbar-links").append("<div id='scroll-container' class='links-container'><span><a id='scrollToTop' href='#' style='color: white;'>&#9650; TOP</a></span></div>");
+            if ($(window).scrollTop() < 100) {
+                $('#scroll-container').hide();
             }
-        });
 
-        $('#scrollToTop').click(function() {
-            $('html, body').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 100) {
+                    $('#scroll-container').fadeIn();
+                } else {
+                    $('#scroll-container').fadeOut();
+                }
+            });
+
+            $('#scrollToTop').click(function() {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        }
     },
 
     helpfulFlagPercentage: function() { //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/38
@@ -1577,21 +1580,14 @@ $(function() {
         var featureOptions = [];
     }
 
-    $('#submitOptions').click(function () {
-        if (confirm("Saving Changes will sync them across all open tabs which might result in the loss of any questions or answers that have not been saved as drafts.")){
-            var featureOptions = [];
-            $('input[type=checkbox]:checked').each(function () {
-                var x = $(this).attr('id');
-                featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
-            });
-            GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
-            console.log('Options saved: ' + featureOptions);
-            $('#featureGMOptions').hide(500);
-        }
-    });
-
-    GM_addValueChangeListener("featureOptions", function () {
-        console.log("SOOF Feature Options have changed, reloading page to refresh styles");
-        location.reload();
+    $('#submitOptions').click(function() {
+        var featureOptions = [];
+        $('input[type=checkbox]:checked').each(function() {
+            var x = $(this).attr('id');
+            featureOptions.push(x); //Add the function's ID (also the checkbox's ID) to the array
+        });
+        GM_setValue('featureOptions', JSON.stringify(featureOptions)); //Save the setting
+        console.log('Options saved: ' + featureOptions);
+        $('#featureGMOptions').hide(500);
     });
 });
