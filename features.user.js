@@ -1387,54 +1387,62 @@ Toggle SBS?</div></li>';
         }
     },
 
-    helpfulFlagPercentage: function() { //https://github.com/shu8/Stack-Overflow-Optional-Features/pull/38, http://meta.stackoverflow.com/q/310881/3541881
-        var helpfulFlags = 0;
-        $("td > a:contains('helpful')").parent().prev().each(function () {
-            helpfulFlags += parseInt($(this).text().replace(",",""));
-        });
-        var declinedFlags = 0;
-        $("td > a:contains('declined')").parent().prev().each(function () {
-            declinedFlags += parseInt($(this).text().replace(",",""));
-        });
-        if (helpfulFlags > 0) {
-            var percentHelpful = Number(Math.round((helpfulFlags / (helpfulFlags + declinedFlags)) * 100 + 'e2') + 'e-2');
-            if (percentHelpful > 100 ) {
-                percentHelpful = 100;
+    helpfulFlagPercentage: function() { //By @enki; https://github.com/shu8/Stack-Overflow-Optional-Features/pull/38, http://meta.stackoverflow.com/q/310881/3541881, http://stackapps.com/q/6773/26088
+        var group = {
+            POST: 1,
+            SPAM: 2,
+            OFFENSIVE: 3,
+            COMMENT: 4
+        };
+        var type = {
+            TOTAL: "flags",
+            WAITING: "waiting",
+            HELPFUL: "helpful",
+            DECLINED: "declined",
+            DISPUTED: "disputed",
+            AGEDAWAY: "aged away"
+        };
+
+        var groupKey,
+            typeKey,
+            total,
+            count,
+            percentage;
+
+        function addPercentage(group, type, percentage) {
+            var $span = $("<span/>", {
+                text: "({0}%)".replace('{0}', percentage),
+                style: "margin-left:5px; color: #999; font-size: 12px;"
+            });
+            $("td > a[href*='group=" + group + "']:contains('" + type + "')").after($span);
+        }
+
+        function calculatePercentage(count, total) {
+            var percent = (count / total) * 100;
+            return +percent.toFixed(2);
+        }
+
+        function getFlagCount(group, type) {
+            var flagCount = 0;
+            flagCount += Number($("td > a[href*='group=" + group + "']:contains('" + type + "')")
+                                .parent()
+                                .prev()
+                                .text()
+                                .replace(",", ""));
+            return flagCount;
+        }
+
+        // add percentages
+        for (groupKey in group) {
+            total = getFlagCount(group[groupKey], type.TOTAL);
+            for (typeKey in type) {
+                if (typeKey !== "TOTAL") {
+                    count = getFlagCount(group[groupKey], type[typeKey]);
+                    percentage = calculatePercentage(count, total);
+                    //console.log(groupKey + ": " + typeKey + " Flags -- " + count);
+                    addPercentage(group[groupKey], type[typeKey], percentage);
+                }
             }
-            
-            var percentColor;
-            if (percentHelpful >= 90) {
-                percentColor = "limegreen";
-            } else if (percentHelpful >= 80) {
-                percentColor = "darkorange";
-            } else if (percentHelpful < 80) {
-                percentColor = "red";
-            } 
-            var css = "<style>\
-#progress {\
-background: #ccc;\
-height: 10px;\
-width: 220px;\
-margin: 6px 10px 10px 0;\
-padding: 0px;\
-}\
-#progress:after {\
-content: '';\
-display: block;\
-background: " + percentColor + ";\
-width: " + percentHelpful + "%;\
-height: 100%;\
-}\
-#percentHelpful {\
-margin-bottom: 5px;\
-}\
-</style>";
-
-            $('head').append(css);
-            $("#flag-stat-info-table").before("<h3 id='percentHelpful' title='pending, aged away and disputed flags are not counted'><span id='percent'>" + percentHelpful + "%</span> helpful</h3>");
-            $("span#percent").css("color", percentColor);
-
-            $("#percentHelpful").after("<div id='progress'></div>");
         }
     },
 
