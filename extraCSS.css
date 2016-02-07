@@ -239,3 +239,10 @@ li.siteLink {
 .form-item.sbs-on.sbs-newq {                    
     float: left !important;                     
 }             
+
+/* For linkedPostsInline; https://github.com/shu8/Stack-Overflow-Optional-Features/issues/48 */
+.loaded-body-shub .post-text {
+    overflow-wrap: break-word;
+    width: 630px;
+    padding: 10px;
+}
