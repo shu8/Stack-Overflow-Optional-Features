@@ -1,5 +1,9 @@
 # Stack Overflow Optional Features (SOOF)
 
+SOOF has been moved to https://github.com/soscripted/sox and has been renamed to ***SOX***! It's the same userscript, but better!!!
+
+---
+
 A userscript for sites in the Stack Exchange Network to add a bunch of optional, user-selectable features via an easy-to-use control panel.
 
 #How to use, requirements, how it works
