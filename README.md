@@ -1,5 +1,11 @@
 # Stack Overflow Optional Features (SOOF)
 
+**IMPORTANT NOTICE: SOOF has been moved to https://github.com/soscripted/sox and has been renamed to *SOX*! It's the same userscript, but better!!!**
+
+The following is retained for historical reasons.
+
+---
+
 A userscript for sites in the Stack Exchange Network to add a bunch of optional, user-selectable features via an easy-to-use control panel.
 
 #How to use, requirements, how it works
@@ -107,9 +113,14 @@ In the latest version: (these link to their corresponding feature-request (from 
     - Added more features (mentioned above),
     - Changed `addSBSBtn` function (Side-by-side editing) to use [zsego's](https://github.com/shu8/SE-Answers_scripts/pull/2) rewritten version to add more features: You can now use side-by-side editing in edits, and you can toggle it on and off! Thanks zsego! :)
     - Renamed project to `Stack Overflow Optional Features`, as suggested at https://github.com/shu8/Stack-Overflow-Optional-Features/issues/42
+- DEVELOP - v1.8: (mainly a 'behind the scenes' update :)
+    - Fixed a bunch of bugs that had been standing for quite a while
+    - Completed the rename of the project to SOOF (in the CSS and UI elements)
+    - Added feature to sync option changes across all open tabs (Chrome-only), see [this issue](https://github.com/shu8/Stack-Overflow-Optional-Features/issues/44) for details.
+
 ---
 
-Descriptions of features
+Descriptions of features (and how to use them)
 -
 
 - Make the topbar fixed:
