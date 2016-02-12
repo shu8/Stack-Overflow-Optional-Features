@@ -1,6 +1,8 @@
 # Stack Overflow Optional Features (SOOF)
 
-SOOF has been moved to https://github.com/soscripted/sox and has been renamed to ***SOX***! It's the same userscript, but better!!!
+**IMPORTANT NOTICE: SOOF has been moved to https://github.com/soscripted/sox and has been renamed to *SOX*! It's the same userscript, but better!!!**
+
+The following is retained for historical reasons.
 
 ---
 
